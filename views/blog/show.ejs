@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main class="page">
+    <article class="section">
+      <div class="container container--narrow">
+        <a class="link-gold post__back" href="/blog">← All posts</a>
+        <time class="post__date"><%= formatDate(post.published_at) %></time>
+        <h1 class="post__title"><%= post.title %></h1>
+        <div class="prose"><%- bodyHtml %></div>
+
+        <div class="post__cta">
+          <h2>Want leads like the ones we describe?</h2>
+          <a class="btn btn--gold" href="/#get-leads">
+            Request your first leads <%- include('../partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <%- include('../partials/footer') %>
+  <script src="/js/bundle.js" defer></script>
+</body>
+</html>

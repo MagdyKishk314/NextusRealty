@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body class="admin">
+  <header class="admin__bar">
+    <div class="container admin__bar-inner">
+      <a class="brand brand--admin" href="/admin">
+        <span class="brand__mark">N</span>
+        <span class="brand__name">Nextus <span class="accent">CMS</span></span>
+      </a>
+      <a class="link-gold" href="/" target="_blank" rel="noopener">View site ↗</a>
+    </div>
+  </header>
+
+  <main class="container admin__main">
+    <!-- Leads -->
+    <section class="admin__section">
+      <div class="admin__section-head">
+        <h1>Leads <span class="badge"><%= leadCount %></span></h1>
+      </div>
+      <% if (!leads.length) { %>
+        <p class="muted">No leads captured yet.</p>
+      <% } else { %>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>When</th><th>Name</th><th>Email</th><th>Phone</th><th>City</th><th>Type</th><th>Volume</th></tr></thead>
+            <tbody>
+              <% leads.forEach(function (l) { %>
+                <tr>
+                  <td class="nowrap"><%= formatDate(l.created_at) %></td>
+                  <td><%= l.name %></td>
+                  <td><a href="mailto:<%= l.email %>"><%= l.email %></a></td>
+                  <td><%= l.phone || '-' %></td>
+                  <td><%= l.city %></td>
+                  <td><%= l.market %></td>
+                  <td><%= l.volume || '-' %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </section>
+
+    <!-- Posts -->
+    <section class="admin__section">
+      <div class="admin__section-head">
+        <h2>Blog posts</h2>
+        <a class="btn btn--gold btn--sm" href="/admin/posts/new">+ New post</a>
+      </div>
+      <% if (!posts.length) { %>
+        <p class="muted">No posts yet.</p>
+      <% } else { %>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Title</th><th>Status</th><th>Published</th><th></th></tr></thead>
+            <tbody>
+              <% posts.forEach(function (p) { %>
+                <tr>
+                  <td><%= p.title %><br><span class="muted small">/blog/<%= p.slug %></span></td>
+                  <td><span class="status status--<%= p.status %>"><%= p.status %></span></td>
+                  <td class="nowrap"><%= formatDate(p.published_at) || '-' %></td>
+                  <td class="row-actions">
+                    <a class="link-gold" href="/admin/posts/<%= p.id %>/edit">Edit</a>
+                    <form method="post" action="/admin/posts/<%= p.id %>/delete" onsubmit="return confirm('Delete this post?');">
+                      <button type="submit" class="link-danger">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="admin__section">
+      <div class="admin__section-head">
+        <h2>Testimonials</h2>
+        <a class="btn btn--gold btn--sm" href="/admin/testimonials/new">+ New testimonial</a>
+      </div>
+      <p class="muted small">Only <strong>published</strong> testimonials appear on the home page.</p>
+      <% if (!testimonials.length) { %>
+        <p class="muted">No testimonials yet.</p>
+      <% } else { %>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Name</th><th>Role</th><th>Rating</th><th>Status</th><th>Order</th><th></th></tr></thead>
+            <tbody>
+              <% testimonials.forEach(function (t) { %>
+                <tr>
+                  <td><%= t.name %></td>
+                  <td><%= t.role || '-' %></td>
+                  <td><%= t.rating %>★</td>
+                  <td><span class="status status--<%= t.status %>"><%= t.status %></span></td>
+                  <td><%= t.sort_order %></td>
+                  <td class="row-actions">
+                    <a class="link-gold" href="/admin/testimonials/<%= t.id %>/edit">Edit</a>
+                    <form method="post" action="/admin/testimonials/<%= t.id %>/delete" onsubmit="return confirm('Delete this testimonial?');">
+                      <button type="submit" class="link-danger">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

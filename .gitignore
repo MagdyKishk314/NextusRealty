@@ -1,0 +1,30 @@
+# dependencies
+/node_modules
+
+# build output
+/dist
+/public/js/bundle.js
+/public/js/bundle.js.map
+
+# database (runtime data)
+/data/*.db
+/data/*.db-journal
+/data/*.db-wal
+/data/*.db-shm
+
+# env
+.env
+.env.local
+
+# misc
+.DS_Store
+*.log
+npm-debug.log*
+
+# stale Next.js build output (project no longer uses Next.js)
+/.next
+
+# Claude Code / agent tooling (not part of the project)
+/.agents
+/.claude
+skills-lock.json

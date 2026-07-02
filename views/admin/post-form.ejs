@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body class="admin">
+  <header class="admin__bar">
+    <div class="container admin__bar-inner">
+      <a class="brand brand--admin" href="/admin">
+        <span class="brand__mark">N</span>
+        <span class="brand__name">Nextus <span class="accent">CMS</span></span>
+      </a>
+      <a class="link-gold" href="/admin">← Dashboard</a>
+    </div>
+  </header>
+
+  <main class="container container--narrow admin__main">
+    <h1><%= post ? 'Edit post' : 'New post' %></h1>
+    <% if (error) { %><p class="form-error"><%= error %></p><% } %>
+
+    <form method="post" action="<%= formAction %>" class="admin-form">
+      <label class="field"><span>Title *</span>
+        <input type="text" name="title" required value="<%= post ? post.title : '' %>" />
+      </label>
+      <label class="field"><span>Slug <span class="muted small">(optional, auto-generated from title)</span></span>
+        <input type="text" name="slug" placeholder="my-post-slug" value="<%= post ? post.slug : '' %>" />
+      </label>
+      <label class="field"><span>Excerpt <span class="muted small">(shown on the blog index &amp; meta description)</span></span>
+        <textarea name="excerpt" rows="2"><%= post ? post.excerpt : '' %></textarea>
+      </label>
+      <label class="field"><span>Body <span class="muted small">(plain text; blank lines start new paragraphs)</span></span>
+        <textarea name="body" rows="14"><%= post ? post.body : '' %></textarea>
+      </label>
+      <label class="field"><span>Status</span>
+        <select name="status">
+          <option value="draft" <%= (!post || post.status === 'draft') ? 'selected' : '' %>>Draft</option>
+          <option value="published" <%= (post && post.status === 'published') ? 'selected' : '' %>>Published</option>
+        </select>
+      </label>
+
+      <div class="admin-form__actions">
+        <button type="submit" class="btn btn--gold">Save post</button>
+        <a class="link-gold" href="/admin">Cancel</a>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

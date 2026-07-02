@@ -1,0 +1,29 @@
+{
+  "name": "nextus-realty",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nextus Realty — classic MVC monolith (TypeScript + Express + EJS + node:sqlite)",
+  "scripts": {
+    "build:client": "esbuild src/client/main.ts --bundle --minify --sourcemap --target=es2018 --outfile=public/js/bundle.js",
+    "build:server": "tsc -p tsconfig.json",
+    "build": "npm run build:client && npm run build:server",
+    "watch:client": "esbuild src/client/main.ts --bundle --sourcemap --target=es2018 --outfile=public/js/bundle.js --watch",
+    "dev": "npm run build:client && tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "seed": "tsx src/db/seed.ts",
+    "og": "node scripts/generate-og.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.client.json"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.13.0",
+    "esbuild": "^0.24.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

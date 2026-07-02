@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main class="page">
+    <section class="section error-page">
+      <div class="container container--narrow">
+        <p class="eyebrow"><%= status %></p>
+        <h1 class="section-title"><%= heading %></h1>
+        <p class="section-subhead"><%= message %></p>
+        <a class="btn btn--gold" href="/">Back to home</a>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+</body>
+</html>

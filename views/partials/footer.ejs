@@ -1,0 +1,54 @@
+<footer class="footer">
+  <div class="footer__cta">
+    <div class="container footer__cta-inner">
+      <div>
+        <h2 class="footer__cta-title">Ready to close more, chase less?</h2>
+        <p class="footer__cta-sub">
+          Request a sample and see what a confirmed lead feels like.
+        </p>
+      </div>
+      <a class="btn btn--gold" href="/#get-leads">
+        Get your leads <%- include('icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
+      </a>
+    </div>
+  </div>
+
+  <div class="container footer__body">
+    <div class="footer__brandcol">
+      <a class="brand" href="/#top">
+        <span class="brand__mark">N</span>
+        <span class="brand__name">Nextus<span class="accent"> Realty</span></span>
+      </a>
+      <p class="footer__blurb">
+        Exclusive, verified, pre-qualified real estate leads for agents who
+        measure success in closings, not call volume.
+      </p>
+    </div>
+
+    <div class="footer__cols">
+      <div class="footer__col">
+        <h3>Product</h3>
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#why-nextus">Why Nextus</a>
+        <a href="/#comparison">Comparison</a>
+      </div>
+      <div class="footer__col">
+        <h3>Company</h3>
+        <a href="/blog">Blog</a>
+        <a href="/#faq">FAQ</a>
+        <a href="/#get-leads">Get leads</a>
+        <a href="mailto:<%= site.contactEmail %>">Contact</a>
+      </div>
+      <div class="footer__col">
+        <h3>Legal</h3>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container footer__meta">
+    <p>© <%= year %> <%= site.name %>. All rights reserved.</p>
+    <p>Quality leads. No compromises.</p>
+  </div>
+</footer>
