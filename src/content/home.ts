@@ -14,7 +14,6 @@ export const hero = {
     "Nextus Realty delivers pre-qualified buyer and seller leads to a single agent: you. Every lead is cold-called and confirmed by a real person before it reaches you, so fewer, better leads mean bigger closings.",
   trustPoints: [
     { icon: "lock", label: "Exclusive, never resold" },
-    { icon: "badge", label: "Identity & finance verified" },
     { icon: "shield", label: "Pre-qualified intent" },
   ],
 };
@@ -23,7 +22,7 @@ export const stats = [
   { value: "3.4×", label: "Higher close rate vs. shared leads" },
   { value: "1", label: "Agent per lead, always exclusive" },
   { value: "100%", label: "Contact info verified before delivery" },
-  { value: "<24h", label: "From capture to your inbox" },
+  { value: "<6h", label: "From capture to your inbox" },
 ];
 
 export const problem = {
