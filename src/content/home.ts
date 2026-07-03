@@ -118,11 +118,17 @@ export const comparison = {
     "This is the benchmark we set, line by line. Here's how a Nextus lead measures against what the rest of the industry hands you.",
   rows: [
     { label: "Sold to how many agents", typical: "5–8 agents", nextus: "You only", highlight: false },
+    { label: "Who buys the data", typical: "You buy it", nextus: "We buy it for you", highlight: false },
+    { label: "Seller motivation", typical: "Cash & flip shoppers", nextus: "Relocation, probate, hardship", highlight: false },
+    { label: "Property targeting", typical: "Any interested lead", nextus: "Your market & price range", highlight: false },
     { label: "Contact info verified", typical: false, nextus: true, highlight: false },
     { label: "Confirmed by a real person", typical: false, nextus: true, highlight: true },
+    { label: "Times confirmed before delivery", typical: "None", nextus: "Twice", highlight: false },
     { label: "Intent pre-qualified", typical: false, nextus: true, highlight: false },
+    { label: "Pricing model", typical: "Monthly retainer", nextus: "Pay per lead", highlight: false },
     { label: "Typical close rate", typical: "~1%", nextus: "~3.4%", highlight: false },
     { label: "Replaced if it misses", typical: false, nextus: true, highlight: false },
+    { label: "Reactivation if leads go quiet", typical: false, nextus: "Free for 2 months", highlight: false },
   ] as Array<{
     label: string;
     typical: ComparisonValue;
