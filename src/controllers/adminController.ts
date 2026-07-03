@@ -1,14 +1,16 @@
 import type { Request, Response } from "express";
 import { meta } from "../seo/meta.js";
 import { pageTitle } from "../site.js";
-import { slugify, formatDate } from "../utils.js";
+import { slugify, formatDate, textToHtml } from "../utils.js";
 import { countLeads, listLeads } from "../models/leadModel.js";
+import { countSignups, listSignups } from "../models/signupModel.js";
 import {
   listAllPosts,
   getPostById,
   createPost,
   updatePost,
   deletePost,
+  setPostStatus,
   slugExists,
   type PostStatus,
 } from "../models/postModel.js";
@@ -31,6 +33,8 @@ export function dashboard(_req: Request, res: Response) {
     meta: adminMeta("CMS"),
     leadCount: countLeads(),
     leads: listLeads(25),
+    signupCount: countSignups(),
+    signups: listSignups(25),
     posts: listAllPosts(),
     testimonials: listAllTestimonials(),
     formatDate,
@@ -59,6 +63,33 @@ function readPostBody(req: Request) {
     status,
     slugSource: slugify(slugSource),
   };
+}
+
+export function postsManage(_req: Request, res: Response) {
+  res.render("admin/posts", {
+    meta: adminMeta("Blog posts"),
+    posts: listAllPosts(),
+    formatDate,
+  });
+}
+
+export function viewPost(req: Request, res: Response) {
+  const post = getPostById(Number(req.params.id));
+  if (!post) return res.redirect(303, "/admin/posts");
+  res.render("admin/post-view", {
+    meta: adminMeta(post.title),
+    post,
+    bodyHtml: textToHtml(post.body),
+    formatDate,
+  });
+}
+
+export function togglePostStatus(req: Request, res: Response) {
+  const post = getPostById(Number(req.params.id));
+  if (post) {
+    setPostStatus(post.id, post.status === "published" ? "draft" : "published");
+  }
+  res.redirect(303, req.get("referer") ?? "/admin/posts");
 }
 
 export function newPost(_req: Request, res: Response) {

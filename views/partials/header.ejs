@@ -6,11 +6,31 @@
     </a>
 
     <nav class="nav" aria-label="Primary">
-      <a href="/#how-it-works">How it works</a>
-      <a href="/#why-nextus">Why Nextus</a>
-      <a href="/#comparison">Comparison</a>
-      <a href="/blog">Blog</a>
-      <a href="/#faq">FAQ</a>
+      <div class="nav__item">
+        <a class="nav__top" href="/#top">Home <span class="nav__caret" aria-hidden="true"></span></a>
+        <div class="nav__menu" role="menu">
+          <a role="menuitem" href="/#how-it-works">How it works</a>
+          <a role="menuitem" href="/#why-nextus">Why Nextus</a>
+          <a role="menuitem" href="/#comparison">Comparison</a>
+          <a role="menuitem" href="/#faq">FAQ</a>
+        </div>
+      </div>
+
+      <div class="nav__item">
+        <a class="nav__top" href="/blog">Blog <span class="nav__caret" aria-hidden="true"></span></a>
+        <div class="nav__menu" role="menu">
+          <a role="menuitem" href="/blog">All articles</a>
+          <a role="menuitem" href="/blog">Latest posts</a>
+        </div>
+      </div>
+
+      <div class="nav__item">
+        <a class="nav__top" href="/signup">Account <span class="nav__caret" aria-hidden="true"></span></a>
+        <div class="nav__menu" role="menu">
+          <a role="menuitem" href="/signup">Sign up</a>
+          <a role="menuitem" href="/admin">Admin login</a>
+        </div>
+      </div>
     </nav>
 
     <a class="btn btn--gold btn--sm" href="/#get-leads">

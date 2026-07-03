@@ -4,17 +4,10 @@
   <%- include('../partials/head') %>
 </head>
 <body class="admin">
-  <header class="admin__bar">
-    <div class="container admin__bar-inner">
-      <a class="brand brand--admin" href="/admin">
-        <span class="brand__mark">N</span>
-        <span class="brand__name">Nextus <span class="accent">CMS</span></span>
-      </a>
-      <a class="link-gold" href="/admin">← Dashboard</a>
-    </div>
-  </header>
+  <%- include('../partials/admin-bar') %>
 
   <main class="container container--narrow admin__main">
+    <p><a class="link-gold" href="/admin/posts">&larr; All posts</a></p>
     <h1><%= post ? 'Edit post' : 'New post' %></h1>
     <% if (error) { %><p class="form-error"><%= error %></p><% } %>
 

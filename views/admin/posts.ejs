@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body class="admin">
+  <%- include('../partials/admin-bar') %>
+
+  <main class="container admin__main">
+    <section class="admin__section">
+      <div class="admin__section-head">
+        <h1>Blog posts <span class="badge"><%= posts.length %></span></h1>
+        <a class="btn btn--gold btn--sm" href="/admin/posts/new">+ New post</a>
+      </div>
+      <p class="muted small">
+        Only <strong>published</strong> posts are visible on the public blog.
+        Use <strong>Publish</strong> / <strong>Hide</strong> to toggle visibility without editing.
+      </p>
+
+      <% if (!posts.length) { %>
+        <p class="muted">No posts yet. <a class="link-gold" href="/admin/posts/new">Write your first one &rarr;</a></p>
+      <% } else { %>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Title</th><th>Status</th><th>Published</th><th>Updated</th><th></th></tr></thead>
+            <tbody>
+              <% posts.forEach(function (p) { %>
+                <tr>
+                  <td>
+                    <strong><%= p.title %></strong><br>
+                    <span class="muted small">/blog/<%= p.slug %></span>
+                  </td>
+                  <td><span class="status status--<%= p.status %>"><%= p.status %></span></td>
+                  <td class="nowrap"><%= formatDate(p.published_at) || '-' %></td>
+                  <td class="nowrap"><%= formatDate(p.updated_at) %></td>
+                  <td class="row-actions">
+                    <a class="link-gold" href="/admin/posts/<%= p.id %>/view">View</a>
+                    <a class="link-gold" href="/admin/posts/<%= p.id %>/edit">Edit</a>
+                    <form method="post" action="/admin/posts/<%= p.id %>/toggle">
+                      <button type="submit" class="link-toggle"><%= p.status === 'published' ? 'Hide' : 'Publish' %></button>
+                    </form>
+                    <form method="post" action="/admin/posts/<%= p.id %>/delete" onsubmit="return confirm('Delete this post? This cannot be undone.');">
+                      <button type="submit" class="link-danger">Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </section>
+  </main>
+</body>
+</html>

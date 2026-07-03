@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main id="top">
+    <section class="section section--dark lead">
+      <div class="container lead__grid">
+        <div class="lead__pitch">
+          <p class="eyebrow">Become a Nextus agent</p>
+          <h1 class="section-title section-title--light">Sign up to receive exclusive, confirmed leads</h1>
+          <p class="section-subhead section-subhead--light">
+            One agent per lead, always. Tell us where you work and what you close,
+            and we'll set you up with leads our team has already cold-called and
+            verified, before anyone else sees them.
+          </p>
+          <ul class="lead__points">
+            <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>Exclusive territory, never resold</li>
+            <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>Every lead confirmed by a real person</li>
+            <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>Delivered in under six hours</li>
+          </ul>
+          <p class="lead__privacy"><%- include('partials/icon', { name: 'shield', cls: 'icon icon--sm accent-fg' }) %> Your details stay private. We never resell your information, same as our leads.</p>
+        </div>
+
+        <div class="lead__card">
+          <% if (submitted) { %>
+            <div class="form-success">
+              <span class="form-success__icon"><%- include('partials/icon', { name: 'check', cls: 'icon' }) %></span>
+              <h3>Welcome aboard</h3>
+              <p>Thanks for signing up. A market specialist will reach out shortly to get you set up with your first exclusive leads.</p>
+              <a class="link-gold" href="/signup">Submit another sign up</a>
+            </div>
+          <% } else { %>
+            <form class="lead-form" action="/signup" method="post" novalidate>
+              <div class="field-row">
+                <label class="field"><span>Full name *</span>
+                  <input type="text" name="name" autocomplete="name" placeholder="Jordan Ellis" required value="<%= formValues.name || '' %>" />
+                </label>
+                <label class="field"><span>Work email *</span>
+                  <input type="email" name="email" autocomplete="email" placeholder="you@brokerage.com" required value="<%= formValues.email || '' %>" />
+                </label>
+              </div>
+              <div class="field-row">
+                <label class="field"><span>Phone</span>
+                  <input type="tel" name="phone" autocomplete="tel" placeholder="(555) 123-4567" value="<%= formValues.phone || '' %>" />
+                </label>
+                <label class="field"><span>Brokerage</span>
+                  <input type="text" name="brokerage" placeholder="Ellis &amp; Co. Realty" value="<%= formValues.brokerage || '' %>" />
+                </label>
+              </div>
+              <label class="field"><span>Primary market *</span>
+                <select name="market" required>
+                  <option value="" disabled <%= !formValues.market ? 'selected' : '' %>>Select a lead type</option>
+                  <% markets.forEach(function (m) { %>
+                    <option value="<%= m %>" <%= formValues.market === m ? 'selected' : '' %>><%= m %></option>
+                  <% }); %>
+                </select>
+              </label>
+              <label class="field"><span>Anything we should know?</span>
+                <textarea name="message" rows="3" placeholder="Your target cities, monthly volume, or anything else."><%= formValues.message || '' %></textarea>
+              </label>
+
+              <p class="form-error<%= formError ? '' : ' is-hidden' %>"><%= formError || '' %></p>
+
+              <button type="submit" class="btn btn--dark btn--block">
+                <span>Create my agent account</span> <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
+              </button>
+              <p class="form-fineprint">By signing up, you agree to be contacted about Nextus Realty lead services.</p>
+            </form>
+          <% } %>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+  <script src="/js/bundle.js" defer></script>
+</body>
+</html>

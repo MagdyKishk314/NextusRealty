@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body class="admin">
+  <%- include('../partials/admin-bar') %>
+
+  <main class="container container--narrow admin__main">
+    <p><a class="link-gold" href="/admin/posts">&larr; All posts</a></p>
+
+    <article class="admin__article">
+      <header class="admin__article-head">
+        <span class="status status--<%= post.status %>"><%= post.status %></span>
+        <h1><%= post.title %></h1>
+        <p class="muted small">
+          /blog/<%= post.slug %>
+          &middot; <%= post.status === 'published' ? 'Published ' + (formatDate(post.published_at) || '') : 'Not published' %>
+          &middot; Updated <%= formatDate(post.updated_at) %>
+        </p>
+        <% if (post.excerpt) { %><p class="admin__article-excerpt"><%= post.excerpt %></p><% } %>
+      </header>
+
+      <div class="admin__article-body">
+        <% if (post.body) { %><%- bodyHtml %><% } else { %><p class="muted">This post has no body yet.</p><% } %>
+      </div>
+
+      <footer class="admin__article-actions">
+        <a class="btn btn--gold btn--sm" href="/admin/posts/<%= post.id %>/edit">Edit post</a>
+        <form method="post" action="/admin/posts/<%= post.id %>/toggle">
+          <button type="submit" class="btn btn--outline btn--sm"><%= post.status === 'published' ? 'Hide from blog' : 'Publish to blog' %></button>
+        </form>
+        <% if (post.status === 'published') { %>
+          <a class="link-gold" href="/blog/<%= post.slug %>" target="_blank" rel="noopener">View live &#8599;</a>
+        <% } %>
+      </footer>
+    </article>
+  </main>
+</body>
+</html>

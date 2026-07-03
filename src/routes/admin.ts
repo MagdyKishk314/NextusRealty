@@ -10,9 +10,12 @@ adminRouter.use(basicAuth);
 adminRouter.get("/", admin.dashboard);
 
 // Posts
+adminRouter.get("/posts", admin.postsManage);
 adminRouter.get("/posts/new", admin.newPost);
 adminRouter.post("/posts", admin.createPostHandler);
+adminRouter.get("/posts/:id/view", admin.viewPost);
 adminRouter.get("/posts/:id/edit", admin.editPost);
+adminRouter.post("/posts/:id/toggle", admin.togglePostStatus);
 adminRouter.post("/posts/:id", admin.updatePostHandler);
 adminRouter.post("/posts/:id/delete", admin.deletePostHandler);
 

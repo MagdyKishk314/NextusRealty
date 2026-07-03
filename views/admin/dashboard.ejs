@@ -4,21 +4,42 @@
   <%- include('../partials/head') %>
 </head>
 <body class="admin">
-  <header class="admin__bar">
-    <div class="container admin__bar-inner">
-      <a class="brand brand--admin" href="/admin">
-        <span class="brand__mark">N</span>
-        <span class="brand__name">Nextus <span class="accent">CMS</span></span>
-      </a>
-      <a class="link-gold" href="/" target="_blank" rel="noopener">View site ↗</a>
-    </div>
-  </header>
+  <%- include('../partials/admin-bar') %>
 
   <main class="container admin__main">
+    <!-- Signups -->
+    <section class="admin__section">
+      <div class="admin__section-head">
+        <h1>Agent sign ups <span class="badge"><%= signupCount %></span></h1>
+      </div>
+      <% if (!signups.length) { %>
+        <p class="muted">No agent sign ups yet.</p>
+      <% } else { %>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>When</th><th>Name</th><th>Email</th><th>Phone</th><th>Brokerage</th><th>Market</th><th>Notes</th></tr></thead>
+            <tbody>
+              <% signups.forEach(function (s) { %>
+                <tr>
+                  <td class="nowrap"><%= formatDate(s.created_at) %></td>
+                  <td><%= s.name %></td>
+                  <td><a href="mailto:<%= s.email %>"><%= s.email %></a></td>
+                  <td><%= s.phone || '-' %></td>
+                  <td><%= s.brokerage || '-' %></td>
+                  <td><%= s.market %></td>
+                  <td><%= s.message || '-' %></td>
+                </tr>
+              <% }); %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </section>
+
     <!-- Leads -->
     <section class="admin__section">
       <div class="admin__section-head">
-        <h1>Leads <span class="badge"><%= leadCount %></span></h1>
+        <h2>Leads <span class="badge"><%= leadCount %></span></h2>
       </div>
       <% if (!leads.length) { %>
         <p class="muted">No leads captured yet.</p>
@@ -48,7 +69,10 @@
     <section class="admin__section">
       <div class="admin__section-head">
         <h2>Blog posts</h2>
-        <a class="btn btn--gold btn--sm" href="/admin/posts/new">+ New post</a>
+        <div class="admin__section-actions">
+          <a class="link-gold" href="/admin/posts">Manage all &rarr;</a>
+          <a class="btn btn--gold btn--sm" href="/admin/posts/new">+ New post</a>
+        </div>
       </div>
       <% if (!posts.length) { %>
         <p class="muted">No posts yet.</p>
@@ -63,7 +87,11 @@
                   <td><span class="status status--<%= p.status %>"><%= p.status %></span></td>
                   <td class="nowrap"><%= formatDate(p.published_at) || '-' %></td>
                   <td class="row-actions">
+                    <a class="link-gold" href="/admin/posts/<%= p.id %>/view">View</a>
                     <a class="link-gold" href="/admin/posts/<%= p.id %>/edit">Edit</a>
+                    <form method="post" action="/admin/posts/<%= p.id %>/toggle">
+                      <button type="submit" class="link-toggle"><%= p.status === 'published' ? 'Hide' : 'Publish' %></button>
+                    </form>
                     <form method="post" action="/admin/posts/<%= p.id %>/delete" onsubmit="return confirm('Delete this post?');">
                       <button type="submit" class="link-danger">Delete</button>
                     </form>
@@ -94,7 +122,7 @@
                 <tr>
                   <td><%= t.name %></td>
                   <td><%= t.role || '-' %></td>
-                  <td><%= t.rating %>★</td>
+                  <td><%= t.rating %>&#9733;</td>
                   <td><span class="status status--<%= t.status %>"><%= t.status %></span></td>
                   <td><%= t.sort_order %></td>
                   <td class="row-actions">

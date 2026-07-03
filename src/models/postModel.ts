@@ -99,6 +99,22 @@ export function updatePost(id: number, input: PostInput): void {
   );
 }
 
+/** Flip a post between draft and published without touching its content. */
+export function setPostStatus(id: number, status: PostStatus): void {
+  const existing = getPostById(id);
+  if (!existing) return;
+  // Stamp published_at the first time a post goes live; keep it once set.
+  const publishedAt =
+    status === "published"
+      ? (existing.published_at ?? new Date().toISOString())
+      : null;
+  db.prepare(
+    `UPDATE posts
+     SET status = ?, published_at = ?, updated_at = datetime('now')
+     WHERE id = ?`,
+  ).run(status, publishedAt, id);
+}
+
 export function deletePost(id: number): void {
   db.prepare(`DELETE FROM posts WHERE id = ?`).run(id);
 }

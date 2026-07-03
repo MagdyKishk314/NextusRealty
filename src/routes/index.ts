@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { showHome } from "../controllers/homeController.js";
 import { submitLead } from "../controllers/leadController.js";
+import { showSignup, submitSignup } from "../controllers/signupController.js";
 import { showBlogIndex, showBlogPost } from "../controllers/blogController.js";
 import { robots, sitemap } from "../controllers/seoController.js";
 import { adminRouter } from "./admin.js";
@@ -10,6 +11,10 @@ export const router = Router();
 // Marketing
 router.get("/", showHome);
 router.post("/leads", submitLead);
+
+// Agent sign up
+router.get("/signup", showSignup);
+router.post("/signup", submitSignup);
 
 // Blog
 router.get("/blog", showBlogIndex);
