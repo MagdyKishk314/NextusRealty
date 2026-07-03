@@ -97,11 +97,17 @@ scripts/generate-og.mjs   Rasterizes the OG image from an SVG
 
 ## Configuration (env vars)
 
-| Variable                       | Default              | Notes                         |
-| ------------------------------ | -------------------- | ----------------------------- |
-| `PORT`                         | `3000`               |                               |
-| `DB_PATH`                      | `data/nextus.db`     | SQLite file location          |
-| `ADMIN_USER` / `ADMIN_PASSWORD`| `admin` / `nextus`   | **Change before deploying**   |
+Copy `.env.example` to `.env` and edit it — the app loads `.env` automatically
+on boot (via `process.loadEnvFile()`). Real environment variables set by your
+host take precedence over the file, and a missing `.env` just falls back to the
+defaults below.
+
+| Variable                       | Default              | Notes                          |
+| ------------------------------ | -------------------- | ------------------------------ |
+| `PORT`                         | `3000`               |                                |
+| `DB_PATH`                      | `data/nextus.db`     | SQLite file location           |
+| `ADMIN_USER` / `ADMIN_PASSWORD`| `admin` / `nextus`   | **Change before deploying**    |
+| `SESSION_SECRET`               | dev fallback         | Signs the admin session cookie; set a long random value in production (`openssl rand -hex 32`) |
 
 ## SEO
 
