@@ -6,6 +6,21 @@
 const CHECK_SVG =
   '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg>';
 
+function initHeader(): void {
+  const header = document.querySelector<HTMLElement>(".site-header");
+  // Only pages with a hero get the transparent-over-hero treatment; elsewhere
+  // the header stays solid (its CSS default).
+  if (!header || !document.querySelector(".hero")) return;
+
+  const THRESHOLD = 40;
+  const update = () => {
+    header.classList.toggle("is-transparent", window.scrollY < THRESHOLD);
+  };
+  update(); // set the initial state before enabling transitions (no flash)
+  requestAnimationFrame(() => header.classList.add("is-ready"));
+  window.addEventListener("scroll", update, { passive: true });
+}
+
 function initFaq(): void {
   const toggles = document.querySelectorAll<HTMLButtonElement>("[data-faq-toggle]");
   toggles.forEach((btn) => {
@@ -86,6 +101,7 @@ function initLeadForm(): void {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  initHeader();
   initFaq();
   initLeadForm();
 });
