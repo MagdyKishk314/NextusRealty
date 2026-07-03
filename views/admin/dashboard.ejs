@@ -7,68 +7,10 @@
   <%- include('../partials/admin-bar') %>
 
   <main class="container admin__main">
-    <!-- Signups -->
-    <section class="admin__section">
-      <div class="admin__section-head">
-        <h1>Agent sign ups <span class="badge"><%= signupCount %></span></h1>
-      </div>
-      <% if (!signups.length) { %>
-        <p class="muted">No agent sign ups yet.</p>
-      <% } else { %>
-        <div class="table-wrap">
-          <table class="admin-table">
-            <thead><tr><th>When</th><th>Name</th><th>Email</th><th>Phone</th><th>Brokerage</th><th>Market</th><th>Notes</th></tr></thead>
-            <tbody>
-              <% signups.forEach(function (s) { %>
-                <tr>
-                  <td class="nowrap"><%= formatDate(s.created_at) %></td>
-                  <td><%= s.name %></td>
-                  <td><a href="mailto:<%= s.email %>"><%= s.email %></a></td>
-                  <td><%= s.phone || '-' %></td>
-                  <td><%= s.brokerage || '-' %></td>
-                  <td><%= s.market %></td>
-                  <td><%= s.message || '-' %></td>
-                </tr>
-              <% }); %>
-            </tbody>
-          </table>
-        </div>
-      <% } %>
-    </section>
-
-    <!-- Leads -->
-    <section class="admin__section">
-      <div class="admin__section-head">
-        <h2>Leads <span class="badge"><%= leadCount %></span></h2>
-      </div>
-      <% if (!leads.length) { %>
-        <p class="muted">No leads captured yet.</p>
-      <% } else { %>
-        <div class="table-wrap">
-          <table class="admin-table">
-            <thead><tr><th>When</th><th>Name</th><th>Email</th><th>Phone</th><th>City</th><th>Type</th><th>Volume</th></tr></thead>
-            <tbody>
-              <% leads.forEach(function (l) { %>
-                <tr>
-                  <td class="nowrap"><%= formatDate(l.created_at) %></td>
-                  <td><%= l.name %></td>
-                  <td><a href="mailto:<%= l.email %>"><%= l.email %></a></td>
-                  <td><%= l.phone || '-' %></td>
-                  <td><%= l.city %></td>
-                  <td><%= l.market %></td>
-                  <td><%= l.volume || '-' %></td>
-                </tr>
-              <% }); %>
-            </tbody>
-          </table>
-        </div>
-      <% } %>
-    </section>
-
     <!-- Posts -->
     <section class="admin__section">
       <div class="admin__section-head">
-        <h2>Blog posts</h2>
+        <h1>Blog posts</h1>
         <div class="admin__section-actions">
           <a class="link-gold" href="/admin/posts">Manage all &rarr;</a>
           <a class="btn btn--gold btn--sm" href="/admin/posts/new">+ New post</a>

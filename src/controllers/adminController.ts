@@ -2,8 +2,6 @@ import type { Request, Response } from "express";
 import { meta } from "../seo/meta.js";
 import { pageTitle } from "../site.js";
 import { slugify, formatDate, textToHtml } from "../utils.js";
-import { countLeads, listLeads } from "../models/leadModel.js";
-import { countSignups, listSignups } from "../models/signupModel.js";
 import {
   listAllPosts,
   getPostById,
@@ -23,10 +21,6 @@ const adminMeta = (title: string) =>
 export function dashboard(_req: Request, res: Response) {
   res.render("admin/dashboard", {
     meta: adminMeta("CMS"),
-    leadCount: countLeads(),
-    leads: listLeads(25),
-    signupCount: countSignups(),
-    signups: listSignups(25),
     posts: listAllPosts(),
     formatDate,
   });
