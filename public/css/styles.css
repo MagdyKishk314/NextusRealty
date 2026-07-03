@@ -759,66 +759,6 @@ section {
   color: var(--slate-400);
 }
 
-/* ---------------------------------------------------- Testimonials */
-
-.testimonials {
-  display: grid;
-  gap: 24px;
-}
-.testimonial {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  background: var(--slate-50);
-  border: 1px solid var(--slate-200);
-  border-radius: var(--radius);
-  padding: 28px;
-}
-.testimonial__stars {
-  color: var(--gold-500);
-  letter-spacing: 2px;
-  margin-bottom: 14px;
-}
-.testimonial blockquote {
-  margin: 0;
-  flex: 1;
-  font-size: 0.925rem;
-  color: var(--ink-800);
-}
-.testimonial figcaption {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-top: 22px;
-}
-.testimonial__avatar {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  background: var(--ink-950);
-  color: var(--gold-400);
-  font-family: var(--font-serif);
-  font-size: 0.85rem;
-}
-.testimonial__name {
-  display: block;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--ink-900);
-}
-.testimonial__role {
-  display: block;
-  font-size: 0.8rem;
-  color: var(--slate-500);
-}
-@media (min-width: 760px) {
-  .testimonials {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
 /* ---------------------------------------------------- Lead form */
 
 .lead__grid {

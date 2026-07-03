@@ -147,30 +147,6 @@
       </div>
     </section>
 
-    <!-- Testimonials (only rendered when published in the CMS) -->
-    <% if (testimonials && testimonials.length) { %>
-    <section class="section">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow eyebrow--center">From the field</p>
-          <h2 class="section-title">Agents who stopped buying leads by the pound</h2>
-        </div>
-        <div class="testimonials">
-          <% testimonials.forEach(function (t) { %>
-            <figure class="testimonial">
-              <div class="testimonial__stars" aria-hidden="true"><% for (var i=0;i<t.rating;i++){ %>★<% } %></div>
-              <blockquote>“<%= t.quote %>”</blockquote>
-              <figcaption>
-                <span class="testimonial__avatar"><%= t.name.split(' ').map(function(n){return n[0];}).join('') %></span>
-                <span><span class="testimonial__name"><%= t.name %></span><span class="testimonial__role"><%= t.role %></span></span>
-              </figcaption>
-            </figure>
-          <% }); %>
-        </div>
-      </div>
-    </section>
-    <% } %>
-
     <!-- Lead form -->
     <section id="get-leads" class="section section--dark lead">
       <div class="container lead__grid">

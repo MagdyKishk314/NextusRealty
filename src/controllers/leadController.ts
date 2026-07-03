@@ -2,7 +2,6 @@ import type { Request, Response } from "express";
 import * as home from "../content/home.js";
 import { faqs } from "../content/faqs.js";
 import { createLead } from "../models/leadModel.js";
-import { listPublishedTestimonials } from "../models/testimonialModel.js";
 import { meta } from "../seo/meta.js";
 import { siteConfig } from "../site.js";
 import { serviceSchema, faqSchema } from "../seo/jsonld.js";
@@ -48,7 +47,6 @@ export function submitLead(req: Request, res: Response) {
       }),
       home,
       faqs,
-      testimonials: listPublishedTestimonials(),
       submitted: false,
       formError: error,
       formValues: values,

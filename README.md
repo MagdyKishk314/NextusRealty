@@ -24,7 +24,7 @@ exclusively, to one agent.
 
 ```bash
 npm install
-npm run seed     # sample blog posts + (draft) testimonials
+npm run seed     # sample blog posts
 npm run dev      # builds the client bundle, then runs the server with reload
 ```
 
@@ -63,7 +63,7 @@ src/
   db/
     database.ts           node:sqlite connection + schema (runs on boot)
     seed.ts               Sample content seeder
-  models/                 leadModel, postModel, testimonialModel (raw SQL)
+  models/                 leadModel, postModel, signupModel (raw SQL)
   controllers/            home, lead, blog, admin, seo
   routes/                 index (public) + admin (basic-auth guarded)
   middleware/auth.ts      HTTP Basic Auth for /admin
@@ -83,7 +83,7 @@ scripts/generate-og.mjs   Rasterizes the OG image from an SVG
 | GET    | `/blog`                      | Blog index (published posts)     |
 | GET    | `/blog/:slug`                | Single post                      |
 | GET    | `/robots.txt`, `/sitemap.xml`| SEO endpoints (sitemap is dynamic) |
-| \*     | `/admin`, `/admin/...`       | CMS (posts + testimonials), auth |
+| \*     | `/admin`, `/admin/...`       | CMS (posts, leads, sign-ups), auth |
 
 ## CMS
 
@@ -91,9 +91,6 @@ scripts/generate-og.mjs   Rasterizes the OG image from an SVG
 
 - **Leads** — every submission is stored and listed on the dashboard.
 - **Blog** — create/edit/delete posts; drafts are hidden from the public site.
-- **Testimonials** — create/edit/delete; **only published** testimonials appear
-  on the home page (seeded ones are drafts, so the section stays hidden until
-  you publish real ones).
 
 ## Configuration (env vars)
 

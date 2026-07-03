@@ -6,7 +6,6 @@
  */
 import { db } from "./database.js";
 import { createPost } from "../models/postModel.js";
-import { createTestimonial } from "../models/testimonialModel.js";
 import { slugify } from "../utils.js";
 
 function isEmpty(table: string): boolean {
@@ -64,46 +63,5 @@ It's slower than scraping a list, and that's exactly the point. Fewer, better le
   return posts.length;
 }
 
-function seedTestimonials(): number {
-  if (!isEmpty("testimonials")) return 0;
-
-  // Seeded as DRAFTS so they do not appear on the public site until you
-  // publish them in the CMS. Replace with real quotes when you have them.
-  const testimonials = [
-    {
-      name: "Marcus Reyes",
-      role: "Broker, Coastal Group",
-      quote:
-        "I stopped racing six other agents to the phone. Every Nextus lead is mine, and they actually pick up. My close rate tripled in a quarter.",
-      rating: 5,
-      sort_order: 1,
-    },
-    {
-      name: "Priya Nandakumar",
-      role: "Realtor, Metro Residential",
-      quote:
-        "Every lead comes already confirmed by their team, so I'm not burning hours on dead numbers. I closed three deals from my very first batch.",
-      rating: 5,
-      sort_order: 2,
-    },
-    {
-      name: "Dana Whitfield",
-      role: "Team Lead, Whitfield & Co.",
-      quote:
-        "The confirmation call is the whole game. I show up to conversations with people who are ready, not tire-kickers. It changed how I spend my day.",
-      rating: 5,
-      sort_order: 3,
-    },
-  ];
-
-  for (const t of testimonials) {
-    createTestimonial({ ...t, status: "draft" });
-  }
-  return testimonials.length;
-}
-
 const posts = seedPosts();
-const testimonials = seedTestimonials();
-console.log(
-  `Seed complete. Posts: ${posts} added, testimonials: ${testimonials} added (as drafts).`,
-);
+console.log(`Seed complete. Posts: ${posts} added.`);
