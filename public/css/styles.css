@@ -1087,6 +1087,19 @@ section {
   font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.4);
 }
+.footer__meta-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+/* Discreet admin entry point — blends into the footer meta, gold on hover. */
+.footer__admin {
+  color: rgba(255, 255, 255, 0.4);
+  transition: color 0.15s ease;
+}
+.footer__admin:hover {
+  color: var(--gold-400);
+}
 @media (min-width: 720px) {
   .footer__cta-inner {
     flex-direction: row;
