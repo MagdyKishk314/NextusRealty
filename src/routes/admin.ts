@@ -1,11 +1,17 @@
 import { Router } from "express";
-import { basicAuth } from "../middleware/auth.js";
+import { requireAdmin } from "../middleware/auth.js";
+import * as auth from "../controllers/authController.js";
 import * as admin from "../controllers/adminController.js";
 
 export const adminRouter = Router();
 
-// Everything under /admin requires authentication.
-adminRouter.use(basicAuth);
+// Public auth routes (must stay outside the guard).
+adminRouter.get("/login", auth.showLogin);
+adminRouter.post("/login", auth.login);
+adminRouter.post("/logout", auth.logout);
+
+// Everything else under /admin requires a valid session.
+adminRouter.use(requireAdmin);
 
 adminRouter.get("/", admin.dashboard);
 

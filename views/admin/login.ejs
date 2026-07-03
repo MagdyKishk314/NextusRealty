@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body class="admin admin--auth">
+  <main class="auth">
+    <div class="auth__card">
+      <a class="brand brand--admin auth__brand" href="/">
+        <span class="brand__mark">N</span>
+        <span class="brand__name">Nextus <span class="accent">CMS</span></span>
+      </a>
+
+      <h1 class="auth__title">Sign in</h1>
+      <p class="auth__sub">Enter your credentials to manage the site.</p>
+
+      <% if (error) { %>
+        <p class="form-error auth__error"><%= error %></p>
+      <% } %>
+
+      <form method="post" action="/admin/login" class="auth__form">
+        <input type="hidden" name="next" value="<%= next %>" />
+        <label class="field"><span>Username</span>
+          <input type="text" name="username" autocomplete="username" autofocus required value="<%= username %>" />
+        </label>
+        <label class="field"><span>Password</span>
+          <input type="password" name="password" autocomplete="current-password" required />
+        </label>
+        <button type="submit" class="btn btn--gold btn--block">
+          Sign in <%- include('../partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
+        </button>
+      </form>
+
+      <a class="auth__back link-gold" href="/">&larr; Back to site</a>
+    </div>
+  </main>
+</body>
+</html>

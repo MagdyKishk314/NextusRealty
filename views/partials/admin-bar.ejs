@@ -8,6 +8,9 @@
       <a href="/admin"<%= currentPath === '/admin' ? ' class="is-active"' : '' %>>Dashboard</a>
       <a href="/admin/posts"<%= currentPath && currentPath.indexOf('/admin/posts') === 0 ? ' class="is-active"' : '' %>>Blog posts</a>
       <a class="link-gold" href="/" target="_blank" rel="noopener">View site &#8599;</a>
+      <form method="post" action="/admin/logout" class="admin__logout">
+        <button type="submit" class="admin__logout-btn">Log out</button>
+      </form>
     </nav>
   </div>
 </header>

@@ -1160,6 +1160,82 @@ section {
   background: var(--slate-50);
   min-height: 100vh;
 }
+
+/* Admin: styled login page */
+.admin--auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: radial-gradient(
+    1100px 560px at 50% -10%,
+    var(--ink-800),
+    var(--ink-950) 62%
+  );
+}
+.auth {
+  width: 100%;
+  max-width: 420px;
+}
+.auth__card {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 40px 34px;
+}
+.auth__brand {
+  display: inline-flex;
+  margin-bottom: 28px;
+}
+.auth__title {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.9rem;
+  color: var(--white);
+  margin: 0 0 6px;
+}
+.auth__sub {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.95rem;
+  margin: 0 0 24px;
+}
+.auth__error {
+  margin-bottom: 18px;
+}
+.auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.auth__form .field > span {
+  color: rgba(255, 255, 255, 0.75);
+}
+.auth__form .btn {
+  margin-top: 6px;
+}
+.auth__back {
+  display: inline-block;
+  margin-top: 22px;
+  font-size: 0.875rem;
+}
+.admin__logout {
+  margin: 0;
+}
+.admin__logout-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+  transition: color 0.15s ease;
+}
+.admin__logout-btn:hover {
+  color: var(--white);
+}
 .admin__bar {
   background: var(--ink-950);
   color: var(--white);
