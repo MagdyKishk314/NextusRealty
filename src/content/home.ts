@@ -5,13 +5,13 @@
  */
 
 export const hero = {
-  eyebrow: "Exclusive, human-confirmed real estate leads",
-  titleLead: "Exclusive, verified",
-  titleAccent: "real estate leads",
-  titleTail: "that actually close",
-  tagline: "Fewer leads. Bigger closings.",
+  eyebrow: "The standard for verified real estate leads",
+  titleLead: "We set the standard for",
+  titleAccent: "verified real estate leads",
+  titleTail: "that close",
+  tagline: "This is what a real lead looks like.",
   subhead:
-    "Nextus Realty delivers pre-qualified buyer and seller leads to a single agent: you. Every lead is cold-called and confirmed by a real person before it reaches you, so fewer, better leads mean bigger closings.",
+    "Nextus Realty defines what a qualified lead should be. Every one is cold-called and confirmed by our team, then handed to a single agent: you. We don't sell lists. We set the bar the rest of the industry falls short of.",
   trustPoints: [
     { icon: "lock", label: "Exclusive, never resold" },
     { icon: "shield", label: "Pre-qualified intent" },
@@ -26,12 +26,12 @@ export const stats = [
 ];
 
 export const problem = {
-  eyebrow: "The difference",
-  title: "Most leads are sold by the pound. Ours are confirmed by hand.",
+  eyebrow: "What the industry gets wrong",
+  title: "The industry sells leads by the pound. We decided that wasn't good enough.",
   subhead:
-    "A raw list resold to seven agents isn't a head start. It's a race to voicemail. Every Nextus lead is cold-called and confirmed by a real person, so the ones you receive are ready to talk.",
+    "A raw list resold to seven agents isn't a head start. It's a race to voicemail. We built Nextus to end that. Every lead is cold-called and confirmed by a real person, because that is the only standard worth delivering.",
   typical: {
-    heading: "The typical lead",
+    heading: "The industry standard",
     items: [
       "Sold to 5–8 agents at once, so you're in a race, not a relationship",
       "Fake numbers, dead emails, and “just browsing” tire-kickers",
@@ -40,7 +40,7 @@ export const problem = {
     ],
   },
   nextus: {
-    heading: "The Nextus lead",
+    heading: "The Nextus standard",
     items: [
       "Delivered to you and no one else. Full stop.",
       "Every phone and email verified before it reaches you",
@@ -55,27 +55,27 @@ export const steps = [
     icon: "phone",
     step: "01",
     title: "We pick up the phone",
-    body: "No scraped lists, no recycled databases. Our team cold calls in your market and reaches real people, surfacing the ones actively looking to buy or sell right now.",
+    body: "No scraped lists, no recycled databases. Our team cold calls in your market and reaches real people, surfacing the ones actively looking to buy or sell right now. This is where every qualified lead begins.",
   },
   {
     icon: "shield",
     step: "02",
     title: "A real person confirms every lead",
-    body: "Before anything ships, our lead manager calls the lead directly, confirms their details are accurate, and asks a few questions about their timeline and intent.",
+    body: "Before anything ships, our lead manager calls the lead directly, confirms their details are accurate, and asks the questions about timeline and intent. Nothing reaches you until it clears that bar.",
   },
   {
     icon: "badge",
     step: "03",
     title: "You get it first, and alone",
-    body: "The confirmed lead lands in your inbox within 24 hours, exclusively yours. No competing agents, no bidding war, just a warm conversation waiting to happen.",
+    body: "The confirmed lead lands in your inbox within hours, exclusively yours. No competing agents, no bidding war, just a warm conversation waiting to happen.",
   },
 ];
 
 export const features = {
-  eyebrow: "Why agents switch",
-  title: "Every lead is touched by a human before it reaches you",
+  eyebrow: "Why agents trust Nextus",
+  title: "The standard every lead is held to before it reaches you",
   subhead:
-    "We don't sell raw lists. We deliver conversations our team has already confirmed are worth your time.",
+    "We don't sell raw lists. We deliver conversations our team has already confirmed are worth your time. This is the bar we hold, on every single lead.",
   items: [
     {
       icon: "lock",
@@ -90,7 +90,7 @@ export const features = {
     {
       icon: "badge",
       title: "Verified, not just captured",
-      body: "Real name, working number, valid email, confirmed intent. If it doesn't pass our checks, it doesn't reach you.",
+      body: "Real name, working number, valid email, confirmed intent. If it doesn't pass our checks, it doesn't reach you. No exceptions.",
     },
     {
       icon: "target",
@@ -100,22 +100,22 @@ export const features = {
     {
       icon: "trending",
       title: "Ready to convert",
-      body: "Pre-qualified intent means dramatically higher close rates. Your time goes to people who are genuinely ready to move.",
+      body: "Pre-qualified intent is why our leads close at 3.4× the rate of shared lists. Your time goes to people who are genuinely ready to move.",
     },
     {
       icon: "clock",
       title: "Fresh, never recycled",
-      body: "Leads reach you while intent is hot, typically within 24 hours of the confirming call, not weeks-old data sold on repeat.",
+      body: "Leads reach you while intent is hot, in under six hours from the confirming call, not weeks-old data sold on repeat.",
     },
   ],
 };
 
 export type ComparisonValue = string | boolean;
 export const comparison = {
-  eyebrow: "Side by side",
-  title: "The same market. A completely different lead.",
+  eyebrow: "The measure of a lead",
+  title: "The same market. A completely different standard.",
   subhead:
-    "Not all leads are created equal. Here's how a Nextus lead stacks up against what most vendors hand you.",
+    "This is the benchmark we set, line by line. Here's how a Nextus lead measures against what the rest of the industry hands you.",
   rows: [
     { label: "Sold to how many agents", typical: "5–8 agents", nextus: "You only", highlight: false },
     { label: "Contact info verified", typical: false, nextus: true, highlight: false },
