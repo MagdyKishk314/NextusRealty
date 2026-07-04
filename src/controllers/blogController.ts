@@ -40,6 +40,7 @@ export function showBlogPost(req: Request, res: Response) {
       jsonLd: [blogPostingSchema(post)],
     }),
     post,
+    posts: listPublishedPosts(),
     bodyHtml: textToHtml(post.body),
     formatDate,
     siteName: siteConfig.name,

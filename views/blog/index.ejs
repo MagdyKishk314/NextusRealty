@@ -15,20 +15,26 @@
           <p class="section-subhead">How we source, confirm, and deliver exclusive real estate leads.</p>
         </div>
 
-        <% if (!posts.length) { %>
-          <p class="muted">No posts yet. Check back soon.</p>
-        <% } else { %>
-          <div class="post-list">
-            <% posts.forEach(function (post) { %>
-              <article class="post-card">
-                <time class="post-card__date"><%= formatDate(post.published_at) %></time>
-                <h2 class="post-card__title"><a href="/blog/<%= post.slug %>"><%= post.title %></a></h2>
-                <p class="post-card__excerpt"><%= post.excerpt %></p>
-                <a class="link-gold" href="/blog/<%= post.slug %>">Read more →</a>
-              </article>
-            <% }); %>
+        <div class="blog-layout">
+          <%- include('../partials/blog-sidebar', { posts: posts, currentSlug: null }) %>
+
+          <div class="blog-main">
+            <% if (!posts.length) { %>
+              <p class="muted">No posts yet. Check back soon.</p>
+            <% } else { %>
+              <div class="post-list">
+                <% posts.forEach(function (post) { %>
+                  <article class="post-card">
+                    <time class="post-card__date"><%= formatDate(post.published_at) %></time>
+                    <h2 class="post-card__title"><a href="/blog/<%= post.slug %>"><%= post.title %></a></h2>
+                    <p class="post-card__excerpt"><%= post.excerpt %></p>
+                    <a class="link-gold" href="/blog/<%= post.slug %>">Read more →</a>
+                  </article>
+                <% }); %>
+              </div>
+            <% } %>
           </div>
-        <% } %>
+        </div>
       </div>
     </section>
   </main>

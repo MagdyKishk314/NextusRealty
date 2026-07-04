@@ -7,21 +7,27 @@
   <%- include('../partials/header') %>
 
   <main class="page">
-    <article class="section">
-      <div class="container container--narrow">
-        <a class="link-gold post__back" href="/blog">← All posts</a>
-        <time class="post__date"><%= formatDate(post.published_at) %></time>
-        <h1 class="post__title"><%= post.title %></h1>
-        <div class="prose"><%- bodyHtml %></div>
+    <section class="section">
+      <div class="container">
+        <div class="blog-layout">
+          <%- include('../partials/blog-sidebar', { posts: posts, currentSlug: post.slug }) %>
 
-        <div class="post__cta">
-          <h2>Want leads like the ones we describe?</h2>
-          <a class="btn btn--gold" href="/#get-leads">
-            Request your first leads <%- include('../partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
-          </a>
+          <article class="blog-main blog-article">
+            <a class="link-gold post__back" href="/blog">← All posts</a>
+            <time class="post__date"><%= formatDate(post.published_at) %></time>
+            <h1 class="post__title"><%= post.title %></h1>
+            <div class="prose"><%- bodyHtml %></div>
+
+            <div class="post__cta">
+              <h2>Want leads like the ones we describe?</h2>
+              <a class="btn btn--gold" href="/signup">
+                Request your first leads <%- include('../partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
+              </a>
+            </div>
+          </article>
         </div>
       </div>
-    </article>
+    </section>
   </main>
 
   <%- include('../partials/footer') %>

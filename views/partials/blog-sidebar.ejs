@@ -1,0 +1,17 @@
+<aside class="blog-sidebar">
+  <div class="blog-sidebar__panel">
+    <p class="blog-sidebar__label">Articles</p>
+    <nav class="blog-sidebar__nav" aria-label="Blog articles">
+      <a href="/blog"<%= !currentSlug ? ' class="is-active"' : '' %>>All articles</a>
+      <% posts.forEach(function (p) { %>
+        <a href="/blog/<%= p.slug %>"<%= currentSlug === p.slug ? ' class="is-active"' : '' %>><%= p.title %></a>
+      <% }); %>
+    </nav>
+  </div>
+
+  <div class="blog-sidebar__cta">
+    <p class="blog-sidebar__cta-title">Exclusive, confirmed leads</p>
+    <p class="blog-sidebar__cta-sub">One agent per lead, verified by a real person before it reaches you.</p>
+    <a class="btn btn--gold btn--sm btn--block" href="/signup">Get your leads</a>
+  </div>
+</aside>
