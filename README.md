@@ -31,15 +31,15 @@ npm run dev      # builds the client bundle, then runs the server with reload
 Open <http://localhost:3000>. The CMS is at <http://localhost:3000/admin>
 (default login `admin` / `nextus` — override with env vars, see below).
 
-> Note: `npm run dev` builds the client bundle once. If you change files in
-> `src/client/`, re-run `npm run build:client` (or `npm run watch:client` in a
-> second terminal).
+> `npm run dev` watches everything: it recompiles the server (`tsc --watch`),
+> rebundles the client (`esbuild --watch`), and restarts the server on change
+> (`node --watch`). No `tsx` — it doesn't run on Node 26.
 
 ## Scripts
 
 | Command                | What it does                                        |
 | ---------------------- | --------------------------------------------------- |
-| `npm run dev`          | Build client, then run server with reload (tsx)     |
+| `npm run dev`          | Watch + rebuild client & server, restart on change  |
 | `npm run build`        | Build client bundle + compile server to `dist/`     |
 | `npm start`            | Run the compiled server (`node dist/server.js`)     |
 | `npm run seed`         | Seed sample content (idempotent)                    |
