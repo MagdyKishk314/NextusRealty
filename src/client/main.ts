@@ -100,8 +100,98 @@ function initLeadForm(): void {
   });
 }
 
+function initPostForm(): void {
+  const form = document.querySelector<HTMLFormElement>("[data-post-form]");
+  if (!form) return;
+
+  // --- Cover image: live preview + drag & drop ---
+  const uploader = form.querySelector<HTMLElement>("[data-uploader]");
+  const fileInput = form.querySelector<HTMLInputElement>("[data-file]");
+  const hint = form.querySelector<HTMLElement>("[data-hint]");
+  const preview = form.querySelector<HTMLElement>("[data-preview]");
+  const previewImg = form.querySelector<HTMLImageElement>("[data-preview-img]");
+  const previewName = form.querySelector<HTMLElement>("[data-preview-name]");
+  const clearBtn = form.querySelector<HTMLButtonElement>("[data-clear]");
+
+  if (uploader && fileInput && hint && preview && previewImg && previewName && clearBtn) {
+    let objectUrl: string | null = null;
+
+    const showFile = (file: File) => {
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      objectUrl = URL.createObjectURL(file);
+      previewImg.src = objectUrl;
+      previewName.textContent = file.name;
+      hint.hidden = true;
+      preview.hidden = false;
+      clearBtn.hidden = false;
+    };
+
+    const reset = () => {
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      objectUrl = null;
+      fileInput.value = "";
+      hint.hidden = false;
+      preview.hidden = true;
+      clearBtn.hidden = true;
+    };
+
+    fileInput.addEventListener("change", () => {
+      const file = fileInput.files?.[0];
+      if (file) showFile(file);
+      else reset();
+    });
+
+    clearBtn.addEventListener("click", reset);
+
+    ["dragenter", "dragover"].forEach((evt) =>
+      uploader.addEventListener(evt, (e) => {
+        e.preventDefault();
+        uploader.classList.add("is-dragover");
+      }),
+    );
+    ["dragleave", "dragend", "drop"].forEach((evt) =>
+      uploader.addEventListener(evt, () => uploader.classList.remove("is-dragover")),
+    );
+    uploader.addEventListener("drop", (e) => {
+      e.preventDefault();
+      const dt = (e as DragEvent).dataTransfer;
+      const file = dt?.files?.[0];
+      if (file && file.type.startsWith("image/")) {
+        fileInput.files = dt!.files;
+        showFile(file);
+      }
+    });
+  }
+
+  // --- Category quick-pick chips ---
+  const category = form.querySelector<HTMLInputElement>("[data-category]");
+  if (category) {
+    form.querySelectorAll<HTMLButtonElement>(".chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        category.value = chip.dataset.chip ?? "";
+        category.focus();
+      });
+    });
+  }
+
+  // --- Excerpt character counter ---
+  const excerpt = form.querySelector<HTMLTextAreaElement>("[data-excerpt]");
+  const counter = form.querySelector<HTMLElement>("[data-excerpt-count]");
+  if (excerpt && counter) {
+    const IDEAL = 160;
+    const update = () => {
+      const n = excerpt.value.length;
+      counter.textContent = `${n} characters${n > IDEAL ? ` — ${IDEAL} or fewer reads best in search` : ""}`;
+      counter.classList.toggle("is-over", n > IDEAL);
+    };
+    excerpt.addEventListener("input", update);
+    update();
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initHeader();
   initFaq();
   initLeadForm();
+  initPostForm();
 });

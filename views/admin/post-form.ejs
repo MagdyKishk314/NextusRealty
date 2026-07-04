@@ -11,49 +11,82 @@
     <h1><%= post ? 'Edit post' : 'New post' %></h1>
     <% if (error) { %><p class="form-error"><%= error %></p><% } %>
 
-    <form method="post" action="<%= formAction %>" class="admin-form" enctype="multipart/form-data">
+    <form method="post" action="<%= formAction %>" class="admin-form" enctype="multipart/form-data" data-post-form>
       <label class="field"><span>Title *</span>
-        <input type="text" name="title" required value="<%= post ? post.title : '' %>" />
+        <input type="text" name="title" required placeholder="A clear, specific headline" value="<%= post ? post.title : '' %>" />
       </label>
-      <label class="field"><span>Slug <span class="muted small">(optional, auto-generated from title)</span></span>
-        <input type="text" name="slug" placeholder="my-post-slug" value="<%= post ? post.slug : '' %>" />
-      </label>
-      <label class="field"><span>Category <span class="muted small">(shown as a filter on the blog)</span></span>
-        <input type="text" name="category" list="category-options" placeholder="e.g. Sourcing" value="<%= post ? (post.category || '') : '' %>" />
-        <datalist id="category-options">
-          <% categories.forEach(function (c) { %><option value="<%= c %>"></option><% }); %>
-        </datalist>
-      </label>
-      <div class="field"><span>Cover image <span class="muted small">(JPG, PNG, WebP, GIF &mdash; up to 5&nbsp;MB)</span></span>
+
+      <div class="field-row">
+        <label class="field"><span>Slug <span class="muted small">(auto from title)</span></span>
+          <input type="text" name="slug" placeholder="my-post-slug" value="<%= post ? post.slug : '' %>" />
+        </label>
+        <label class="field"><span>Category <span class="muted small">(blog filter)</span></span>
+          <input type="text" name="category" list="category-options" placeholder="e.g. Sourcing" value="<%= post ? (post.category || '') : '' %>" data-category />
+          <datalist id="category-options">
+            <% categories.forEach(function (c) { %><option value="<%= c %>"></option><% }); %>
+          </datalist>
+          <% if (categories.length) { %>
+            <div class="chips">
+              <% categories.forEach(function (c) { %><button type="button" class="chip" data-chip="<%= c %>"><%= c %></button><% }); %>
+            </div>
+          <% } %>
+        </label>
+      </div>
+
+      <div class="field">
+        <span>Cover image <span class="muted small">(JPG, PNG, WebP, GIF &mdash; up to 5&nbsp;MB)</span></span>
         <% if (post && post.image) { %>
-          <div class="image-preview">
+          <div class="uploader__current">
             <img src="<%= post.image %>" alt="Current cover image" />
-            <label class="image-preview__remove">
-              <input type="checkbox" name="removeImage" value="1" /> Remove image
-            </label>
+            <div>
+              <p class="muted small" style="margin:0 0 6px">Current image</p>
+              <label class="checkbox"><input type="checkbox" name="removeImage" value="1" /> Remove it</label>
+            </div>
           </div>
         <% } %>
-        <input type="file" name="image" accept="image/*" />
-        <% if (post && post.image) { %><p class="muted small">Uploading a new file replaces the current image.</p><% } %>
+        <label class="uploader" data-uploader>
+          <input type="file" name="image" accept="image/*" class="visually-hidden" data-file />
+          <div class="uploader__hint" data-hint>
+            <span class="uploader__icon"><%- include('../partials/icon', { name: 'plus', cls: 'icon' }) %></span>
+            <span><strong>Click to choose an image</strong><br><span class="muted small">or drag &amp; drop it here</span></span>
+          </div>
+          <div class="uploader__preview" data-preview hidden>
+            <img data-preview-img alt="Selected image preview" />
+            <span class="small" data-preview-name></span>
+          </div>
+        </label>
+        <button type="button" class="link-danger uploader__clear" data-clear hidden>Remove selected image</button>
       </div>
-      <label class="field"><span>Excerpt <span class="muted small">(shown on the blog index &amp; meta description)</span></span>
-        <textarea name="excerpt" rows="2"><%= post ? post.excerpt : '' %></textarea>
+
+      <label class="field"><span>Excerpt <span class="muted small">(blog index &amp; meta description)</span></span>
+        <textarea name="excerpt" rows="2" maxlength="220" data-excerpt><%= post ? post.excerpt : '' %></textarea>
+        <span class="field-counter" data-excerpt-count aria-live="polite"></span>
       </label>
+
       <label class="field"><span>Body <span class="muted small">(plain text; blank lines start new paragraphs)</span></span>
         <textarea name="body" rows="14"><%= post ? post.body : '' %></textarea>
       </label>
-      <label class="field"><span>Status</span>
-        <select name="status">
-          <option value="draft" <%= (!post || post.status === 'draft') ? 'selected' : '' %>>Draft</option>
-          <option value="published" <%= (post && post.status === 'published') ? 'selected' : '' %>>Published</option>
-        </select>
-      </label>
 
-      <div class="admin-form__actions">
+      <div class="field"><span>Status</span>
+        <div class="segmented">
+          <label class="segmented__opt">
+            <input type="radio" name="status" value="draft" <%= (!post || post.status === 'draft') ? 'checked' : '' %> />
+            <span>Draft <span class="muted small">&mdash; hidden</span></span>
+          </label>
+          <label class="segmented__opt">
+            <input type="radio" name="status" value="published" <%= (post && post.status === 'published') ? 'checked' : '' %> />
+            <span>Published <span class="muted small">&mdash; live</span></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="admin-form__bar">
         <button type="submit" class="btn btn--gold">Save post</button>
         <a class="link-gold" href="/admin/posts">Cancel</a>
       </div>
     </form>
   </main>
+
+  <script src="/js/bundle.js" defer></script>
 </body>
 </html>
