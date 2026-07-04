@@ -34,6 +34,8 @@ CREATE TABLE IF NOT EXISTS posts (
   title        TEXT NOT NULL,
   excerpt      TEXT NOT NULL DEFAULT '',
   body         TEXT NOT NULL DEFAULT '',
+  category     TEXT NOT NULL DEFAULT '',
+  image        TEXT,
   status       TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','published')),
   published_at TEXT,
   created_at   TEXT NOT NULL DEFAULT (datetime('now')),
@@ -52,9 +54,22 @@ CREATE TABLE IF NOT EXISTS signups (
 );
 `;
 
+/** Add a column to an existing table if it isn't there yet (idempotent). */
+function ensureColumn(table: string, column: string, definition: string): void {
+  const cols = db
+    .prepare(`PRAGMA table_info(${table})`)
+    .all() as unknown as Array<{ name: string }>;
+  if (!cols.some((c) => c.name === column)) {
+    db.exec(`ALTER TABLE ${table} ADD COLUMN ${column} ${definition}`);
+  }
+}
+
 /** Idempotent. Safe to run on every boot. */
 export function initSchema(): void {
   db.exec(SCHEMA);
+  // Migrations for databases created before these columns existed.
+  ensureColumn("posts", "category", "TEXT NOT NULL DEFAULT ''");
+  ensureColumn("posts", "image", "TEXT");
 }
 
 initSchema();

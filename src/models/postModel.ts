@@ -8,6 +8,8 @@ export interface Post {
   title: string;
   excerpt: string;
   body: string;
+  category: string;
+  image: string | null;
   status: PostStatus;
   published_at: string | null;
   created_at: string;
@@ -19,10 +21,21 @@ export interface PostInput {
   title: string;
   excerpt: string;
   body: string;
+  category: string;
+  image: string | null;
   status: PostStatus;
 }
 
-export function listPublishedPosts(): Post[] {
+export function listPublishedPosts(category?: string): Post[] {
+  if (category) {
+    return db
+      .prepare(
+        `SELECT * FROM posts
+         WHERE status = 'published' AND category = ?
+         ORDER BY COALESCE(published_at, created_at) DESC, id DESC`,
+      )
+      .all(category) as unknown as Post[];
+  }
   return db
     .prepare(
       `SELECT * FROM posts
@@ -30,6 +43,18 @@ export function listPublishedPosts(): Post[] {
        ORDER BY COALESCE(published_at, created_at) DESC, id DESC`,
     )
     .all() as unknown as Post[];
+}
+
+/** Distinct, non-empty categories among published posts, alphabetical. */
+export function listCategories(): string[] {
+  const rows = db
+    .prepare(
+      `SELECT DISTINCT category FROM posts
+       WHERE status = 'published' AND category <> ''
+       ORDER BY category COLLATE NOCASE ASC`,
+    )
+    .all() as unknown as Array<{ category: string }>;
+  return rows.map((r) => r.category);
 }
 
 export function listAllPosts(): Post[] {
@@ -62,14 +87,16 @@ export function createPost(input: PostInput): number {
     input.status === "published" ? new Date().toISOString() : null;
   const info = db
     .prepare(
-      `INSERT INTO posts (slug, title, excerpt, body, status, published_at)
-       VALUES (?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO posts (slug, title, excerpt, body, category, image, status, published_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
     )
     .run(
       input.slug,
       input.title,
       input.excerpt,
       input.body,
+      input.category,
+      input.image,
       input.status,
       publishedAt,
     );
@@ -85,14 +112,16 @@ export function updatePost(id: number, input: PostInput): void {
       : null;
   db.prepare(
     `UPDATE posts
-     SET slug = ?, title = ?, excerpt = ?, body = ?, status = ?,
-         published_at = ?, updated_at = datetime('now')
+     SET slug = ?, title = ?, excerpt = ?, body = ?, category = ?, image = ?,
+         status = ?, published_at = ?, updated_at = datetime('now')
      WHERE id = ?`,
   ).run(
     input.slug,
     input.title,
     input.excerpt,
     input.body,
+    input.category,
+    input.image,
     input.status,
     publishedAt,
     id,

@@ -4,6 +4,7 @@ import { pageTitle } from "../site.js";
 import { slugify, formatDate, textToHtml } from "../utils.js";
 import {
   listAllPosts,
+  listCategories,
   getPostById,
   createPost,
   updatePost,
@@ -12,6 +13,7 @@ import {
   slugExists,
   type PostStatus,
 } from "../models/postModel.js";
+import { publicPath, removeUpload } from "../middleware/upload.js";
 
 const adminMeta = (title: string) =>
   meta({ title: pageTitle(title), robots: "noindex, nofollow" });
@@ -45,9 +47,20 @@ function readPostBody(req: Request) {
     title,
     excerpt: (b.excerpt ?? "").trim(),
     body: (b.body ?? "").trim(),
+    category: (b.category ?? "").trim(),
     status,
     slugSource: slugify(slugSource),
   };
+}
+
+/** Public path of the just-uploaded image, or null. */
+function uploadedImage(req: Request): string | null {
+  return req.file ? publicPath(req.file.filename) : null;
+}
+
+/** Any error recorded by the upload middleware. */
+function uploadError(req: Request): string | null {
+  return (req as Request & { uploadError?: string }).uploadError ?? null;
 }
 
 export function postsManage(_req: Request, res: Response) {
@@ -81,6 +94,7 @@ export function newPost(_req: Request, res: Response) {
   res.render("admin/post-form", {
     meta: adminMeta("New post"),
     post: null,
+    categories: listCategories(),
     formAction: "/admin/posts",
     error: null,
   });
@@ -88,12 +102,15 @@ export function newPost(_req: Request, res: Response) {
 
 export function createPostHandler(req: Request, res: Response) {
   const data = readPostBody(req);
-  if (!data.title) {
+  const err = uploadError(req) ?? (!data.title ? "Title is required." : null);
+  if (err) {
+    removeUpload(uploadedImage(req)); // discard any orphaned upload
     return res.status(422).render("admin/post-form", {
       meta: adminMeta("New post"),
-      post: { ...req.body, id: 0 },
+      post: { ...req.body, id: 0, image: null },
+      categories: listCategories(),
       formAction: "/admin/posts",
-      error: "Title is required.",
+      error: err,
     });
   }
   createPost({
@@ -101,17 +118,20 @@ export function createPostHandler(req: Request, res: Response) {
     title: data.title,
     excerpt: data.excerpt,
     body: data.body,
+    category: data.category,
+    image: uploadedImage(req),
     status: data.status,
   });
-  res.redirect(303, "/admin");
+  res.redirect(303, "/admin/posts");
 }
 
 export function editPost(req: Request, res: Response) {
   const post = getPostById(Number(req.params.id));
-  if (!post) return res.redirect(303, "/admin");
+  if (!post) return res.redirect(303, "/admin/posts");
   res.render("admin/post-form", {
     meta: adminMeta("Edit post"),
     post,
+    categories: listCategories(),
     formAction: `/admin/posts/${post.id}`,
     error: null,
   });
@@ -120,25 +140,43 @@ export function editPost(req: Request, res: Response) {
 export function updatePostHandler(req: Request, res: Response) {
   const id = Number(req.params.id);
   const existing = getPostById(id);
-  if (!existing) return res.redirect(303, "/admin");
+  if (!existing) return res.redirect(303, "/admin/posts");
 
   const data = readPostBody(req);
-  if (!data.title) {
+  const err = uploadError(req) ?? (!data.title ? "Title is required." : null);
+  if (err) {
+    removeUpload(uploadedImage(req));
     return res.status(422).render("admin/post-form", {
       meta: adminMeta("Edit post"),
       post: { ...existing, ...req.body },
+      categories: listCategories(),
       formAction: `/admin/posts/${id}`,
-      error: "Title is required.",
+      error: err,
     });
   }
+
+  // Resolve the image: new upload replaces, "remove" clears, else keep current.
+  const newUpload = uploadedImage(req);
+  const removeExisting = (req.body as Record<string, string>).removeImage === "1";
+  let image = existing.image;
+  if (newUpload) {
+    removeUpload(existing.image);
+    image = newUpload;
+  } else if (removeExisting) {
+    removeUpload(existing.image);
+    image = null;
+  }
+
   updatePost(id, {
     slug: uniqueSlug(data.slugSource, id),
     title: data.title,
     excerpt: data.excerpt,
     body: data.body,
+    category: data.category,
+    image,
     status: data.status,
   });
-  res.redirect(303, "/admin");
+  res.redirect(303, "/admin/posts");
 }
 
 export function deletePostHandler(req: Request, res: Response) {

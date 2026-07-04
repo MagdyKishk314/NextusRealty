@@ -21,6 +21,7 @@ function seedPosts(): number {
   const posts = [
     {
       title: "Why exclusive leads close at a higher rate",
+      category: "Playbook",
       excerpt:
         "When a lead is shared with eight agents, you're not selling. You're racing. Here's what exclusivity actually changes about your day.",
       body: `Most lead vendors sell the same contact to a handful of agents at once. The moment that record is created, the clock starts and everyone is dialing the same person.
@@ -31,6 +32,7 @@ That's the whole reason we deliver every lead to a single agent and never resell
     },
     {
       title: "What our lead manager confirms before a lead ships",
+      category: "Verification",
       excerpt:
         "Every Nextus lead is called by a real person first. Here's exactly what we check before it reaches your inbox.",
       body: `A form-fill is a guess. A confirmed lead is a fact.
@@ -41,6 +43,7 @@ We also note the little things that make your first call easier: their preferred
     },
     {
       title: "Cold calling done right: how we source in your market",
+      category: "Sourcing",
       excerpt:
         "No scraped lists, no recycled databases. A look at how our team surfaces real buyers and sellers by picking up the phone.",
       body: `Good leads don't come from buying the same tired database everyone else already has. They come from conversations.
@@ -57,6 +60,8 @@ It's slower than scraping a list, and that's exactly the point. Fewer, better le
       title: p.title,
       excerpt: p.excerpt,
       body: p.body,
+      category: p.category,
+      image: null,
       status: "published",
     });
   }

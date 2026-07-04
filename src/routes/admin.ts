@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { requireAdmin } from "../middleware/auth.js";
+import { postImageUpload } from "../middleware/upload.js";
 import * as auth from "../controllers/authController.js";
 import * as admin from "../controllers/adminController.js";
 
@@ -18,9 +19,9 @@ adminRouter.get("/", admin.dashboard);
 // Posts
 adminRouter.get("/posts", admin.postsManage);
 adminRouter.get("/posts/new", admin.newPost);
-adminRouter.post("/posts", admin.createPostHandler);
+adminRouter.post("/posts", postImageUpload, admin.createPostHandler);
 adminRouter.get("/posts/:id/view", admin.viewPost);
 adminRouter.get("/posts/:id/edit", admin.editPost);
 adminRouter.post("/posts/:id/toggle", admin.togglePostStatus);
-adminRouter.post("/posts/:id", admin.updatePostHandler);
+adminRouter.post("/posts/:id", postImageUpload, admin.updatePostHandler);
 adminRouter.post("/posts/:id/delete", admin.deletePostHandler);

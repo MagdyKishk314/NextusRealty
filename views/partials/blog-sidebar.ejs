@@ -1,10 +1,10 @@
 <aside class="blog-sidebar">
   <div class="blog-sidebar__panel">
-    <p class="blog-sidebar__label">Articles</p>
-    <nav class="blog-sidebar__nav" aria-label="Blog articles">
-      <a href="/blog"<%= !currentSlug ? ' class="is-active"' : '' %>>All articles</a>
-      <% posts.forEach(function (p) { %>
-        <a href="/blog/<%= p.slug %>"<%= currentSlug === p.slug ? ' class="is-active"' : '' %>><%= p.title %></a>
+    <p class="blog-sidebar__label">Categories</p>
+    <nav class="blog-sidebar__nav" aria-label="Blog categories">
+      <a href="/blog"<%= !currentCategory ? ' class="is-active"' : '' %>>All articles</a>
+      <% categories.forEach(function (c) { %>
+        <a href="/blog?category=<%= encodeURIComponent(c) %>"<%= currentCategory === c ? ' class="is-active"' : '' %>><%= c %></a>
       <% }); %>
     </nav>
   </div>

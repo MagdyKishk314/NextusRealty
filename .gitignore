@@ -6,6 +6,10 @@
 /public/js/bundle.js
 /public/js/bundle.js.map
 
+# uploaded post images (user content, not source)
+/public/uploads/*
+!/public/uploads/.gitkeep
+
 # database (runtime data)
 /data/*.db
 /data/*.db-journal

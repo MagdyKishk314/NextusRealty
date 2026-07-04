@@ -1,20 +1,31 @@
 import type { Request, Response } from "express";
-import { listPublishedPosts, getPostBySlug } from "../models/postModel.js";
+import {
+  listPublishedPosts,
+  listCategories,
+  getPostBySlug,
+} from "../models/postModel.js";
 import { meta } from "../seo/meta.js";
 import { pageTitle, siteConfig } from "../site.js";
 import { blogPostingSchema } from "../seo/jsonld.js";
 import { textToHtml, formatDate, excerptFrom } from "../utils.js";
 
-export function showBlogIndex(_req: Request, res: Response) {
-  const posts = listPublishedPosts();
+export function showBlogIndex(req: Request, res: Response) {
+  const categories = listCategories();
+  const requested = typeof req.query.category === "string" ? req.query.category : "";
+  // Only honour a category that actually exists.
+  const currentCategory = categories.includes(requested) ? requested : null;
+  const posts = listPublishedPosts(currentCategory ?? undefined);
+
   res.render("blog/index", {
     meta: meta({
-      title: pageTitle("Blog"),
+      title: pageTitle(currentCategory ? `Blog: ${currentCategory}` : "Blog"),
       description:
         "Notes on exclusive, human-confirmed real estate leads: how we source, verify, and deliver them.",
       canonicalPath: "/blog",
     }),
     posts,
+    categories,
+    currentCategory,
     formatDate,
   });
 }
@@ -40,7 +51,8 @@ export function showBlogPost(req: Request, res: Response) {
       jsonLd: [blogPostingSchema(post)],
     }),
     post,
-    posts: listPublishedPosts(),
+    categories: listCategories(),
+    currentCategory: post.category || null,
     bodyHtml: textToHtml(post.body),
     formatDate,
     siteName: siteConfig.name,
