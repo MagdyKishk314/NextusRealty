@@ -1,14 +1,32 @@
-<header class="admin__bar">
-  <div class="container admin__bar-inner">
-    <a class="brand brand--admin" href="/admin">
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="/admin">
       <span class="brand__mark">N</span>
-      <span class="brand__name">Nextus <span class="accent">CMS</span></span>
+      <span class="brand__name">Nextus<span class="accent"> Realty</span></span>
     </a>
-    <nav class="admin__nav" aria-label="Admin">
-      <a class="link-gold" href="/" target="_blank" rel="noopener">View site &#8599;</a>
-      <form method="post" action="/admin/logout" class="admin__logout">
-        <button type="submit" class="admin__logout-btn">Log out</button>
-      </form>
+
+    <nav class="nav" aria-label="Primary">
+      <div class="nav__item">
+        <a class="nav__top" href="/#top">Home <span class="nav__caret" aria-hidden="true"></span></a>
+        <div class="nav__menu" role="menu">
+          <a role="menuitem" href="/#how-it-works">How it works</a>
+          <a role="menuitem" href="/#why-nextus">Why Nextus</a>
+          <a role="menuitem" href="/#comparison">Comparison</a>
+          <a role="menuitem" href="/#faq">FAQ</a>
+        </div>
+      </div>
+
+      <div class="nav__item">
+        <a class="nav__top" href="/blog">Blog</a>
+      </div>
+
+      <div class="nav__item">
+        <a class="nav__top" href="/signup">Sign up</a>
+      </div>
     </nav>
+
+    <form method="post" action="/admin/logout" class="admin__logout">
+      <button type="submit" class="admin__logout-btn">Log out</button>
+    </form>
   </div>
 </header>
