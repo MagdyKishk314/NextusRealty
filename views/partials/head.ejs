@@ -36,6 +36,21 @@
   rel="stylesheet"
 />
 
+<!-- Motion boot, before first paint (no content flash):
+     - arriving mid page-transition → cover with the curtain (.is-veiled)
+     - first visit of the session   → cover with the loading screen (.is-booting)
+     The bundle swaps these for the real animated elements at DOMContentLoaded. -->
+<script>
+  try {
+    if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      var el = document.documentElement;
+      if (sessionStorage.getItem("nx:pt")) el.classList.add("is-veiled");
+      else if (!sessionStorage.getItem("nx:seen")) el.classList.add("is-booting");
+      sessionStorage.setItem("nx:seen", "1");
+    }
+  } catch (e) {}
+</script>
+
 <link rel="stylesheet" href="/css/styles.css" />
 
 <!-- Structured data -->

@@ -319,6 +319,11 @@ section {
   justify-content: space-between;
   height: 64px;
 }
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .nav {
   display: none;
   gap: 8px;
@@ -416,26 +421,21 @@ section {
   color: var(--white);
   overflow: hidden;
 }
-.hero__bg {
+.hero__canvas {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 56px 56px;
-  opacity: 0.6;
+  width: 100%;
+  height: 100%;
 }
-.hero__bg::after {
-  content: "";
+/* Legibility layer over the skyline: vignette the edges, deepen the centre
+   behind the copy, and fade cleanly into the next section. */
+.hero__veil {
   position: absolute;
-  top: -160px;
-  left: 50%;
-  width: 820px;
-  height: 520px;
-  transform: translateX(-50%);
-  background: rgba(201, 162, 39, 0.2);
-  filter: blur(120px);
-  border-radius: 999px;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 62% 58% at 50% 44%, rgba(10, 15, 28, 0.68), rgba(10, 15, 28, 0) 72%),
+    linear-gradient(to bottom, rgba(10, 15, 28, 0.6), rgba(10, 15, 28, 0) 22%),
+    linear-gradient(to top, rgba(10, 15, 28, 0.55), rgba(10, 15, 28, 0) 30%);
 }
 .hero__inner {
   position: relative;
@@ -501,6 +501,291 @@ section {
     justify-content: center;
     gap: 32px;
   }
+}
+
+/* Word spans injected by the title animation */
+.hero__title .w {
+  display: inline-block;
+}
+
+/* Floating proof chips — glass cards drifting over the skyline */
+.hero__chip {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  width: 232px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: rgba(13, 20, 36, 0.62);
+  border: 1px solid rgba(233, 196, 106, 0.22);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 24px 50px rgba(5, 8, 16, 0.45);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.78);
+  text-align: left;
+}
+.hero__chip--left {
+  left: max(28px, calc(50% - 640px));
+  top: 30%;
+}
+.hero__chip--right {
+  right: max(28px, calc(50% - 640px));
+  top: 48%;
+}
+.chip__head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chip__avatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  background: rgba(233, 196, 106, 0.16);
+  color: var(--gold-300);
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+.chip__who {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+.chip__who strong {
+  color: var(--white);
+  font-weight: 600;
+}
+.chip__who span {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+.chip__title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold-400);
+}
+.chip__checks {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chip__checks li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.chip__checks .mark {
+  margin-top: 0;
+  width: 18px;
+  height: 18px;
+}
+.chip__foot {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+@media (min-width: 1180px) {
+  .hero__chip {
+    display: block;
+  }
+}
+
+/* Scroll cue */
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.55);
+  z-index: 2;
+}
+.hero__scroll:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
+.hero__scroll-track {
+  display: block;
+  width: 22px;
+  height: 36px;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
+  position: relative;
+}
+.hero__scroll-dot {
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 999px;
+  background: var(--gold-400);
+  animation: scroll-dot 2.1s ease-in-out infinite;
+}
+.hero__scroll-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+}
+@keyframes scroll-dot {
+  0% { transform: translateY(0); opacity: 0; }
+  25% { opacity: 1; }
+  65% { transform: translateY(14px); opacity: 1; }
+  100% { transform: translateY(18px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero__scroll-dot {
+    animation: none;
+    top: 12px;
+  }
+}
+
+/* ---------------------------------------------------- Page transitions */
+
+/* The curtain: ink panel with a hairline gold edge on both leading edges. */
+.page-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: var(--ink-950);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.page-veil::before,
+.page-veil::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold-400), transparent);
+  opacity: 0.5;
+}
+.page-veil::before {
+  top: 0;
+}
+.page-veil::after {
+  bottom: 0;
+}
+.page-veil__mark {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: var(--gold-400);
+  color: var(--ink-950);
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.7rem;
+}
+
+/* Pre-paint boot cover, stamped on <html> by the inline head script when the
+   previous page started a transition (.is-veiled) or on the session's first
+   visit (.is-booting). The real veil/loader takes over on init; the animation
+   below is a fallback so bundle-less pages (admin login, error) self-dismiss
+   instead of staying covered. */
+html.is-veiled::before,
+html.is-booting::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--ink-950);
+  animation: veil-boot-out 0.5s ease 0.8s forwards;
+}
+html.is-veiled::after,
+html.is-booting::after {
+  content: "N";
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 201;
+  width: 52px;
+  height: 52px;
+  margin: -26px 0 0 -26px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--gold-400);
+  color: var(--ink-950);
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.7rem;
+  animation: veil-boot-out 0.3s ease 0.7s forwards;
+}
+@keyframes veil-boot-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Loading screen (first visit of the session) */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  display: grid;
+  place-items: center;
+  background: var(--ink-950);
+}
+.page-loader::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold-400), transparent);
+  opacity: 0.5;
+}
+.page-loader__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+.page-loader__bar {
+  display: block;
+  width: 132px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+.page-loader__fill {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(to right, var(--gold-500), var(--gold-300));
+  transform: scaleX(0);
+  transform-origin: left;
+}
+html.nx-lock {
+  overflow: hidden;
 }
 
 /* ---------------------------------------------------- Stats */
@@ -737,9 +1022,13 @@ section {
 .compare__cell--nextus {
   color: var(--ink-900);
   font-weight: 500;
+  background: rgba(233, 196, 106, 0.1);
+  box-shadow: inset 1px 0 0 rgba(233, 196, 106, 0.35),
+    inset -1px 0 0 rgba(233, 196, 106, 0.35);
 }
 .compare__row--head .compare__cell--nextus {
   color: var(--ink-900);
+  background: rgba(233, 196, 106, 0.22);
 }
 .compare__row.is-highlight {
   background: rgba(233, 196, 106, 0.12);
@@ -762,6 +1051,60 @@ section {
 .pill--no {
   background: var(--slate-100);
   color: var(--slate-400);
+}
+.has-tip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: help;
+  text-decoration: underline dotted currentColor;
+  text-underline-offset: 3px;
+  outline: none;
+}
+.has-tip__icon {
+  color: var(--gold-600, #b8860b);
+  opacity: 0.75;
+  flex-shrink: 0;
+}
+.has-tip .tip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 5;
+  width: max-content;
+  max-width: 220px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--ink-900);
+  color: var(--white);
+  font-size: 0.78rem;
+  font-weight: 400;
+  line-height: 1.4;
+  text-align: left;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  pointer-events: none;
+}
+.has-tip .tip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--ink-900);
+}
+.has-tip:hover .tip,
+.has-tip:focus-visible .tip,
+.has-tip:focus .tip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* ---------------------------------------------------- Lead form */
@@ -905,6 +1248,11 @@ section {
 }
 .faq__list {
   border-top: 1px solid var(--slate-200);
+}
+.faq__cta {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 8px;
 }
 .faq__item {
   border-bottom: 1px solid var(--slate-200);

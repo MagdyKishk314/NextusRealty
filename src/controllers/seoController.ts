@@ -20,6 +20,7 @@ export function robots(_req: Request, res: Response) {
 export function sitemap(_req: Request, res: Response) {
   const urls: { loc: string; lastmod?: string; priority: string }[] = [
     { loc: absoluteUrl("/"), priority: "1.0" },
+    { loc: absoluteUrl("/faq"), priority: "0.7" },
     { loc: absoluteUrl("/blog"), priority: "0.7" },
   ];
 

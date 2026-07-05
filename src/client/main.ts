@@ -3,6 +3,11 @@
  * Everything here is progressive: the FAQ and lead form both work without JS.
  */
 
+import { initLoader } from "./loader";
+import { initSkyline } from "./skyline";
+import { initMotion } from "./motion";
+import { initPageTransitions } from "./transitions";
+
 const CHECK_SVG =
   '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-11"/></svg>';
 
@@ -194,4 +199,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initFaq();
   initLeadForm();
   initPostForm();
+  initLoader();
+  initSkyline();
+  initMotion();
+  initPageTransitions();
 });

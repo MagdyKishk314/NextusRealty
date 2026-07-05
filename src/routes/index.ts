@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { showHome } from "../controllers/homeController.js";
+import { showFaq } from "../controllers/faqController.js";
 import { submitLead } from "../controllers/leadController.js";
 import { showSignup, submitSignup } from "../controllers/signupController.js";
 import { showBlogIndex, showBlogPost } from "../controllers/blogController.js";
@@ -10,6 +11,7 @@ export const router = Router();
 
 // Marketing
 router.get("/", showHome);
+router.get("/faq", showFaq);
 router.post("/leads", submitLead);
 
 // Agent sign up

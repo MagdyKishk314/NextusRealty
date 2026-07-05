@@ -7,26 +7,24 @@
 
     <nav class="nav" aria-label="Primary">
       <div class="nav__item">
-        <a class="nav__top" href="/#top">Home <span class="nav__caret" aria-hidden="true"></span></a>
-        <div class="nav__menu" role="menu">
-          <a role="menuitem" href="/#how-it-works">How it works</a>
-          <a role="menuitem" href="/#why-nextus">Why Nextus</a>
-          <a role="menuitem" href="/#comparison">Comparison</a>
-          <a role="menuitem" href="/#faq">FAQ</a>
-        </div>
+        <a class="nav__top" href="/#top">Home</a>
       </div>
-
+      <div class="nav__item">
+        <a class="nav__top" href="/#why-nextus">Services</a>
+      </div>
       <div class="nav__item">
         <a class="nav__top" href="/blog">Blog</a>
       </div>
-
       <div class="nav__item">
-        <a class="nav__top" href="/signup">Sign up</a>
+        <a class="nav__top" href="/faq">FAQ</a>
       </div>
     </nav>
 
-    <a class="btn btn--gold btn--sm" href="/#get-leads">
-      Get leads <%- include('icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
-    </a>
+    <div class="site-header__actions">
+      <a class="nav__top" href="/signup">Sign up</a>
+      <a class="btn btn--gold btn--sm" href="/#get-leads">
+        Contact Us <%- include('icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
+      </a>
+    </div>
   </div>
 </header>

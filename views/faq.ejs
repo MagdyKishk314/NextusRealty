@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main class="page">
+    <section class="section">
+      <div class="container faq">
+        <div class="faq__intro" data-reveal>
+          <p class="eyebrow">Questions</p>
+          <h1 class="section-title">Frequently asked questions</h1>
+          <p class="section-subhead">Everything agents ask before they request their first batch of exclusive, confirmed leads.</p>
+        </div>
+        <div class="faq__list">
+          <% faqs.forEach(function (faq, i) { %>
+            <div class="faq__item<%= i === 0 ? ' is-open' : '' %>" data-faq-item data-reveal>
+              <button type="button" class="faq__q" data-faq-toggle aria-expanded="<%= i === 0 ? 'true' : 'false' %>">
+                <span><%= faq.q %></span>
+                <span class="faq__toggle"><span class="faq__plus"><%- include('partials/icon', { name: 'plus', cls: 'icon icon--sm' }) %></span><span class="faq__minus"><%- include('partials/icon', { name: 'minus', cls: 'icon icon--sm' }) %></span></span>
+              </button>
+              <div class="faq__a"><p><%= faq.a %></p></div>
+            </div>
+          <% }); %>
+        </div>
+        <div class="faq__cta" data-reveal>
+          <a class="btn btn--gold btn--lg" href="/#get-leads">
+            Request your first leads <%- include('partials/icon', { name: 'arrow', cls: 'icon' }) %>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+  <script src="/js/bundle.js" defer></script>
+</body>
+</html>

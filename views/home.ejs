@@ -7,104 +7,89 @@
   <%- include('partials/header') %>
 
   <main id="top">
-    <!-- Hero -->
+    <!-- ============================================================
+         Authority journey: Claim (hero) → Proof (stats) → Pillars
+         (why Nextus) → Method (how it works) → Evidence (comparison)
+         → Objections (FAQ) → The ask (lead form).
+         ============================================================ -->
+
+    <!-- Hero: the claim -->
     <section class="hero">
-      <div class="hero__bg" aria-hidden="true"></div>
+      <canvas class="hero__canvas" data-skyline aria-hidden="true"></canvas>
+      <div class="hero__veil" aria-hidden="true"></div>
+
+      <!-- Floating proof chips (decorative) -->
+      <aside class="hero__chip hero__chip--left" data-hero-chip aria-hidden="true">
+        <div class="chip__head">
+          <span class="chip__avatar">DR</span>
+          <div class="chip__who"><strong>Dana R.</strong><span>Seller &middot; Relocation</span></div>
+        </div>
+        <ul class="chip__checks">
+          <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>Phone verified</li>
+          <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>Intent confirmed</li>
+        </ul>
+        <div class="chip__foot">Delivered 14m ago &middot; Exclusive</div>
+      </aside>
+      <aside class="hero__chip hero__chip--right" data-hero-chip aria-hidden="true">
+        <div class="chip__title">The Nextus standard</div>
+        <ul class="chip__checks">
+          <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>Cold-called first</li>
+          <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>Confirmed twice</li>
+          <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>One agent only</li>
+        </ul>
+      </aside>
+
       <div class="container hero__inner">
-        <p class="eyebrow eyebrow--center"><span class="dot"></span><%= home.hero.eyebrow %></p>
+        <p class="eyebrow eyebrow--center" data-hero-el><span class="dot"></span><%= home.hero.eyebrow %></p>
         <h1 class="hero__title">
           <%= home.hero.titleLead %> <span class="accent"><%= home.hero.titleAccent %></span> <%= home.hero.titleTail %>
         </h1>
-        <p class="hero__tagline"><%= home.hero.tagline %></p>
-        <p class="hero__subhead"><%= home.hero.subhead %></p>
+        <p class="hero__tagline" data-hero-el><%= home.hero.tagline %></p>
+        <p class="hero__subhead" data-hero-el><%= home.hero.subhead %></p>
 
-        <div class="hero__cta">
+        <div class="hero__cta" data-hero-el>
           <a class="btn btn--gold btn--lg" href="#get-leads">
             Request your first leads <%- include('partials/icon', { name: 'arrow', cls: 'icon' }) %>
           </a>
           <a class="btn btn--outline btn--lg" href="#comparison">See the difference</a>
         </div>
 
-        <ul class="trust-list">
+        <ul class="trust-list" data-hero-el>
           <% home.hero.trustPoints.forEach(function (tp) { %>
             <li><%- include('partials/icon', { name: tp.icon, cls: 'icon icon--sm accent-fg' }) %><%= tp.label %></li>
           <% }); %>
         </ul>
       </div>
+
+      <a class="hero__scroll" href="#stats" data-hero-el aria-label="Scroll to see more">
+        <span class="hero__scroll-track"><span class="hero__scroll-dot"></span></span>
+        <span class="hero__scroll-label">Scroll</span>
+      </a>
     </section>
 
-    <!-- Stats -->
-    <section class="stats-section">
+    <!-- Stats: immediate proof -->
+    <section id="stats" class="stats-section">
       <div class="container stats">
         <% home.stats.forEach(function (s) { %>
-          <div class="stat">
-            <div class="stat__value"><%= s.value %></div>
+          <div class="stat" data-reveal>
+            <div class="stat__value" data-count><%= s.value %></div>
             <div class="stat__label"><%= s.label %></div>
           </div>
         <% }); %>
       </div>
     </section>
 
-    <!-- Problem -->
-    <section class="section section--muted">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow eyebrow--center"><%= home.problem.eyebrow %></p>
-          <h2 class="section-title"><%= home.problem.title %></h2>
-          <p class="section-subhead"><%= home.problem.subhead %></p>
-        </div>
-        <div class="compare-cards">
-          <div class="card">
-            <h3 class="card__kicker"><%= home.problem.typical.heading %></h3>
-            <ul class="checklist">
-              <% home.problem.typical.items.forEach(function (item) { %>
-                <li><span class="mark mark--cross"><%- include('partials/icon', { name: 'cross', cls: 'icon icon--xs' }) %></span><%= item %></li>
-              <% }); %>
-            </ul>
-          </div>
-          <div class="card card--dark">
-            <h3 class="card__kicker accent"><%= home.problem.nextus.heading %></h3>
-            <ul class="checklist">
-              <% home.problem.nextus.items.forEach(function (item) { %>
-                <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span><%= item %></li>
-              <% }); %>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- How it works -->
-    <section id="how-it-works" class="section">
-      <div class="container">
-        <div class="section-head">
-          <p class="eyebrow eyebrow--center">How it works</p>
-          <h2 class="section-title">Three steps between you and a signed contract</h2>
-          <p class="section-subhead">No dashboards to babysit, no credits to burn. Quality control is our job. Closing is yours.</p>
-        </div>
-        <div class="steps">
-          <% home.steps.forEach(function (st) { %>
-            <div class="step">
-              <div class="step__icon"><%- include('partials/icon', { name: st.icon, cls: 'icon' }) %></div>
-              <div class="step__head"><span class="step__num"><%= st.step %></span><h3 class="step__title"><%= st.title %></h3></div>
-              <p class="step__body"><%= st.body %></p>
-            </div>
-          <% }); %>
-        </div>
-      </div>
-    </section>
-
-    <!-- Why Nextus -->
+    <!-- Why Nextus: the authority pillars -->
     <section id="why-nextus" class="section section--dark">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head" data-reveal>
           <p class="eyebrow eyebrow--center"><%= home.features.eyebrow %></p>
           <h2 class="section-title section-title--light"><%= home.features.title %></h2>
           <p class="section-subhead section-subhead--light"><%= home.features.subhead %></p>
         </div>
         <div class="features">
           <% home.features.items.forEach(function (f) { %>
-            <div class="feature">
+            <div class="feature" data-reveal>
               <div class="feature__icon"><%- include('partials/icon', { name: f.icon, cls: 'icon icon--sm' }) %></div>
               <h3 class="feature__title"><%= f.title %></h3>
               <p class="feature__body"><%= f.body %></p>
@@ -114,18 +99,38 @@
       </div>
     </section>
 
-    <!-- Comparison -->
+    <!-- How it works: the method -->
+    <section id="how-it-works" class="section">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow eyebrow--center">How it works</p>
+          <h2 class="section-title">Three steps between you and a signed contract</h2>
+          <p class="section-subhead">Quality control is our job. Closing is yours.</p>
+        </div>
+        <div class="steps">
+          <% home.steps.forEach(function (st) { %>
+            <div class="step" data-reveal>
+              <div class="step__icon"><%- include('partials/icon', { name: st.icon, cls: 'icon' }) %></div>
+              <div class="step__head"><span class="step__num"><%= st.step %></span><h3 class="step__title"><%= st.title %></h3></div>
+              <p class="step__body"><%= st.body %></p>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparison: the evidence -->
     <section id="comparison" class="section section--muted">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head" data-reveal>
           <p class="eyebrow eyebrow--center"><%= home.comparison.eyebrow %></p>
-          <h2 class="section-title"><%= home.comparison.title %></h2>
+          <h2 class="section-title"><%- home.comparison.title %></h2>
           <p class="section-subhead"><%= home.comparison.subhead %></p>
         </div>
-        <div class="compare">
+        <div class="compare" data-reveal-rows>
           <div class="compare__row compare__row--head">
             <div class="compare__cell compare__cell--label">The lead itself</div>
-            <div class="compare__cell">Typical vendor</div>
+            <div class="compare__cell">Others</div>
             <div class="compare__cell compare__cell--nextus">Nextus</div>
           </div>
           <% home.comparison.rows.forEach(function (row) { %>
@@ -134,11 +139,15 @@
               <div class="compare__cell">
                 <% if (typeof row.typical === 'boolean') { %>
                   <span class="pill <%= row.typical ? 'pill--yes' : 'pill--no' %>"><%- include('partials/icon', { name: row.typical ? 'check' : 'cross', cls: 'icon icon--xs' }) %></span>
+                <% } else if (row.typicalTip) { %>
+                  <span class="has-tip" tabindex="0"><%= row.typical %><%- include('partials/icon', { name: 'info', cls: 'icon icon--xs has-tip__icon' }) %><span class="tip" role="tooltip"><%= row.typicalTip %></span></span>
                 <% } else { %><%= row.typical %><% } %>
               </div>
               <div class="compare__cell compare__cell--nextus">
                 <% if (typeof row.nextus === 'boolean') { %>
                   <span class="pill <%= row.nextus ? 'pill--yes' : 'pill--no' %>"><%- include('partials/icon', { name: row.nextus ? 'check' : 'cross', cls: 'icon icon--xs' }) %></span>
+                <% } else if (row.nextusTip) { %>
+                  <span class="has-tip" tabindex="0"><%= row.nextus %><%- include('partials/icon', { name: 'info', cls: 'icon icon--xs has-tip__icon' }) %><span class="tip" role="tooltip"><%= row.nextusTip %></span></span>
                 <% } else { %><%= row.nextus %><% } %>
               </div>
             </div>
@@ -147,15 +156,42 @@
       </div>
     </section>
 
-    <!-- Lead form -->
+    <!-- FAQ: objection handling before the ask -->
+    <section id="faq" class="section">
+      <div class="container faq">
+        <div class="faq__intro" data-reveal>
+          <p class="eyebrow">Questions</p>
+          <h2 class="section-title">Everything you'd want to know first</h2>
+          <p class="section-subhead">Still unsure? Request a sample. The quality answers most questions faster than we can.</p>
+        </div>
+        <div class="faq__list">
+          <% faqs.forEach(function (faq, i) { %>
+            <div class="faq__item<%= i === 0 ? ' is-open' : '' %>" data-faq-item data-reveal>
+              <button type="button" class="faq__q" data-faq-toggle aria-expanded="<%= i === 0 ? 'true' : 'false' %>">
+                <span><%= faq.q %></span>
+                <span class="faq__toggle"><span class="faq__plus"><%- include('partials/icon', { name: 'plus', cls: 'icon icon--sm' }) %></span><span class="faq__minus"><%- include('partials/icon', { name: 'minus', cls: 'icon icon--sm' }) %></span></span>
+              </button>
+              <div class="faq__a"><p><%= faq.a %></p></div>
+            </div>
+          <% }); %>
+        </div>
+        <div class="faq__cta" data-reveal>
+          <a class="btn btn--dark btn--lg" href="/faq">
+            Visit our FAQ page <%- include('partials/icon', { name: 'arrow', cls: 'icon' }) %>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lead form: the ask -->
     <section id="get-leads" class="section section--dark lead">
       <div class="container lead__grid">
-        <div class="lead__pitch">
+        <div class="lead__pitch" data-reveal>
           <p class="eyebrow">Get started</p>
           <h2 class="section-title section-title--light">Request your first batch of exclusive leads</h2>
           <p class="section-subhead section-subhead--light">
             Tell us your market and we'll put together a sample of what a confirmed
-            lead looks like. No contracts, no credits, just leads that close.
+            lead looks like. No contracts, just leads that close.
           </p>
           <ul class="lead__points">
             <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>A dedicated specialist for your market</li>
@@ -165,7 +201,7 @@
           <p class="lead__privacy"><%- include('partials/icon', { name: 'shield', cls: 'icon icon--sm accent-fg' }) %> Your details stay private. We never resell your information, same as our leads.</p>
         </div>
 
-        <div class="lead__card">
+        <div class="lead__card" data-reveal>
           <% if (submitted) { %>
             <div class="form-success" data-lead-success>
               <span class="form-success__icon"><%- include('partials/icon', { name: 'check', cls: 'icon' }) %></span>
@@ -215,28 +251,6 @@
             </button>
             <p class="form-fineprint">By submitting, you agree to be contacted about Nextus Realty lead services.</p>
           </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section id="faq" class="section section--muted">
-      <div class="container faq">
-        <div class="faq__intro">
-          <p class="eyebrow">Questions</p>
-          <h2 class="section-title">Everything you'd want to know first</h2>
-          <p class="section-subhead">Still unsure? Request a sample. The quality answers most questions faster than we can.</p>
-        </div>
-        <div class="faq__list">
-          <% faqs.forEach(function (faq, i) { %>
-            <div class="faq__item<%= i === 0 ? ' is-open' : '' %>" data-faq-item>
-              <button type="button" class="faq__q" data-faq-toggle aria-expanded="<%= i === 0 ? 'true' : 'false' %>">
-                <span><%= faq.q %></span>
-                <span class="faq__toggle"><span class="faq__plus"><%- include('partials/icon', { name: 'plus', cls: 'icon icon--sm' }) %></span><span class="faq__minus"><%- include('partials/icon', { name: 'minus', cls: 'icon icon--sm' }) %></span></span>
-              </button>
-              <div class="faq__a"><p><%= faq.a %></p></div>
-            </div>
-          <% }); %>
         </div>
       </div>
     </section>
