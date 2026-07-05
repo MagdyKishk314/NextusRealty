@@ -18,16 +18,6 @@ import { publicPath, removeUpload } from "../middleware/upload.js";
 const adminMeta = (title: string) =>
   meta({ title: pageTitle(title), robots: "noindex, nofollow" });
 
-/* ---------------------------------------------------------------- Dashboard */
-
-export function dashboard(_req: Request, res: Response) {
-  res.render("admin/dashboard", {
-    meta: adminMeta("CMS"),
-    posts: listAllPosts(),
-    formatDate,
-  });
-}
-
 /* -------------------------------------------------------------------- Posts */
 
 function uniqueSlug(desired: string, exceptId?: number): string {
@@ -73,7 +63,7 @@ export function postsManage(_req: Request, res: Response) {
 
 export function viewPost(req: Request, res: Response) {
   const post = getPostById(Number(req.params.id));
-  if (!post) return res.redirect(303, "/admin/posts");
+  if (!post) return res.redirect(303, "/admin");
   res.render("admin/post-view", {
     meta: adminMeta(post.title),
     post,
@@ -87,7 +77,7 @@ export function togglePostStatus(req: Request, res: Response) {
   if (post) {
     setPostStatus(post.id, post.status === "published" ? "draft" : "published");
   }
-  res.redirect(303, req.get("referer") ?? "/admin/posts");
+  res.redirect(303, req.get("referer") ?? "/admin");
 }
 
 export function newPost(_req: Request, res: Response) {
@@ -122,12 +112,12 @@ export function createPostHandler(req: Request, res: Response) {
     image: uploadedImage(req),
     status: data.status,
   });
-  res.redirect(303, "/admin/posts");
+  res.redirect(303, "/admin");
 }
 
 export function editPost(req: Request, res: Response) {
   const post = getPostById(Number(req.params.id));
-  if (!post) return res.redirect(303, "/admin/posts");
+  if (!post) return res.redirect(303, "/admin");
   res.render("admin/post-form", {
     meta: adminMeta("Edit post"),
     post,
@@ -140,7 +130,7 @@ export function editPost(req: Request, res: Response) {
 export function updatePostHandler(req: Request, res: Response) {
   const id = Number(req.params.id);
   const existing = getPostById(id);
-  if (!existing) return res.redirect(303, "/admin/posts");
+  if (!existing) return res.redirect(303, "/admin");
 
   const data = readPostBody(req);
   const err = uploadError(req) ?? (!data.title ? "Title is required." : null);
@@ -176,7 +166,7 @@ export function updatePostHandler(req: Request, res: Response) {
     image,
     status: data.status,
   });
-  res.redirect(303, "/admin/posts");
+  res.redirect(303, "/admin");
 }
 
 export function deletePostHandler(req: Request, res: Response) {

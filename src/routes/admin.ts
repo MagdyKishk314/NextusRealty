@@ -14,10 +14,11 @@ adminRouter.post("/logout", auth.logout);
 // Everything else under /admin requires a valid session.
 adminRouter.use(requireAdmin);
 
-adminRouter.get("/", admin.dashboard);
+// The admin home is the blog-post manager.
+adminRouter.get("/", admin.postsManage);
 
 // Posts
-adminRouter.get("/posts", admin.postsManage);
+adminRouter.get("/posts", (_req, res) => res.redirect(301, "/admin"));
 adminRouter.get("/posts/new", admin.newPost);
 adminRouter.post("/posts", postImageUpload, admin.createPostHandler);
 adminRouter.get("/posts/:id/view", admin.viewPost);

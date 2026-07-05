@@ -7,7 +7,7 @@
   <%- include('../partials/admin-bar') %>
 
   <main class="container container--narrow admin__main">
-    <p><a class="link-gold" href="/admin/posts">&larr; All posts</a></p>
+    <p><a class="link-gold" href="/admin">&larr; All posts</a></p>
     <h1><%= post ? 'Edit post' : 'New post' %></h1>
     <% if (error) { %><p class="form-error"><%= error %></p><% } %>
 
@@ -81,7 +81,7 @@
 
       <div class="admin-form__bar">
         <button type="submit" class="btn btn--gold">Save post</button>
-        <a class="link-gold" href="/admin/posts">Cancel</a>
+        <a class="link-gold" href="/admin">Cancel</a>
       </div>
     </form>
   </main>
