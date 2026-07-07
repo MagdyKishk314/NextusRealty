@@ -41,17 +41,6 @@ CREATE TABLE IF NOT EXISTS posts (
   created_at   TEXT NOT NULL DEFAULT (datetime('now')),
   updated_at   TEXT NOT NULL DEFAULT (datetime('now'))
 );
-
-CREATE TABLE IF NOT EXISTS signups (
-  id         INTEGER PRIMARY KEY AUTOINCREMENT,
-  name       TEXT NOT NULL,
-  email      TEXT NOT NULL,
-  phone      TEXT,
-  brokerage  TEXT,
-  market     TEXT NOT NULL,
-  message    TEXT,
-  created_at TEXT NOT NULL DEFAULT (datetime('now'))
-);
 `;
 
 /** Add a column to an existing table if it isn't there yet (idempotent). */

@@ -417,28 +417,65 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--ink-950);
   color: var(--white);
   overflow: hidden;
+  /* Solid ink fallback beneath the photo + tint (shows if the image fails). */
+  background: linear-gradient(180deg, #070b16 0%, #0a0f1c 50%, #0b1222 100%);
 }
-.hero__canvas {
+/* Decorative background layers behind the copy: a treated photograph, a navy +
+   gold wash for brand and legibility, then a faint grid and fine grain. */
+.hero__bg {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  z-index: 0;
+  pointer-events: none;
 }
-/* Legibility layer over the skyline: vignette the edges, deepen the centre
-   behind the copy, and fade cleanly into the next section. */
-.hero__veil {
+/* Real-estate photograph, pulled toward the brand's navy monochrome and dimmed
+   so the wash above can carry the gold and keep the copy legible. */
+.hero__photo {
+  position: absolute;
+  inset: 0;
+  background-image: url("/img/hero.jpg");
+  background-size: cover;
+  background-position: center 42%;
+  filter: grayscale(0.4) contrast(1.05) brightness(0.68) saturate(0.85);
+}
+/* Navy + gold wash: an overall ink layer for legibility, a centre vignette
+   behind the headline, a warm gold glow rising from the horizon and a soft
+   light top-right. */
+.hero__tint {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 62% 58% at 50% 44%, rgba(10, 15, 28, 0.68), rgba(10, 15, 28, 0) 72%),
-    linear-gradient(to bottom, rgba(10, 15, 28, 0.6), rgba(10, 15, 28, 0) 22%),
-    linear-gradient(to top, rgba(10, 15, 28, 0.55), rgba(10, 15, 28, 0) 30%);
+    radial-gradient(ellipse 82% 64% at 50% 46%, rgba(7, 11, 22, 0.26), rgba(7, 11, 22, 0.64) 78%),
+    radial-gradient(128% 82% at 50% 116%, rgba(233, 196, 106, 0.22), rgba(233, 196, 106, 0.05) 42%, transparent 66%),
+    radial-gradient(78% 60% at 82% 4%, rgba(245, 217, 155, 0.12), transparent 52%),
+    linear-gradient(180deg, rgba(8, 12, 22, 0.62) 0%, rgba(9, 13, 24, 0.46) 46%, rgba(9, 14, 26, 0.72) 100%);
+}
+/* Faint architectural grid — a nod to blueprints and precision. Masked so it
+   reads only toward the edges and fades out behind the headline. */
+.hero__grid {
+  position: absolute;
+  inset: -1px;
+  background-image:
+    linear-gradient(rgba(233, 196, 106, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233, 196, 106, 0.06) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 74% 68% at 50% 46%, transparent 6%, #000 76%);
+          mask-image: radial-gradient(ellipse 74% 68% at 50% 46%, transparent 6%, #000 76%);
+}
+/* Fine film grain — kills gradient banding and adds a premium, printed feel. */
+.hero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  mix-blend-mode: overlay;
 }
 .hero__inner {
   position: relative;
+  z-index: 1;
   text-align: center;
   /* Extra top padding keeps content clear of the overlapping header on short
      viewports; flex centering handles the rest. */
@@ -506,98 +543,6 @@ section {
 /* Word spans injected by the title animation */
 .hero__title .w {
   display: inline-block;
-}
-
-/* Floating proof chips — glass cards drifting over the skyline */
-.hero__chip {
-  position: absolute;
-  z-index: 2;
-  display: none;
-  width: 232px;
-  padding: 16px 18px;
-  border-radius: 14px;
-  background: rgba(13, 20, 36, 0.62);
-  border: 1px solid rgba(233, 196, 106, 0.22);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 24px 50px rgba(5, 8, 16, 0.45);
-  font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.78);
-  text-align: left;
-}
-.hero__chip--left {
-  left: max(28px, calc(50% - 640px));
-  top: 30%;
-}
-.hero__chip--right {
-  right: max(28px, calc(50% - 640px));
-  top: 48%;
-}
-.chip__head {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.chip__avatar {
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  background: rgba(233, 196, 106, 0.16);
-  color: var(--gold-300);
-  font-weight: 600;
-  font-size: 0.78rem;
-}
-.chip__who {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.3;
-}
-.chip__who strong {
-  color: var(--white);
-  font-weight: 600;
-}
-.chip__who span {
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.55);
-}
-.chip__title {
-  font-size: 0.72rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--gold-400);
-}
-.chip__checks {
-  list-style: none;
-  margin: 12px 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.chip__checks li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.chip__checks .mark {
-  margin-top: 0;
-  width: 18px;
-  height: 18px;
-}
-.chip__foot {
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 0.72rem;
-  color: rgba(255, 255, 255, 0.5);
-}
-@media (min-width: 1180px) {
-  .hero__chip {
-    display: block;
-  }
 }
 
 /* Scroll cue */
@@ -979,6 +924,239 @@ html.nx-lock {
 @media (min-width: 960px) {
   .features {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ---------------------------------------------------- Services page */
+
+.services {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.service {
+  display: grid;
+  gap: 28px;
+  align-items: center;
+}
+/* The describing photo: a rounded card with a gold icon badge and, over a
+   bottom scrim, the "typical" lead-type tags. */
+.service__media {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  background: var(--ink-800);
+  box-shadow: var(--shadow-md);
+}
+.service__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.03) contrast(1.02);
+}
+.service__badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: rgba(10, 15, 28, 0.62);
+  border: 1px solid rgba(233, 196, 106, 0.4);
+  color: var(--gold-400);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.service__badge .icon {
+  width: 24px;
+  height: 24px;
+}
+.service__overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 46px 18px 16px;
+  background: linear-gradient(to top, rgba(8, 12, 22, 0.92), rgba(8, 12, 22, 0.45) 55%, transparent);
+}
+.service__overlay-label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.6);
+}
+.service__tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.service__tag {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  padding: 5px 11px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+}
+.service__title {
+  margin-top: 12px;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
+}
+.service__tagline {
+  margin-top: 8px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--gold-600);
+}
+.service__body {
+  margin-top: 14px;
+  color: var(--slate-600);
+}
+.service__list {
+  margin-top: 22px;
+}
+.service__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 24px;
+}
+.service__cta .icon {
+  transition: transform 0.15s ease;
+}
+.service__cta:hover .icon {
+  transform: translateX(2px);
+}
+@media (min-width: 900px) {
+  .services {
+    gap: 68px;
+  }
+  .service {
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+  }
+  /* Alternate which side the photo sits on, row to row. */
+  .service--flip .service__media {
+    order: 2;
+  }
+}
+
+/* Services page — closing call to action */
+.services-cta {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+.services-cta .btn {
+  margin-top: 28px;
+}
+
+/* ---------------------------------------------------- Founder / About the team */
+
+.founder {
+  display: grid;
+  gap: 44px;
+  align-items: start;
+}
+.founder__media {
+  max-width: 380px;
+  margin: 0 auto;
+  padding: 16px 16px 22px;
+  background: var(--ink-950);
+  border: 1px solid rgba(233, 196, 106, 0.28);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+}
+.founder__photo {
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--ink-800);
+}
+.founder__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.founder__id {
+  margin-top: 16px;
+  text-align: center;
+}
+.founder__name {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.35rem;
+  color: var(--white);
+}
+.founder__role {
+  margin-top: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold-400);
+}
+.founder__pitch .section-title {
+  margin-top: 14px;
+}
+.founder__pitch .section-subhead {
+  max-width: 560px;
+}
+.founder__creds {
+  margin-top: 28px;
+  gap: 12px;
+}
+.founder__book {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 520px;
+  margin-top: 30px;
+  padding: 14px 16px;
+  background: var(--slate-50);
+  border: 1px solid var(--slate-200);
+  border-radius: 12px;
+}
+.founder__book-cover {
+  flex: none;
+  width: 58px;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: var(--shadow-sm);
+}
+.founder__book-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--slate-600);
+}
+.founder__book-text strong {
+  font-size: 0.9rem;
+  color: var(--ink-900);
+}
+@media (min-width: 940px) {
+  .founder {
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 64px;
+    align-items: center;
   }
 }
 

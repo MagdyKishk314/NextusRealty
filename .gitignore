@@ -20,6 +20,9 @@
 .env
 .env.local
 
+# vercel
+.vercel
+
 # misc
 .DS_Store
 *.log

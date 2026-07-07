@@ -23,7 +23,19 @@ export const config = {
     return path.join(this.rootDir, "public");
   },
   get dbPath() {
-    return process.env.DB_PATH ?? path.join(this.rootDir, "data", "nextus.db");
+    if (process.env.DB_PATH) return process.env.DB_PATH;
+    // Vercel's filesystem is read-only except /tmp, so the DB lives there.
+    // NOTE: /tmp is per-instance and ephemeral — writes do NOT persist across
+    // cold starts. Point DB_PATH at a hosted database for durable storage.
+    if (process.env.VERCEL) return "/tmp/nextus.db";
+    return path.join(this.rootDir, "data", "nextus.db");
+  },
+  get uploadsDir() {
+    // Same read-only-filesystem constraint as the DB (see dbPath): uploaded
+    // images on Vercel land in /tmp and are neither persisted nor served.
+    return process.env.VERCEL
+      ? "/tmp/uploads"
+      : path.join(this.publicDir, "uploads");
   },
 
   // Credentials for the CMS admin area.

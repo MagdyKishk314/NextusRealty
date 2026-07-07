@@ -68,10 +68,27 @@ export function initLoader(): void {
       .timeline({ defaults: { ease: "power3.inOut" } })
       .to(fill, { scaleX: 1, duration: 0.3, ease: "power2.inOut" })
       .to(inner, { autoAlpha: 0, scale: 0.92, duration: 0.28, ease: "power2.in" }, ">-0.05")
-      .to(loader, { yPercent: -100, duration: 0.65, onStart: done }, ">-0.12")
-      .add(() => {
-        root.classList.remove("nx-lock");
-        loader.remove();
-      });
+      .to(
+        loader,
+        {
+          yPercent: -100,
+          duration: 0.65,
+          onStart: () => {
+            // If the visit targeted an anchor (/#comparison etc.), the scroll
+            // lock deferred the jump — land there instantly while still covered.
+            root.classList.remove("nx-lock");
+            if (location.hash) {
+              try {
+                document.querySelector(location.hash)?.scrollIntoView({ behavior: "instant" as ScrollBehavior });
+              } catch {
+                /* invalid selector in hash — ignore */
+              }
+            }
+            done();
+          },
+        },
+        ">-0.12",
+      )
+      .add(() => loader.remove());
   });
 }

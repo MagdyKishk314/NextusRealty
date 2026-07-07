@@ -15,7 +15,8 @@ function isEmpty(table: string): boolean {
   return row.n === 0;
 }
 
-function seedPosts(): number {
+/** Seed sample blog posts when the table is empty. Safe to call on every boot. */
+export function seedIfEmpty(): number {
   if (!isEmpty("posts")) return 0;
 
   const posts = [
@@ -68,5 +69,9 @@ It's slower than scraping a list, and that's exactly the point. Fewer, better le
   return posts.length;
 }
 
-const posts = seedPosts();
-console.log(`Seed complete. Posts: ${posts} added.`);
+// Run directly with `npm run seed`; when imported (e.g. the Vercel entry seeds
+// the fresh /tmp database on boot) it just exposes seedIfEmpty().
+if (require.main === module) {
+  const added = seedIfEmpty();
+  console.log(`Seed complete. Posts: ${added} added.`);
+}

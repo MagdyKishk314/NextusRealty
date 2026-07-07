@@ -110,6 +110,30 @@ export const features = {
   ],
 };
 
+export const founder = {
+  eyebrow: "About the team",
+  title: 'Lead generation from <span class="accent">real estate pros</span>',
+  paragraphs: [
+    "Nextus wasn't built by marketers guessing at what agents need. It was built by Vladimir Selantev after more than 15 years inside real-estate lead generation — running campaigns for some of the industry's biggest names, including Grant Cardone, and managing a portfolio of $6 million in assets along the way.",
+    "That experience is the product. He's watched agents burn entire weeks on resold lists, and he built Nextus around the one standard that matters: every lead confirmed by a real person before it ever reaches you.",
+  ],
+  name: "Vladimir Selantev",
+  role: "Founder, Nextus Realty",
+  photo: "/img/vladimir.jpg",
+  credentials: [
+    "15+ years in lead generation",
+    "Worked alongside Grant Cardone",
+    "Managed a $6M asset portfolio",
+    "Author, How to Successfully Hunt Fortune 1000 Contracts",
+  ],
+  book: {
+    cover: "/img/hunt-fortune-1000.jpg",
+    title: "How to Successfully Hunt Fortune 1000 Contracts",
+    blurb:
+      "Vladimir's lead-generation playbook for the ITAD industry — the same discipline behind every Nextus lead.",
+  },
+};
+
 export type ComparisonValue = string | boolean;
 export const comparison = {
   eyebrow: "The measure of a lead",
@@ -201,6 +225,8 @@ export const leadForm = {
     "Luxury / high-net-worth",
     "Commercial",
     "Investment / multifamily",
+    "Wholesaling / motivated sellers",
+    "Contractor / home services (roofing, HVAC…)",
   ],
   volumes: ["10–25 / month", "25–50 / month", "50–100 / month", "100+ / month"],
 };

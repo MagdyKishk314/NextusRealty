@@ -48,7 +48,6 @@ function heroIntro(): void {
   const title = hero.querySelector<HTMLElement>(".hero__title");
   const words = title ? splitWords(title) : [];
   const items = hero.querySelectorAll<HTMLElement>("[data-hero-el]");
-  const chips = document.querySelectorAll<HTMLElement>("[data-hero-chip]");
 
   // Paused until the loading screen (if any) starts lifting, so the title
   // cascades in right as the curtain rises.
@@ -58,27 +57,9 @@ function heroIntro(): void {
   }
   tl.from(items, { y: 22, autoAlpha: 0, duration: 0.7, stagger: 0.1 }, 0.4);
 
-  if (chips.length) {
-    tl.from(chips, { y: 34, autoAlpha: 0, scale: 0.95, duration: 0.9, stagger: 0.15 }, 0.9);
-    // Perpetual gentle float, slightly different tempo per chip for depth.
-    // Started from inside the timeline so it stays in sync with the entrance.
-    tl.add(() => {
-      chips.forEach((chip, i) => {
-        gsap.to(chip, {
-          y: i % 2 ? -14 : -9,
-          rotation: i % 2 ? -1 : 0.8,
-          duration: 3.2 + i * 0.7,
-          ease: "sine.inOut",
-          yoyo: true,
-          repeat: -1,
-        });
-      });
-    }, 1.9);
-  }
-
   loaderDone.then(() => tl.play());
 
-  // Content drifts up slower than the page scrolls and fades — depth vs skyline
+  // Content drifts up slower than the page scrolls and fades for a little depth.
   const inner = hero.querySelector<HTMLElement>(".hero__inner");
   if (inner) {
     gsap.to(inner, {
@@ -88,13 +69,6 @@ function heroIntro(): void {
       scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
     });
   }
-  chips.forEach((chip, i) => {
-    gsap.to(chip, {
-      y: 150 + i * 60,
-      ease: "none",
-      scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true },
-    });
-  });
 }
 
 /** Count stat values up when they scroll into view. Handles mixed strings
@@ -120,6 +94,33 @@ function statCounters(): void {
       onComplete: () => {
         el.textContent = raw; // restore exact original ("3.4×", not "3.4×" reformatted)
       },
+    });
+  });
+}
+
+/** Deterministically reveal whatever is already on screen — used after the
+ *  loading screen (which may land on an anchor mid-page), where waiting for a
+ *  scroll event would leave the section invisible. */
+function revealInView(): void {
+  const vh = window.innerHeight;
+  const inView = (el: HTMLElement): boolean => {
+    const r = el.getBoundingClientRect();
+    return r.top < vh * 0.95 && r.bottom > 0;
+  };
+
+  const els = gsap.utils.toArray<HTMLElement>("[data-reveal]").filter(inView);
+  if (els.length) {
+    gsap.to(els, { y: 0, autoAlpha: 1, duration: 0.75, ease: "power2.out", stagger: 0.09, overwrite: true });
+  }
+  document.querySelectorAll<HTMLElement>("[data-reveal-rows]").forEach((table) => {
+    if (!inView(table)) return;
+    gsap.to(table.querySelectorAll(".compare__row"), {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "power2.out",
+      stagger: 0.055,
+      overwrite: true,
     });
   });
 }
@@ -159,4 +160,12 @@ export function initMotion(): void {
   heroIntro();
   statCounters();
   reveals();
+
+  // The loading screen may land the visitor mid-page (anchor URLs like
+  // /#comparison). Recompute trigger positions once it's done and reveal
+  // anything already in view instead of waiting for a scroll event.
+  loaderDone.then(() => {
+    ScrollTrigger.refresh();
+    revealInView();
+  });
 }

@@ -6,8 +6,14 @@ import type { Request, Response, NextFunction } from "express";
 import { config } from "../config.js";
 
 /** Where uploaded post images live (served statically from /uploads/...). */
-export const UPLOAD_DIR = path.join(config.publicDir, "uploads");
-fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+export const UPLOAD_DIR = config.uploadsDir;
+// Best-effort: on a read-only serverless filesystem this can fail; a failed
+// upload then surfaces a friendly error rather than crashing the app at boot.
+try {
+  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+} catch {
+  /* read-only filesystem (e.g. serverless) — uploads unavailable */
+}
 
 const ALLOWED = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"]);
 

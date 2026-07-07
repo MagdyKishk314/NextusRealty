@@ -4,7 +4,6 @@
  */
 
 import { initLoader } from "./loader";
-import { initSkyline } from "./skyline";
 import { initMotion } from "./motion";
 import { initPageTransitions } from "./transitions";
 
@@ -200,7 +199,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initLeadForm();
   initPostForm();
   initLoader();
-  initSkyline();
   initMotion();
   initPageTransitions();
 });

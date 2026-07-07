@@ -1,5 +1,6 @@
 import { siteConfig, absoluteUrl } from "../site.js";
 import { faqs } from "../content/faqs.js";
+import { services } from "../content/services.js";
 import type { Post } from "../models/postModel.js";
 
 const ORG_ID = `${siteConfig.url}/#organization`;
@@ -45,6 +46,28 @@ export function serviceSchema() {
     areaServed: { "@type": "Country", name: "United States" },
     audience: { "@type": "Audience", audienceType: "Real estate agents" },
     offers: { "@type": "Offer", category: "Exclusive, verified real estate leads" },
+  };
+}
+
+/** OfferCatalog of the three lead verticals shown on the Services page. */
+export function servicesSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Real Estate & Contractor Lead Generation",
+    serviceType: "Lead generation",
+    description:
+      "Exclusive, human-confirmed leads for wholesalers, listing agents, and home-service contractors.",
+    provider: { "@id": ORG_ID },
+    areaServed: { "@type": "Country", name: "United States" },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Nextus lead services",
+      itemListElement: services.map((s) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: s.title, description: s.tagline },
+      })),
+    },
   };
 }
 
