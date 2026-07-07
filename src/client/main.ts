@@ -193,9 +193,38 @@ function initPostForm(): void {
   }
 }
 
+/** Home page "from the blog" slider: prev/next buttons scroll the card track,
+ *  disabling at each end. Without JS the track is still swipe/scroll-able. */
+function initBlogSlider(): void {
+  const slider = document.querySelector<HTMLElement>("[data-blog-slider]");
+  if (!slider) return;
+  const track = slider.querySelector<HTMLElement>("[data-blog-track]");
+  const prev = slider.querySelector<HTMLButtonElement>("[data-blog-prev]");
+  const next = slider.querySelector<HTMLButtonElement>("[data-blog-next]");
+  if (!track || !prev || !next) return;
+
+  const step = (): number => {
+    const card = track.querySelector<HTMLElement>(".post-card");
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 24;
+    return card ? card.getBoundingClientRect().width + gap : track.clientWidth * 0.85;
+  };
+  const update = (): void => {
+    const max = track.scrollWidth - track.clientWidth - 2;
+    prev.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft >= max;
+  };
+
+  prev.addEventListener("click", () => track.scrollBy({ left: -step(), behavior: "smooth" }));
+  next.addEventListener("click", () => track.scrollBy({ left: step(), behavior: "smooth" }));
+  track.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  update();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initHeader();
   initFaq();
+  initBlogSlider();
   initLeadForm();
   initPostForm();
   initLoader();
