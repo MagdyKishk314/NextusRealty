@@ -3,8 +3,10 @@
 
 # build output
 /dist
-/public/js/bundle.js
-/public/js/bundle.js.map
+# NOTE: public/js/bundle.js is committed on purpose — Vercel's native-Express
+# setup serves committed files in public/ via its CDN but does NOT serve the
+# build-generated ones, so the client bundle must be checked in. Rebuild it
+# (`npm run build:client`) and commit after changing anything in src/client/.
 
 # uploaded post images (user content, not source)
 /public/uploads/*
