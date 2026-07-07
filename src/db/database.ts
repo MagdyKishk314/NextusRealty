@@ -1,5 +1,6 @@
 import { DatabaseSync } from "node:sqlite";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { config } from "../config.js";
 
@@ -7,9 +8,23 @@ import { config } from "../config.js";
  * Single shared SQLite connection using Node's built-in `node:sqlite`.
  * No external database, no ORM. Just SQL.
  */
-fs.mkdirSync(path.dirname(config.dbPath), { recursive: true });
 
-export const db = new DatabaseSync(config.dbPath);
+// Resolve a writable location for the DB. On a read-only filesystem (e.g. a
+// serverless host) the configured path may not be creatable, so fall back to
+// the OS temp dir. Data there is ephemeral — see the README for durable options.
+function resolveDbPath(): string {
+  const preferred = config.dbPath;
+  try {
+    fs.mkdirSync(path.dirname(preferred), { recursive: true });
+    return preferred;
+  } catch {
+    const fallback = path.join(os.tmpdir(), "nextus.db");
+    fs.mkdirSync(path.dirname(fallback), { recursive: true });
+    return fallback;
+  }
+}
+
+export const db = new DatabaseSync(resolveDbPath());
 
 // Pragmas for a small server-rendered site: WAL for concurrent reads,
 // foreign keys on for integrity.

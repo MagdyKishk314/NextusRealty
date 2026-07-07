@@ -68,10 +68,3 @@ It's slower than scraping a list, and that's exactly the point. Fewer, better le
   }
   return posts.length;
 }
-
-// Run directly with `npm run seed`; when imported (e.g. the Vercel entry seeds
-// the fresh /tmp database on boot) it just exposes seedIfEmpty().
-if (require.main === module) {
-  const added = seedIfEmpty();
-  console.log(`Seed complete. Posts: ${added} added.`);
-}

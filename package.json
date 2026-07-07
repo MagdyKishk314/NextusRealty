@@ -13,7 +13,7 @@
     "watch:client": "esbuild src/client/main.ts --bundle --sourcemap --target=es2018 --outfile=public/js/bundle.js --watch",
     "dev": "node scripts/dev.mjs",
     "start": "node dist/server.js",
-    "seed": "npm run build:server && node dist/db/seed.js",
+    "seed": "npm run build:server && node dist/db/seed-cli.js",
     "og": "node scripts/generate-og.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.client.json"
   },
