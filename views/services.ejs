@@ -18,8 +18,8 @@
 
         <div class="services">
           <% services.forEach(function (s, i) { %>
-            <article class="service<%= i % 2 ? ' service--flip' : '' %>" id="<%= s.id %>" data-reveal>
-              <figure class="service__media">
+            <article class="service<%= i % 2 ? ' service--flip' : '' %>" id="<%= s.id %>">
+              <figure class="service__media" data-reveal="<%= i % 2 ? 'right' : 'left' %>">
                 <img class="service__img" src="<%= s.image %>" alt="<%= s.imageAlt %>" loading="lazy" />
                 <span class="service__badge"><%- include('partials/icon', { name: s.icon, cls: 'icon' }) %></span>
                 <div class="service__overlay">
@@ -32,7 +32,7 @@
                 </div>
               </figure>
 
-              <div class="service__content">
+              <div class="service__content" data-reveal="<%= i % 2 ? 'left' : 'right' %>">
                 <p class="eyebrow"><%= s.kicker %></p>
                 <h2 class="service__title"><%= s.title %></h2>
                 <p class="service__tagline"><%= s.tagline %></p>

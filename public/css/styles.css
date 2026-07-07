@@ -53,6 +53,9 @@ html {
 
 body {
   margin: 0;
+  /* Contain the horizontal slide-in reveals so they never cause a sideways
+     scrollbar. `clip` (not `hidden`) keeps the sticky header working. */
+  overflow-x: clip;
   font-family: var(--font-sans);
   color: var(--ink-900);
   background: var(--white);

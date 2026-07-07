@@ -104,7 +104,7 @@
     <!-- About the team: the authority behind the standard -->
     <section id="about" class="section">
       <div class="container founder">
-        <div class="founder__media" data-reveal>
+        <div class="founder__media" data-reveal="left">
           <figure class="founder__photo">
             <img src="<%= home.founder.photo %>" alt="<%= home.founder.name %>, founder of Nextus Realty" loading="lazy" />
           </figure>
@@ -203,7 +203,7 @@
     <!-- Lead form: the ask -->
     <section id="get-leads" class="section section--dark lead">
       <div class="container lead__grid">
-        <div class="lead__pitch" data-reveal>
+        <div class="lead__pitch" data-reveal="left">
           <p class="eyebrow">Get started</p>
           <h2 class="section-title section-title--light">Request your first batch of exclusive leads</h2>
           <p class="section-subhead section-subhead--light">
@@ -218,7 +218,7 @@
           <p class="lead__privacy"><%- include('partials/icon', { name: 'shield', cls: 'icon icon--sm accent-fg' }) %> Your details stay private. We never resell your information, same as our leads.</p>
         </div>
 
-        <div class="lead__card" data-reveal>
+        <div class="lead__card" data-reveal="right">
           <% if (submitted) { %>
             <div class="form-success" data-lead-success>
               <span class="form-success__icon"><%- include('partials/icon', { name: 'check', cls: 'icon' }) %></span>

@@ -110,7 +110,7 @@ function revealInView(): void {
 
   const els = gsap.utils.toArray<HTMLElement>("[data-reveal]").filter(inView);
   if (els.length) {
-    gsap.to(els, { y: 0, autoAlpha: 1, duration: 0.75, ease: "power2.out", stagger: 0.09, overwrite: true });
+    gsap.to(els, { ...REVEAL_TO, duration: 0.75, ease: "power3.out", stagger: 0.09, overwrite: true });
   }
   document.querySelectorAll<HTMLElement>("[data-reveal-rows]").forEach((table) => {
     if (!inView(table)) return;
@@ -125,16 +125,35 @@ function revealInView(): void {
   });
 }
 
+/** Resting state every reveal animates to. */
+const REVEAL_TO = { x: 0, y: 0, scale: 1, autoAlpha: 1 } as const;
+
+/** Hidden starting transform, chosen by the element's data-reveal value:
+ *  "left"/"right" slide in from the side, "scale" pops, anything else rises. */
+function revealFrom(el: HTMLElement): gsap.TweenVars {
+  switch (el.getAttribute("data-reveal")) {
+    case "left":
+      return { x: -48, autoAlpha: 0 };
+    case "right":
+      return { x: 48, autoAlpha: 0 };
+    case "scale":
+      return { scale: 0.9, autoAlpha: 0 };
+    default:
+      return { y: 32, autoAlpha: 0 };
+  }
+}
+
 function reveals(): void {
-  // Generic fade-up. Batched so siblings entering together stagger naturally.
+  // Reveal on scroll. Each element starts from its own direction (side/scale/up)
+  // and settles into place; batched so siblings entering together stagger.
   const els = gsap.utils.toArray<HTMLElement>("[data-reveal]");
   if (els.length) {
-    gsap.set(els, { y: 30, autoAlpha: 0 });
+    els.forEach((el) => gsap.set(el, revealFrom(el)));
     ScrollTrigger.batch(els, {
       start: "top 86%",
       once: true,
       onEnter: (batch) =>
-        gsap.to(batch, { y: 0, autoAlpha: 1, duration: 0.75, ease: "power2.out", stagger: 0.09 }),
+        gsap.to(batch, { ...REVEAL_TO, duration: 0.8, ease: "power3.out", stagger: 0.09 }),
     });
   }
 
