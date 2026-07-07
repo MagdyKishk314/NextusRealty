@@ -1,11 +1,21 @@
 import type { Request, Response } from "express";
+import nodemailer from "nodemailer";
 import * as home from "../content/home.js";
 import { faqs } from "../content/faqs.js";
 import { config } from "../config.js";
 import { meta } from "../seo/meta.js";
 import { siteConfig } from "../site.js";
 import { serviceSchema, faqSchema } from "../seo/jsonld.js";
-import { isEmail } from "../utils.js";
+import { isEmail, escapeHtml } from "../utils.js";
+
+type LeadValues = {
+  name: string;
+  email: string;
+  phone: string;
+  city: string;
+  market: string;
+  volume: string;
+};
 
 function wantsJson(req: Request): boolean {
   return (
@@ -15,31 +25,68 @@ function wantsJson(req: Request): boolean {
   );
 }
 
-/**
- * Forward a lead to the configured endpoint (LEAD_FORWARD_URL — e.g. a Formspree
- * form or any webhook that emails you). Nothing is stored. Posted as JSON. If
- * the URL isn't set we log the submission and treat it as a success, so the form
- * still works before it's wired up.
- */
-async function forwardLead(values: Record<string, string>): Promise<void> {
-  const url = config.leadForwardUrl;
-  if (!url) {
-    console.warn("[lead] LEAD_FORWARD_URL not set — not forwarded:", values);
-    return;
-  }
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify(values),
+/** Human-readable label/value pairs, in the order they appear on the form. */
+function leadFields(v: LeadValues): Array<[string, string]> {
+  return [
+    ["Name", v.name],
+    ["Email", v.email],
+    ["Phone", v.phone || "—"],
+    ["Market / city", v.city],
+    ["Lead type", v.market],
+    ["Monthly volume", v.volume || "—"],
+  ];
+}
+
+/** Email the lead to config.leadToEmail over Gmail SMTP (App Password auth). */
+async function sendViaGmail(v: LeadValues): Promise<void> {
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: { user: config.gmailUser, pass: config.gmailAppPassword },
+    // Bounded timeouts so a stuck SMTP connection can't hold a serverless
+    // function open until its platform limit.
+    connectionTimeout: 10_000,
+    greetingTimeout: 10_000,
+    socketTimeout: 15_000,
   });
-  if (!res.ok) {
-    throw new Error(`Lead forward failed: ${res.status} ${res.statusText}`);
-  }
+
+  const fields = leadFields(v);
+  const text = fields.map(([k, val]) => `${k}: ${val}`).join("\n");
+  const html =
+    `<h2 style="margin:0 0 14px;font-family:sans-serif">New lead from the Nextus Realty site</h2>` +
+    `<table cellpadding="6" style="border-collapse:collapse;font-family:sans-serif;font-size:14px">` +
+    fields
+      .map(
+        ([k, val]) =>
+          `<tr><td style="color:#64748b;padding-right:16px">${k}</td>` +
+          `<td><strong>${escapeHtml(val)}</strong></td></tr>`,
+      )
+      .join("") +
+    `</table>`;
+
+  await transporter.sendMail({
+    // Gmail sends as the authenticated account; reply goes to the lead.
+    from: `Nextus Realty <${config.gmailUser}>`,
+    to: config.leadToEmail,
+    replyTo: v.email,
+    subject: `New lead: ${v.name} — ${v.market}`,
+    text,
+    html,
+  });
+}
+
+/**
+ * Deliver a lead. Nothing is stored: we email it over Gmail SMTP when
+ * configured, else log it so the form still works before it's wired up.
+ * Throws on a delivery failure so the caller can surface a retry.
+ */
+async function deliverLead(v: LeadValues): Promise<void> {
+  if (config.gmailUser && config.gmailAppPassword) return sendViaGmail(v);
+  console.warn("[lead] Gmail SMTP not configured — not delivered:", v);
 }
 
 export async function submitLead(req: Request, res: Response) {
   const body = req.body as Record<string, string>;
-  const values = {
+  const values: LeadValues = {
     name: (body.name ?? "").trim(),
     email: (body.email ?? "").trim(),
     phone: (body.phone ?? "").trim(),
@@ -56,9 +103,9 @@ export async function submitLead(req: Request, res: Response) {
     error = "Please enter a valid email address.";
   } else {
     try {
-      await forwardLead(values);
+      await deliverLead(values);
     } catch (err) {
-      console.error("[lead] forward error:", err);
+      console.error("[lead] delivery error:", err);
       error = "Something went wrong sending your request. Please try again.";
       status = 502;
     }

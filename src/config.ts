@@ -38,9 +38,13 @@ export const config = {
       : path.join(this.publicDir, "uploads");
   },
 
-  // Where lead-form submissions are forwarded (a Formspree form URL or any
-  // webhook that emails you). Leads are not stored; empty = logged only.
-  leadForwardUrl: process.env.LEAD_FORWARD_URL ?? "",
+  // Lead-form delivery (nothing is stored): email each submission to
+  // leadToEmail over Gmail SMTP. Requires a Gmail account with 2-Step
+  // Verification and an App Password (https://myaccount.google.com/apppasswords).
+  // Unset = submissions are only logged server-side.
+  gmailUser: process.env.GMAIL_USER ?? "",
+  gmailAppPassword: (process.env.GMAIL_APP_PASSWORD ?? "").replace(/\s+/g, ""),
+  leadToEmail: process.env.LEAD_TO_EMAIL ?? "magdykishk314@gmail.com",
 
   // Credentials for the CMS admin area.
   admin: {
