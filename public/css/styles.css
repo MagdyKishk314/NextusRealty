@@ -1495,26 +1495,6 @@ html.nx-lock {
   background: var(--ink-950);
   color: var(--white);
 }
-.footer__cta {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-.footer__cta-inner {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: center;
-  text-align: center;
-  padding: 56px 24px;
-}
-.footer__cta-title {
-  font-family: var(--font-serif);
-  font-weight: 500;
-  font-size: clamp(1.5rem, 3vw, 1.9rem);
-}
-.footer__cta-sub {
-  margin-top: 8px;
-  color: rgba(255, 255, 255, 0.6);
-}
 .footer__body {
   display: grid;
   gap: 40px;
@@ -1572,11 +1552,6 @@ html.nx-lock {
   color: var(--gold-400);
 }
 @media (min-width: 720px) {
-  .footer__cta-inner {
-    flex-direction: row;
-    justify-content: space-between;
-    text-align: left;
-  }
   .footer__body {
     grid-template-columns: 1fr auto;
   }

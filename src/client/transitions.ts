@@ -12,6 +12,7 @@
  */
 
 import { gsap } from "gsap";
+import { assetsReady } from "./assets";
 
 const FLAG = "nx:pt";
 
@@ -66,11 +67,20 @@ export function initPageTransitions(): void {
     gsap.set(mark, { autoAlpha: 1 });
     // Boot cover (html::before/::after) hands off to the real veil seamlessly
     document.documentElement.classList.remove("is-veiled");
-    gsap
-      .timeline({ defaults: { ease: "power3.inOut" } })
-      .to(mark, { autoAlpha: 0, scale: 0.88, duration: 0.28, ease: "power2.in" }, 0.08)
-      .to(veil, { yPercent: -100, duration: 0.6 }, 0.16)
-      .set(veil, { autoAlpha: 0, yPercent: 0 });
+    // Hold the curtain until the new page's assets have loaded, pulsing the
+    // mark so it never looks frozen; then wipe it away.
+    const pulse = gsap.to(mark, { scale: 1.07, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: -1 });
+    const minShow = new Promise<void>((r) => setTimeout(r, 350));
+    const safety = new Promise<void>((r) => setTimeout(r, 15000));
+    Promise.race([Promise.all([assetsReady(), minShow]), safety]).then(() => {
+      pulse.kill();
+      gsap.set(mark, { scale: 1 });
+      gsap
+        .timeline({ defaults: { ease: "power3.inOut" } })
+        .to(mark, { autoAlpha: 0, scale: 0.88, duration: 0.28, ease: "power2.in" }, 0)
+        .to(veil, { yPercent: -100, duration: 0.6 }, 0.16)
+        .set(veil, { autoAlpha: 0, yPercent: 0 });
+    });
   } else {
     document.documentElement.classList.remove("is-veiled");
     gsap.set(veil, { autoAlpha: 0 });

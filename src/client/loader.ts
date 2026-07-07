@@ -1,8 +1,8 @@
 /**
  * First-visit loading screen: the gold brand mark pulsing over ink with a thin
- * gold progress bar, lifting away (same upward curtain as page transitions)
- * once the page has fully loaded. Shows once per session — later arrivals use
- * the between-page transition instead.
+ * gold progress bar that tracks real asset loading, lifting away (same upward
+ * curtain as page transitions) once every asset has loaded. Shows once per
+ * session — later arrivals use the between-page transition instead.
  *
  * The inline <head> script stamps `.is-booting` on <html> before first paint
  * (pure-CSS cover), and this module swaps in the real loader at DOMContentLoaded.
@@ -12,6 +12,7 @@
  */
 
 import { gsap } from "gsap";
+import { assetsReady } from "./assets";
 
 let resolveDone: (() => void) | null = null;
 export const loaderDone = new Promise<void>((r) => (resolveDone = r));
@@ -47,22 +48,25 @@ export function initLoader(): void {
   root.classList.add("nx-lock");
 
   gsap.set(fill, { scaleX: 0 });
-  const crawl = gsap.to(fill, { scaleX: 0.78, duration: 2.4, ease: "power2.out" });
   const pulse = gsap.fromTo(
     mark,
     { scale: 0.96 },
     { scale: 1.06, duration: 0.9, ease: "sine.inOut", yoyo: true, repeat: -1 },
   );
 
-  const loaded = new Promise<void>((r) => {
-    if (document.readyState === "complete") r();
-    else window.addEventListener("load", () => r(), { once: true });
+  // Drive the bar with actual asset-loading progress (never backwards).
+  let progress = 0;
+  const assets = assetsReady((count, tot) => {
+    const next = tot ? count / tot : 1;
+    if (next <= progress) return;
+    progress = next;
+    gsap.to(fill, { scaleX: progress, duration: 0.35, ease: "power1.out", overwrite: true });
   });
-  const minShow = new Promise<void>((r) => setTimeout(r, 900)); // never just blink
-  const safety = new Promise<void>((r) => setTimeout(r, 5000)); // reveal even if an asset hangs
 
-  Promise.race([Promise.all([loaded, minShow]), safety]).then(() => {
-    crawl.kill();
+  const minShow = new Promise<void>((r) => setTimeout(r, 900)); // never just blink
+  const safety = new Promise<void>((r) => setTimeout(r, 20000)); // reveal even if an asset stalls
+
+  Promise.race([Promise.all([assets, minShow]), safety]).then(() => {
     pulse.kill();
     gsap
       .timeline({ defaults: { ease: "power3.inOut" } })

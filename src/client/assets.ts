@@ -1,0 +1,76 @@
+/**
+ * Resolves once the page's eager assets have settled: every non-lazy <img> and
+ * every media element (video/audio) has loaded or errored, web fonts are ready,
+ * and the window `load` event has fired (which also covers stylesheets, scripts
+ * and CSS background images like the hero). Lazy assets (loading="lazy",
+ * preload="none") are excluded so a loading screen never waits on off-screen
+ * content it can't reach.
+ *
+ * `onProgress(loaded, total)` fires as each asset settles, so a progress bar can
+ * track real loading. Every task also resolves on `error`, so a broken or
+ * missing asset can never hang the wait.
+ */
+export function assetsReady(
+  onProgress?: (loaded: number, total: number) => void,
+): Promise<void> {
+  const tasks: Array<Promise<void>> = [];
+  let total = 0;
+  let loaded = 0;
+  const report = (): void => onProgress?.(loaded, total);
+
+  const track = (alreadySettled: boolean, subscribe: (done: () => void) => void): void => {
+    total += 1;
+    if (alreadySettled) {
+      loaded += 1;
+      return;
+    }
+    tasks.push(
+      new Promise<void>((resolve) => {
+        let fired = false;
+        const done = (): void => {
+          if (fired) return;
+          fired = true;
+          loaded += 1;
+          report();
+          resolve();
+        };
+        subscribe(done);
+      }),
+    );
+  };
+
+  // Eager images — lazy ones only load once scrolled into view, so skip them.
+  for (const img of Array.from(document.images)) {
+    if (img.loading === "lazy") continue;
+    track(img.complete, (done) => {
+      img.addEventListener("load", done, { once: true });
+      img.addEventListener("error", done, { once: true });
+    });
+  }
+
+  // Media elements (video/audio) — skip ones that won't fetch until played.
+  for (const el of Array.from(document.querySelectorAll<HTMLMediaElement>("video, audio"))) {
+    if (el.preload === "none") continue;
+    // readyState >= HAVE_FUTURE_DATA means it can play through the current data.
+    track(el.readyState >= 3 || el.error != null, (done) => {
+      el.addEventListener("canplaythrough", done, { once: true });
+      el.addEventListener("loadeddata", done, { once: true });
+      el.addEventListener("error", done, { once: true });
+    });
+  }
+
+  // Web fonts (Fraunces / Inter).
+  if ("fonts" in document) {
+    track(document.fonts.status === "loaded", (done) => {
+      document.fonts.ready.then(done, done);
+    });
+  }
+
+  // Catch-all: stylesheets, scripts, iframes and CSS background images.
+  track(document.readyState === "complete", (done) => {
+    window.addEventListener("load", done, { once: true });
+  });
+
+  report(); // initial state, in case everything is already settled
+  return Promise.all(tasks).then(() => undefined);
+}
