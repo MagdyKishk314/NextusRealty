@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 import * as home from "../content/home.js";
 import { faqs } from "../content/faqs.js";
-import { createLead } from "../models/leadModel.js";
+import { config } from "../config.js";
 import { meta } from "../seo/meta.js";
 import { siteConfig } from "../site.js";
 import { serviceSchema, faqSchema } from "../seo/jsonld.js";
@@ -15,7 +15,29 @@ function wantsJson(req: Request): boolean {
   );
 }
 
-export function submitLead(req: Request, res: Response) {
+/**
+ * Forward a lead to the configured endpoint (LEAD_FORWARD_URL — e.g. a Formspree
+ * form or any webhook that emails you). Nothing is stored. Posted as JSON. If
+ * the URL isn't set we log the submission and treat it as a success, so the form
+ * still works before it's wired up.
+ */
+async function forwardLead(values: Record<string, string>): Promise<void> {
+  const url = config.leadForwardUrl;
+  if (!url) {
+    console.warn("[lead] LEAD_FORWARD_URL not set — not forwarded:", values);
+    return;
+  }
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify(values),
+  });
+  if (!res.ok) {
+    throw new Error(`Lead forward failed: ${res.status} ${res.statusText}`);
+  }
+}
+
+export async function submitLead(req: Request, res: Response) {
   const body = req.body as Record<string, string>;
   const values = {
     name: (body.name ?? "").trim(),
@@ -27,18 +49,27 @@ export function submitLead(req: Request, res: Response) {
   };
 
   let error: string | null = null;
+  let status = 422;
   if (!values.name || !values.email || !values.city || !values.market) {
     error = "Please fill in the required fields.";
   } else if (!isEmail(values.email)) {
     error = "Please enter a valid email address.";
+  } else {
+    try {
+      await forwardLead(values);
+    } catch (err) {
+      console.error("[lead] forward error:", err);
+      error = "Something went wrong sending your request. Please try again.";
+      status = 502;
+    }
   }
 
   if (error) {
     if (wantsJson(req)) {
-      return res.status(422).json({ error });
+      return res.status(status).json({ error });
     }
     // No-JS fallback: re-render the home page with the error + entered values.
-    return res.status(422).render("home", {
+    return res.status(status).render("home", {
       meta: meta({
         title: siteConfig.title,
         description: siteConfig.description,
@@ -52,15 +83,6 @@ export function submitLead(req: Request, res: Response) {
       formValues: values,
     });
   }
-
-  createLead({
-    name: values.name,
-    email: values.email,
-    phone: values.phone || null,
-    city: values.city,
-    market: values.market,
-    volume: values.volume || null,
-  });
 
   if (wantsJson(req)) {
     return res.status(201).json({ ok: true });

@@ -38,6 +38,10 @@ export const config = {
       : path.join(this.publicDir, "uploads");
   },
 
+  // Where lead-form submissions are forwarded (a Formspree form URL or any
+  // webhook that emails you). Leads are not stored; empty = logged only.
+  leadForwardUrl: process.env.LEAD_FORWARD_URL ?? "",
+
   // Credentials for the CMS admin area.
   admin: {
     user: process.env.ADMIN_USER ?? "admin",

@@ -63,7 +63,7 @@ src/
   db/
     database.ts           node:sqlite connection + schema (runs on boot)
     seed.ts               Sample content seeder
-  models/                 leadModel, postModel (raw SQL)
+  models/                 postModel (raw SQL)
   controllers/            home, lead, blog, admin, seo
   routes/                 index (public) + admin (basic-auth guarded)
   middleware/auth.ts      HTTP Basic Auth for /admin
@@ -89,7 +89,6 @@ scripts/generate-og.mjs   Rasterizes the OG image from an SVG
 
 `/admin` is a small server-rendered CMS behind HTTP Basic Auth:
 
-- **Leads** — every submission is stored and listed on the dashboard.
 - **Blog** — create/edit/delete posts; drafts are hidden from the public site.
 
 ## Configuration (env vars)
@@ -105,6 +104,7 @@ defaults below.
 | `DB_PATH`                      | `data/nextus.db`     | SQLite file location           |
 | `ADMIN_USER` / `ADMIN_PASSWORD`| `admin` / `nextus`   | **Change before deploying**    |
 | `SESSION_SECRET`               | dev fallback         | Signs the admin session cookie; set a long random value in production (`openssl rand -hex 32`) |
+| `LEAD_FORWARD_URL`             | *(empty)*            | Lead-form submissions POST here as JSON (e.g. a Formspree form URL); empty = logged only |
 
 ## Deploy (Vercel)
 
@@ -120,13 +120,13 @@ statically, and rewrites everything else to the function.
    `engines` in `package.json` (`node:sqlite` needs Node ≥ 22.5).
 
 > **⚠️ Storage is ephemeral on serverless.** Vercel's filesystem is read-only
-> except `/tmp`, so the SQLite database lives at `/tmp/nextus.db` and uploads at
-> `/tmp/uploads`. **Captured leads, admin-authored posts, and uploaded images do
-> not persist** across cold starts or between instances (the sample blog posts
-> are re-seeded on each cold start). The public marketing pages are static
-> content and fully unaffected. For durable data, point `DB_PATH` at a hosted
-> SQLite/libSQL such as [Turso](https://turso.tech) — or move the models to a
-> managed Postgres — and forward leads to email/CRM in `leadController.ts`.
+> except `/tmp`, so the SQLite database (blog posts) lives at `/tmp/nextus.db`
+> and uploads at `/tmp/uploads`. **Admin-authored blog posts and uploaded images
+> do not persist** across cold starts or between instances (the sample posts are
+> re-seeded on each cold start). Lead-form submissions are emailed via
+> `LEAD_FORWARD_URL`, not stored, so they're unaffected — as are the static
+> marketing pages. For a durable blog, point `DB_PATH` at a hosted SQLite/libSQL
+> such as [Turso](https://turso.tech).
 
 ## SEO
 
@@ -147,5 +147,7 @@ Server-rendered, so all metadata is in the initial HTML:
 
 The form works with **and** without JavaScript. With JS it submits via `fetch`
 and swaps in a success state; without JS it posts normally and redirects
-(Post/Redirect/Get). Either way the lead lands in SQLite and shows in the CMS.
-Wire up email/CRM forwarding in `src/controllers/leadController.ts` when ready.
+(Post/Redirect/Get). Submissions are **not** stored — they're forwarded as JSON
+to `LEAD_FORWARD_URL` (a Formspree form or any webhook that emails you); leave it
+unset to just log them server-side. Customize in
+`src/controllers/leadController.ts`.

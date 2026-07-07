@@ -17,17 +17,6 @@ db.exec("PRAGMA journal_mode = WAL;");
 db.exec("PRAGMA foreign_keys = ON;");
 
 const SCHEMA = `
-CREATE TABLE IF NOT EXISTS leads (
-  id         INTEGER PRIMARY KEY AUTOINCREMENT,
-  name       TEXT NOT NULL,
-  email      TEXT NOT NULL,
-  phone      TEXT,
-  city       TEXT NOT NULL,
-  market     TEXT NOT NULL,
-  volume     TEXT,
-  created_at TEXT NOT NULL DEFAULT (datetime('now'))
-);
-
 CREATE TABLE IF NOT EXISTS posts (
   id           INTEGER PRIMARY KEY AUTOINCREMENT,
   slug         TEXT NOT NULL UNIQUE,
