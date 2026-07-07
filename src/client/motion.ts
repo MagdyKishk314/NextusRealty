@@ -1,6 +1,6 @@
 /**
  * GSAP-driven motion: hero entrance, scroll-triggered reveals, stat count-ups
- * and 2.5D parallax. Everything is progressive — without JS (or with reduced
+ * and 2.5D parallax. Everything is progressive - without JS (or with reduced
  * motion) the page renders fully visible and static.
  */
 
@@ -98,7 +98,7 @@ function statCounters(): void {
   });
 }
 
-/** Deterministically reveal whatever is already on screen — used after the
+/** Deterministically reveal whatever is already on screen - used after the
  *  loading screen (which may land on an anchor mid-page), where waiting for a
  *  scroll event would leave the section invisible. */
 function revealInView(): void {

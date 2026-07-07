@@ -9,7 +9,7 @@ export function showServices(_req: Request, res: Response) {
     meta: meta({
       title: pageTitle("Services"),
       description:
-        "Exclusive, human-confirmed leads for wholesalers, listing agents, and home-service contractors — roofing, HVAC and more. Cold-called, verified, and never resold.",
+        "Exclusive, human-confirmed leads for wholesalers, listing agents, and home-service contractors - roofing, HVAC and more. Cold-called, verified, and never resold.",
       canonicalPath: "/services",
       jsonLd: [servicesSchema()],
     }),

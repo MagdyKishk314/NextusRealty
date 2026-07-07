@@ -2,7 +2,7 @@
   "name": "nextus-realty",
   "version": "1.0.0",
   "private": true,
-  "description": "Nextus Realty — classic MVC monolith (TypeScript + Express + EJS + node:sqlite)",
+  "description": "Nextus Realty - classic MVC monolith (TypeScript + Express + EJS + node:sqlite)",
   "engines": {
     "node": "24.x"
   },

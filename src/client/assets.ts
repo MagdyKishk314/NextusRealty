@@ -39,7 +39,7 @@ export function assetsReady(
     );
   };
 
-  // Eager images — lazy ones only load once scrolled into view, so skip them.
+  // Eager images - lazy ones only load once scrolled into view, so skip them.
   for (const img of Array.from(document.images)) {
     if (img.loading === "lazy") continue;
     track(img.complete, (done) => {
@@ -48,7 +48,7 @@ export function assetsReady(
     });
   }
 
-  // Media elements (video/audio) — skip ones that won't fetch until played.
+  // Media elements (video/audio) - skip ones that won't fetch until played.
   for (const el of Array.from(document.querySelectorAll<HTMLMediaElement>("video, audio"))) {
     if (el.preload === "none") continue;
     // readyState >= HAVE_FUTURE_DATA means it can play through the current data.

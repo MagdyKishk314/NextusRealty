@@ -2,12 +2,12 @@
  * First-visit loading screen: the gold brand mark pulsing over ink with a thin
  * gold progress bar that tracks real asset loading, lifting away (same upward
  * curtain as page transitions) once every asset has loaded. Shows once per
- * session — later arrivals use the between-page transition instead.
+ * session - later arrivals use the between-page transition instead.
  *
  * The inline <head> script stamps `.is-booting` on <html> before first paint
  * (pure-CSS cover), and this module swaps in the real loader at DOMContentLoaded.
  *
- * `loaderDone` resolves when the reveal starts — the hero entrance waits on it
+ * `loaderDone` resolves when the reveal starts - the hero entrance waits on it
  * so the title cascades in just as the curtain lifts.
  */
 
@@ -25,7 +25,7 @@ function done(): void {
 export function initLoader(): void {
   const root = document.documentElement;
   if (!root.classList.contains("is-booting")) {
-    done(); // no loader this visit — hero entrance may start immediately
+    done(); // no loader this visit - hero entrance may start immediately
     return;
   }
 
@@ -79,13 +79,13 @@ export function initLoader(): void {
           duration: 0.65,
           onStart: () => {
             // If the visit targeted an anchor (/#comparison etc.), the scroll
-            // lock deferred the jump — land there instantly while still covered.
+            // lock deferred the jump - land there instantly while still covered.
             root.classList.remove("nx-lock");
             if (location.hash) {
               try {
                 document.querySelector(location.hash)?.scrollIntoView({ behavior: "instant" as ScrollBehavior });
               } catch {
-                /* invalid selector in hash — ignore */
+                /* invalid selector in hash - ignore */
               }
             }
             done();

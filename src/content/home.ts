@@ -114,7 +114,7 @@ export const founder = {
   eyebrow: "About the team",
   title: 'Lead generation from <span class="accent">real estate pros</span>',
   paragraphs: [
-    "Nextus wasn't built by marketers guessing at what agents need. It was built by Vladimir Selantev after more than 15 years inside real-estate lead generation — running campaigns for some of the industry's biggest names, including Grant Cardone, and managing a portfolio of $6 million in assets along the way.",
+    "Nextus wasn't built by marketers guessing at what agents need. It was built by Vladimir Selantev after more than 15 years inside real-estate lead generation, running campaigns for some of the industry's biggest names, including Grant Cardone, and managing a portfolio of $6 million in assets along the way.",
     "That experience is the product. He's watched agents burn entire weeks on resold lists, and he built Nextus around the one standard that matters: every lead confirmed by a real person before it ever reaches you.",
   ],
   name: "Vladimir Selantev",
@@ -130,7 +130,7 @@ export const founder = {
     cover: "/img/hunt-fortune-1000.jpg",
     title: "How to Successfully Hunt Fortune 1000 Contracts",
     blurb:
-      "Vladimir's lead-generation playbook for the ITAD industry — the same discipline behind every Nextus lead.",
+      "Vladimir's lead-generation playbook for the ITAD industry, the same discipline behind every Nextus lead.",
   },
 };
 
@@ -147,14 +147,14 @@ export const comparison = {
       label: "Seller motivation?",
       typical: "Any",
       nextus: "Extreme",
-      nextusTip: "Relocation, probate, and hardship — sellers with real urgency to move, not casual browsers.",
+      nextusTip: "Relocation, probate, and hardship: sellers with real urgency to move, not casual browsers.",
       highlight: false,
     },
     {
       label: "Property targeting?",
       typical: "Any lead",
       nextus: "Your market",
-      nextusTip: "Other companies just dial and hand you whatever lead answers. We target your market specifically — by property value, size, and the criteria you want.",
+      nextusTip: "Other companies just dial and hand you whatever lead answers. We target your market specifically, by property value, size, and the criteria you want.",
       highlight: false,
     },
     {
@@ -169,7 +169,7 @@ export const comparison = {
       label: "Confirmed before delivery?",
       typical: "Never",
       nextus: "Twice",
-      nextusTip: "Our lead manager calls the lead directly — a two-step check that verifies both their interest and the accuracy of their details.",
+      nextusTip: "Our lead manager calls the lead directly, a two-step check that verifies both their interest and the accuracy of their details.",
       highlight: false,
     },
     {
@@ -183,7 +183,7 @@ export const comparison = {
       label: "How you receive it?",
       typical: "By email",
       nextus: "Into your CRM",
-      nextusTip: "Confirmed leads drop straight into your CRM the moment they're ready — no inbox digging or copy-paste.",
+      nextusTip: "Confirmed leads drop straight into your CRM the moment they're ready, no inbox digging or copy-paste.",
       highlight: false,
     },
     {

@@ -1,6 +1,6 @@
 /**
  * Between-page transition: a full-screen ink curtain with the gold brand mark
- * sweeps up over the outgoing page, and lifts away on the incoming one — a
+ * sweeps up over the outgoing page, and lifts away on the incoming one - a
  * single continuous upward wipe across the navigation.
  *
  * Flash-proofing: right before navigating we set a sessionStorage flag; a tiny
@@ -22,7 +22,7 @@ function flag(action: "get" | "set" | "clear"): string | null {
     else if (action === "clear") sessionStorage.removeItem(FLAG);
     else return sessionStorage.getItem(FLAG);
   } catch {
-    /* storage unavailable (private mode etc.) — transitions still work, just without the boot cover */
+    /* storage unavailable (private mode etc.) - transitions still work, just without the boot cover */
   }
   return null;
 }
@@ -43,7 +43,7 @@ function transitionalUrl(a: HTMLAnchorElement): URL | null {
   if (a.target === "_blank" || a.hasAttribute("download")) return null;
   const url = new URL(a.href, location.href);
   if (url.origin !== location.origin) return null;
-  // Same-page hash jump — let smooth scroll handle it
+  // Same-page hash jump - let smooth scroll handle it
   if (url.pathname === location.pathname && url.search === location.search && url.hash) return null;
   return url;
 }

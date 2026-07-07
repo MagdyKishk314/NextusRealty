@@ -1,5 +1,5 @@
 /* ============================================================
-   Nextus Realty — hand-written design system
+   Nextus Realty - hand-written design system
    Deep navy (ink) + warm gold accent. No framework.
    ============================================================ */
 
@@ -452,7 +452,7 @@ section {
     radial-gradient(78% 60% at 82% 4%, rgba(245, 217, 155, 0.12), transparent 52%),
     linear-gradient(180deg, rgba(8, 12, 22, 0.62) 0%, rgba(9, 13, 24, 0.46) 46%, rgba(9, 14, 26, 0.72) 100%);
 }
-/* Faint architectural grid — a nod to blueprints and precision. Masked so it
+/* Faint architectural grid - a nod to blueprints and precision. Masked so it
    reads only toward the edges and fades out behind the headline. */
 .hero__grid {
   position: absolute;
@@ -464,7 +464,7 @@ section {
   -webkit-mask-image: radial-gradient(ellipse 74% 68% at 50% 46%, transparent 6%, #000 76%);
           mask-image: radial-gradient(ellipse 74% 68% at 50% 46%, transparent 6%, #000 76%);
 }
-/* Fine film grain — kills gradient banding and adds a premium, printed feel. */
+/* Fine film grain - kills gradient banding and adds a premium, printed feel. */
 .hero__bg::after {
   content: "";
   position: absolute;
@@ -1057,7 +1057,7 @@ html.nx-lock {
   }
 }
 
-/* Services page — closing call to action */
+/* Services page - closing call to action */
 .services-cta {
   max-width: 620px;
   margin: 0 auto;
@@ -1543,7 +1543,7 @@ html.nx-lock {
   align-items: center;
   gap: 22px;
 }
-/* Discreet admin entry point — blends into the footer meta, gold on hover. */
+/* Discreet admin entry point - blends into the footer meta, gold on hover. */
 .footer__admin {
   color: rgba(255, 255, 255, 0.4);
   transition: color 0.15s ease;

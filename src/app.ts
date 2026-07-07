@@ -75,7 +75,7 @@ export function createApp() {
  */
 const app = createApp();
 
-// On Vercel the /tmp SQLite DB starts empty each cold start — seed the sample
+// On Vercel the /tmp SQLite DB starts empty each cold start - seed the sample
 // blog posts (idempotent; see src/config.ts for the /tmp path).
 if (process.env.VERCEL) {
   try {

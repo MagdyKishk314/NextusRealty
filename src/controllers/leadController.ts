@@ -30,10 +30,10 @@ function leadFields(v: LeadValues): Array<[string, string]> {
   return [
     ["Name", v.name],
     ["Email", v.email],
-    ["Phone", v.phone || "—"],
+    ["Phone", v.phone || "-"],
     ["Market / city", v.city],
     ["Lead type", v.market],
-    ["Monthly volume", v.volume || "—"],
+    ["Monthly volume", v.volume || "-"],
   ];
 }
 
@@ -68,7 +68,7 @@ async function sendViaGmail(v: LeadValues): Promise<void> {
     from: `Nextus Realty <${config.gmailUser}>`,
     to: config.leadToEmail,
     replyTo: v.email,
-    subject: `New lead: ${v.name} — ${v.market}`,
+    subject: `New lead: ${v.name} - ${v.market}`,
     text,
     html,
   });
@@ -81,7 +81,7 @@ async function sendViaGmail(v: LeadValues): Promise<void> {
  */
 async function deliverLead(v: LeadValues): Promise<void> {
   if (config.gmailUser && config.gmailAppPassword) return sendViaGmail(v);
-  console.warn("[lead] Gmail SMTP not configured — not delivered:", v);
+  console.warn("[lead] Gmail SMTP not configured - not delivered:", v);
 }
 
 export async function submitLead(req: Request, res: Response) {

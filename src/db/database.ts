@@ -11,7 +11,7 @@ import { config } from "../config.js";
 
 // Resolve a writable location for the DB. On a read-only filesystem (e.g. a
 // serverless host) the configured path may not be creatable, so fall back to
-// the OS temp dir. Data there is ephemeral — see the README for durable options.
+// the OS temp dir. Data there is ephemeral - see the README for durable options.
 function resolveDbPath(): string {
   const preferred = config.dbPath;
   try {

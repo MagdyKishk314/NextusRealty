@@ -1,6 +1,6 @@
 # Nextus Realty
 
-Marketing site + lightweight CMS for **Nextus Realty** — exclusive, verified
+Marketing site + lightweight CMS for **Nextus Realty** - exclusive, verified
 real estate leads.
 
 A **classic MVC monolith**, deliberately minimal-dependency:
@@ -8,9 +8,9 @@ A **classic MVC monolith**, deliberately minimal-dependency:
 - **TypeScript** models & controllers
 - **Express** routing
 - **EJS** server-rendered views
-- **`node:sqlite`** (Node's built-in SQLite) — no ORM, no external database
+- **`node:sqlite`** (Node's built-in SQLite) - no ORM, no external database
 - **esbuild** for a tiny vanilla-TS client bundle
-- **Hand-written CSS** — no framework build
+- **Hand-written CSS** - no framework build
 
 The positioning never mentions price. The differentiator is the process: every
 lead is cold-called and confirmed by a real lead manager before it ships,
@@ -29,11 +29,11 @@ npm run dev      # builds the client bundle, then runs the server with reload
 ```
 
 Open <http://localhost:3000>. The CMS is at <http://localhost:3000/admin>
-(default login `admin` / `nextus` — override with env vars, see below).
+(default login `admin` / `nextus` - override with env vars, see below).
 
 > `npm run dev` watches everything: it recompiles the server (`tsc --watch`),
 > rebundles the client (`esbuild --watch`), and restarts the server on change
-> (`node --watch`). No `tsx` — it doesn't run on Node 26.
+> (`node --watch`). No `tsx` - it doesn't run on Node 26.
 
 ## Scripts
 
@@ -89,11 +89,11 @@ scripts/generate-og.mjs   Rasterizes the OG image from an SVG
 
 `/admin` is a small server-rendered CMS behind HTTP Basic Auth:
 
-- **Blog** — create/edit/delete posts; drafts are hidden from the public site.
+- **Blog** - create/edit/delete posts; drafts are hidden from the public site.
 
 ## Configuration (env vars)
 
-Copy `.env.example` to `.env` and edit it — the app loads `.env` automatically
+Copy `.env.example` to `.env` and edit it - the app loads `.env` automatically
 on boot (via `process.loadEnvFile()`). Real environment variables set by your
 host take precedence over the file, and a missing `.env` just falls back to the
 defaults below.
@@ -114,12 +114,12 @@ Vercel natively detects Express: `src/app.ts` default-exports the app, which
 Vercel compiles and runs as a single Vercel Function. `vercel.json` runs
 `npm run build` (bundles the client script into `public/`) and includes the EJS
 `views/` in the function. Static assets are served from `public/` by Vercel's
-CDN — note `express.static` is ignored on Vercel, so every asset must live in
+CDN - note `express.static` is ignored on Vercel, so every asset must live in
 `public/`. Node 24 (Vercel's default LTS) is pinned via `engines` in
 `package.json`; `node:sqlite` runs natively there, no flag needed. (`npm start`
 still runs `src/server.ts` locally.)
 
-1. Import the repo in Vercel (or run `vercel --prod`) — no framework preset
+1. Import the repo in Vercel (or run `vercel --prod`) - no framework preset
    needed; `vercel.json` configures the build.
 2. Set project **Environment Variables**: `ADMIN_USER`, `ADMIN_PASSWORD`,
    `SESSION_SECRET`, and `GMAIL_USER` + `GMAIL_APP_PASSWORD` (see the table
@@ -130,7 +130,7 @@ still runs `src/server.ts` locally.)
 > and uploads at `/tmp/uploads`. **Admin-authored blog posts and uploaded images
 > do not persist** across cold starts or between instances (the sample posts are
 > re-seeded on each cold start). Lead-form submissions are emailed over Gmail
-> SMTP, not stored, so they're unaffected — as are the static marketing pages.
+> SMTP, not stored, so they're unaffected - as are the static marketing pages.
 > For a durable blog, point `DB_PATH` at a hosted SQLite/libSQL such as
 > [Turso](https://turso.tech).
 
@@ -153,7 +153,7 @@ Server-rendered, so all metadata is in the initial HTML:
 
 The form works with **and** without JavaScript. With JS it submits via `fetch`
 and swaps in a success state; without JS it posts normally and redirects
-(Post/Redirect/Get). Submissions are **not** stored — each one is emailed to
+(Post/Redirect/Get). Submissions are **not** stored - each one is emailed to
 `LEAD_TO_EMAIL` over Gmail SMTP (set `GMAIL_USER` + `GMAIL_APP_PASSWORD`); if
 those aren't set the submission is just logged server-side. Customize delivery
 in `src/controllers/leadController.ts`.

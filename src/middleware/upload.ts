@@ -12,7 +12,7 @@ export const UPLOAD_DIR = config.uploadsDir;
 try {
   fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 } catch {
-  /* read-only filesystem (e.g. serverless) — uploads unavailable */
+  /* read-only filesystem (e.g. serverless) - uploads unavailable */
 }
 
 const ALLOWED = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif", ".avif"]);

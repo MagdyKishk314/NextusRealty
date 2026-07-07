@@ -185,7 +185,7 @@ function initPostForm(): void {
     const IDEAL = 160;
     const update = () => {
       const n = excerpt.value.length;
-      counter.textContent = `${n} characters${n > IDEAL ? ` — ${IDEAL} or fewer reads best in search` : ""}`;
+      counter.textContent = `${n} characters${n > IDEAL ? ` - ${IDEAL} or fewer reads best in search` : ""}`;
       counter.classList.toggle("is-over", n > IDEAL);
     };
     excerpt.addEventListener("input", update);
