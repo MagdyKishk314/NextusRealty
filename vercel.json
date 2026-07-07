@@ -1,15 +1,11 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
-  "outputDirectory": "public",
   "functions": {
-    "api/index.js": {
+    "index.js": {
       "includeFiles": "views/**"
     }
   },
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/api/index" }
-  ],
   "env": {
     "NODE_OPTIONS": "--experimental-sqlite"
   }

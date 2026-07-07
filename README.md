@@ -110,16 +110,19 @@ defaults below.
 
 ## Deploy (Vercel)
 
-The app runs on Vercel as a single serverless function — `api/index.js` wraps
-the Express app. `vercel.json` builds with `npm run build`, serves `public/`
-statically, and rewrites everything else to the function.
+Vercel natively detects Express: the root `index.js` exports the app, which runs
+as a single Vercel Function. `vercel.json` runs `npm run build` (TypeScript →
+`dist/`, client bundle → `public/`), bundles the EJS `views/`, and sets
+`NODE_OPTIONS=--experimental-sqlite`. Static assets are served from `public/` by
+Vercel's CDN — note `express.static` is ignored on Vercel, so every asset must
+live in `public/`. Node 22 is pinned via `engines` in `package.json`
+(`node:sqlite` needs Node ≥ 22.5).
 
-1. Import the repo in Vercel (or run `vercel --prod`). There's no framework
-   preset; `vercel.json` configures the build.
-2. Set project **Environment Variables**: `ADMIN_USER`, `ADMIN_PASSWORD`, and
-   `SESSION_SECRET` (see the table above). `NODE_OPTIONS=--experimental-sqlite`
-   is already set in `vercel.json`, and the runtime is pinned to Node 22 via
-   `engines` in `package.json` (`node:sqlite` needs Node ≥ 22.5).
+1. Import the repo in Vercel (or run `vercel --prod`) — no framework preset
+   needed; `vercel.json` configures the build.
+2. Set project **Environment Variables**: `ADMIN_USER`, `ADMIN_PASSWORD`,
+   `SESSION_SECRET`, and `GMAIL_USER` + `GMAIL_APP_PASSWORD` (see the table
+   above).
 
 > **⚠️ Storage is ephemeral on serverless.** Vercel's filesystem is read-only
 > except `/tmp`, so the SQLite database (blog posts) lives at `/tmp/nextus.db`
