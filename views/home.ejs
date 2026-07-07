@@ -102,13 +102,13 @@
     </section>
 
     <!-- The confirmation call: motivation + human verification -->
-    <section id="confirmation" class="section section--dark">
+    <section id="confirmation" class="section section--muted">
       <div class="container confirm__grid">
         <div class="confirm__pitch">
           <p class="eyebrow" data-reveal="left"><%= home.confirmation.eyebrow %></p>
-          <h2 class="section-title section-title--light" data-reveal="left"><%= home.confirmation.title %></h2>
+          <h2 class="section-title" data-reveal="left"><%= home.confirmation.title %></h2>
           <% home.confirmation.paragraphs.forEach(function (p) { %>
-            <p class="section-subhead section-subhead--light" data-reveal="left"><%= p %></p>
+            <p class="section-subhead" data-reveal="left"><%= p %></p>
           <% }); %>
           <ul class="checklist confirm__checks" data-reveal="left">
             <% home.confirmation.checks.forEach(function (c) { %>

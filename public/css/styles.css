@@ -739,8 +739,8 @@ html.nx-lock {
 /* ---------------------------------------------------- Stats */
 
 .stats-section {
-  background: var(--white);
-  border-bottom: 1px solid var(--slate-100);
+  background: var(--ink-950);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .stats {
   display: grid;
@@ -755,12 +755,12 @@ html.nx-lock {
   font-family: var(--font-serif);
   font-weight: 500;
   font-size: clamp(2.2rem, 5vw, 3rem);
-  color: var(--ink-900);
+  color: var(--gold-400);
 }
 .stat__label {
   margin-top: 8px;
   font-size: 0.9rem;
-  color: var(--slate-500);
+  color: rgba(255, 255, 255, 0.6);
 }
 @media (min-width: 780px) {
   .stats {
@@ -1094,15 +1094,12 @@ html.nx-lock {
 .confirm__checks {
   margin-top: 28px;
 }
-.confirm__checks li {
-  color: rgba(255, 255, 255, 0.82);
-}
 .confirm__card {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(233, 196, 106, 0.28);
+  background: var(--white);
+  border: 1px solid var(--slate-200);
   border-radius: var(--radius);
   padding: 26px;
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   max-width: 420px;
 }
 .confirm__card-top {
@@ -1116,7 +1113,7 @@ html.nx-lock {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.16em;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--slate-500);
 }
 .confirm__badge {
   display: inline-flex;
@@ -1124,9 +1121,9 @@ html.nx-lock {
   gap: 6px;
   font-size: 0.72rem;
   font-weight: 700;
-  color: var(--gold-400);
-  background: rgba(233, 196, 106, 0.12);
-  border: 1px solid rgba(233, 196, 106, 0.3);
+  color: var(--gold-600);
+  background: rgba(233, 196, 106, 0.14);
+  border: 1px solid rgba(233, 196, 106, 0.45);
   padding: 5px 10px;
   border-radius: 999px;
 }
@@ -1136,7 +1133,7 @@ html.nx-lock {
   gap: 8px;
   margin-top: 20px;
   font-weight: 600;
-  color: var(--white);
+  color: var(--ink-900);
 }
 .confirm__card-list {
   list-style: none;
@@ -1151,15 +1148,15 @@ html.nx-lock {
   align-items: center;
   gap: 10px;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--slate-600);
 }
 .confirm__card-foot {
   margin-top: 20px;
   padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--slate-200);
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--gold-300);
+  color: var(--gold-600);
 }
 @media (min-width: 940px) {
   .confirm__grid {
