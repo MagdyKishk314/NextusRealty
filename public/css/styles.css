@@ -848,6 +848,7 @@ html.nx-lock {
 .step__icon {
   display: grid;
   place-items: center;
+  margin-inline: auto;
   width: 48px;
   height: 48px;
   border-radius: 12px;
