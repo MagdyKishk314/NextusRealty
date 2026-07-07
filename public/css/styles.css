@@ -100,7 +100,7 @@ section {
 }
 
 .section {
-  padding: 88px 0;
+  padding: 104px 0;
   background: var(--white);
 }
 .section--muted {
@@ -932,7 +932,7 @@ html.nx-lock {
 .services {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 64px;
 }
 .service {
   display: grid;
@@ -1045,7 +1045,7 @@ html.nx-lock {
 }
 @media (min-width: 900px) {
   .services {
-    gap: 68px;
+    gap: 104px;
   }
   .service {
     grid-template-columns: 1fr 1fr;
