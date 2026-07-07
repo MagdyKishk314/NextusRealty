@@ -110,13 +110,14 @@ defaults below.
 
 ## Deploy (Vercel)
 
-Vercel natively detects Express: the root `index.js` exports the app, which runs
-as a single Vercel Function. `vercel.json` runs `npm run build` (TypeScript →
-`dist/`, client bundle → `public/`), bundles the EJS `views/`, and sets
-`NODE_OPTIONS=--experimental-sqlite`. Static assets are served from `public/` by
-Vercel's CDN — note `express.static` is ignored on Vercel, so every asset must
-live in `public/`. Node 22 is pinned via `engines` in `package.json`
-(`node:sqlite` needs Node ≥ 22.5).
+Vercel natively detects Express: `src/app.ts` default-exports the app, which
+Vercel compiles and runs as a single Vercel Function. `vercel.json` runs
+`npm run build` (bundles the client script into `public/`) and includes the EJS
+`views/` in the function. Static assets are served from `public/` by Vercel's
+CDN — note `express.static` is ignored on Vercel, so every asset must live in
+`public/`. Node 24 (Vercel's default LTS) is pinned via `engines` in
+`package.json`; `node:sqlite` runs natively there, no flag needed. (`npm start`
+still runs `src/server.ts` locally.)
 
 1. Import the repo in Vercel (or run `vercel --prod`) — no framework preset
    needed; `vercel.json` configures the build.

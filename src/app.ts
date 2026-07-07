@@ -6,6 +6,7 @@ import { meta } from "./seo/meta.js";
 import { pageTitle } from "./site.js";
 import { organizationSchema, websiteSchema } from "./seo/jsonld.js";
 import { router } from "./routes/index.js";
+import { seedIfEmpty } from "./db/seed.js";
 
 // Site-wide structured data is static; build it once.
 const BASE_JSONLD = [organizationSchema(), websiteSchema()];
@@ -66,3 +67,22 @@ export function createApp() {
 
   return app;
 }
+
+/**
+ * Default export: a ready Express app instance. Vercel's Express support detects
+ * this module (it calls `express()`) and uses the default export as the single
+ * Vercel Function. Locally, src/server.ts imports it and calls `listen()`.
+ */
+const app = createApp();
+
+// On Vercel the /tmp SQLite DB starts empty each cold start — seed the sample
+// blog posts (idempotent; see src/config.ts for the /tmp path).
+if (process.env.VERCEL) {
+  try {
+    seedIfEmpty();
+  } catch (err) {
+    console.error("Boot seed skipped:", err);
+  }
+}
+
+export default app;
