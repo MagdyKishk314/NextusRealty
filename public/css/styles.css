@@ -110,7 +110,7 @@ section {
   background: var(--slate-50);
 }
 .section--dark {
-  background: var(--ink-950);
+  background: var(--ink-800);
   color: var(--white);
   position: relative;
   overflow: hidden;
@@ -739,7 +739,7 @@ html.nx-lock {
 /* ---------------------------------------------------- Stats */
 
 .stats-section {
-  background: var(--ink-950);
+  background: var(--ink-800);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .stats {
@@ -895,12 +895,12 @@ html.nx-lock {
   overflow: hidden;
 }
 .feature {
-  background: var(--ink-950);
+  background: var(--ink-800);
   padding: 32px;
   transition: background-color 0.15s ease;
 }
 .feature:hover {
-  background: var(--ink-900);
+  background: var(--ink-700);
 }
 .feature__icon {
   display: grid;
@@ -1593,7 +1593,7 @@ html.nx-lock {
 /* ---------------------------------------------------- Footer */
 
 .footer {
-  background: var(--ink-950);
+  background: var(--ink-800);
   color: var(--white);
 }
 .footer__body {
