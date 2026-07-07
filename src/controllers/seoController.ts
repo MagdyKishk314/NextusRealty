@@ -23,6 +23,8 @@ export function sitemap(_req: Request, res: Response) {
     { loc: absoluteUrl("/services"), priority: "0.8" },
     { loc: absoluteUrl("/faq"), priority: "0.7" },
     { loc: absoluteUrl("/blog"), priority: "0.7" },
+    { loc: absoluteUrl("/privacy"), priority: "0.3" },
+    { loc: absoluteUrl("/terms"), priority: "0.3" },
   ];
 
   for (const post of listPublishedPosts()) {

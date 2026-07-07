@@ -935,6 +935,33 @@ html.nx-lock {
 
 /* ---------------------------------------------------- Services page */
 
+/* Tall services-page header */
+.services-header {
+  padding: clamp(120px, 16vw, 200px) 0 clamp(56px, 7vw, 92px);
+  background: var(--slate-50);
+  text-align: center;
+}
+.services-header .section-head {
+  max-width: 860px;
+  margin-bottom: 0;
+}
+.services-header__title {
+  margin-top: 18px;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
+  text-wrap: balance;
+}
+.services-header .section-subhead {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.2rem;
+}
+
 .services {
   display: flex;
   flex-direction: column;
@@ -962,25 +989,6 @@ html.nx-lock {
   object-fit: cover;
   display: block;
   filter: saturate(1.03) contrast(1.02);
-}
-.service__badge {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 12px;
-  background: rgba(10, 15, 28, 0.62);
-  border: 1px solid rgba(233, 196, 106, 0.4);
-  color: var(--gold-400);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-}
-.service__badge .icon {
-  width: 24px;
-  height: 24px;
 }
 .service__overlay {
   position: absolute;
@@ -1574,6 +1582,43 @@ html.nx-lock {
 
 .page {
   min-height: 40vh;
+}
+
+/* Legal pages (privacy, terms) */
+.legal {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.legal__head {
+  margin-bottom: 40px;
+}
+.legal__updated {
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--slate-500);
+}
+.legal__intro {
+  font-size: 1.1rem;
+  color: var(--slate-600);
+}
+.legal__section {
+  margin-top: 36px;
+}
+.legal__section h2 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: var(--ink-900);
+  margin-bottom: 12px;
+}
+.legal__section p {
+  color: var(--slate-600);
+  margin-bottom: 12px;
+}
+.legal__intro a,
+.legal__section a {
+  color: var(--gold-600);
+  font-weight: 600;
 }
 
 /* ---------------------------------------------------- Blog layout + sidebar */

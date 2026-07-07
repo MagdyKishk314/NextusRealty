@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main class="page">
+    <section class="section">
+      <div class="container legal">
+        <div class="legal__head" data-reveal>
+          <p class="eyebrow">Legal</p>
+          <h1 class="section-title"><%= doc.title %></h1>
+          <p class="legal__updated">Last updated: <%= doc.updated %></p>
+        </div>
+
+        <p class="legal__intro" data-reveal><%- doc.intro %></p>
+
+        <% doc.sections.forEach(function (sec) { %>
+          <section class="legal__section" data-reveal>
+            <h2><%= sec.heading %></h2>
+            <% sec.paragraphs.forEach(function (p) { %>
+              <p><%- p %></p>
+            <% }); %>
+          </section>
+        <% }); %>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+  <script src="/js/bundle.js" defer></script>
+</body>
+</html>

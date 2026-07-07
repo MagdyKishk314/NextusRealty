@@ -7,21 +7,25 @@
   <%- include('partials/header') %>
 
   <main class="page">
-    <!-- Intro + the three services -->
-    <section class="section section--muted">
+    <!-- Page header -->
+    <section class="services-header">
       <div class="container">
         <div class="section-head" data-reveal>
           <p class="eyebrow eyebrow--center"><span class="dot"></span><%= servicesIntro.eyebrow %></p>
-          <h1 class="section-title"><%= servicesIntro.title %></h1>
+          <h1 class="services-header__title"><%= servicesIntro.title %></h1>
           <p class="section-subhead"><%= servicesIntro.subhead %></p>
         </div>
+      </div>
+    </section>
 
+    <!-- The three services -->
+    <section class="section section--muted">
+      <div class="container">
         <div class="services">
           <% services.forEach(function (s, i) { %>
             <article class="service<%= i % 2 ? ' service--flip' : '' %>" id="<%= s.id %>">
               <figure class="service__media" data-reveal="<%= i % 2 ? 'right' : 'left' %>">
                 <img class="service__img" src="<%= s.image %>" alt="<%= s.imageAlt %>" loading="lazy" />
-                <span class="service__badge"><%- include('partials/icon', { name: s.icon, cls: 'icon' }) %></span>
                 <div class="service__overlay">
                   <span class="service__overlay-label">Typical</span>
                   <ul class="service__tags">
