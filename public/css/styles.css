@@ -110,7 +110,7 @@ section {
   background: var(--slate-50);
 }
 .section--dark {
-  background: var(--ink-800);
+  background: var(--ink-950);
   color: var(--white);
   position: relative;
   overflow: hidden;
@@ -297,9 +297,7 @@ section {
   /* Solid by default (safe on light pages and without JS). On pages with a
      hero, JS adds .is-transparent while scrolled to the top so the bar blends
      into the hero, then removes it on scroll for this solid, readable state. */
-  background: rgba(10, 15, 28, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--ink-950);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
 }
@@ -739,7 +737,7 @@ html.nx-lock {
 /* ---------------------------------------------------- Stats */
 
 .stats-section {
-  background: var(--ink-800);
+  background: var(--ink-950);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .stats {
@@ -895,12 +893,12 @@ html.nx-lock {
   overflow: hidden;
 }
 .feature {
-  background: var(--ink-800);
+  background: var(--ink-950);
   padding: 32px;
   transition: background-color 0.15s ease;
 }
 .feature:hover {
-  background: var(--ink-700);
+  background: var(--ink-900);
 }
 .feature__icon {
   display: grid;
@@ -1593,7 +1591,7 @@ html.nx-lock {
 /* ---------------------------------------------------- Footer */
 
 .footer {
-  background: var(--ink-800);
+  background: var(--ink-950);
   color: var(--white);
 }
 .footer__body {
