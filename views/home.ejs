@@ -101,6 +101,38 @@
       </div>
     </section>
 
+    <!-- The confirmation call: motivation + human verification -->
+    <section id="confirmation" class="section section--dark">
+      <div class="container confirm__grid">
+        <div class="confirm__pitch">
+          <p class="eyebrow" data-reveal="left"><%= home.confirmation.eyebrow %></p>
+          <h2 class="section-title section-title--light" data-reveal="left"><%= home.confirmation.title %></h2>
+          <% home.confirmation.paragraphs.forEach(function (p) { %>
+            <p class="section-subhead section-subhead--light" data-reveal="left"><%= p %></p>
+          <% }); %>
+          <ul class="checklist confirm__checks" data-reveal="left">
+            <% home.confirmation.checks.forEach(function (c) { %>
+              <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span><%= c %></li>
+            <% }); %>
+          </ul>
+        </div>
+
+        <aside class="confirm__card" data-reveal="right">
+          <div class="confirm__card-top">
+            <span class="confirm__card-label"><%= home.confirmation.card.label %></span>
+            <span class="confirm__badge"><%- include('partials/icon', { name: 'shield', cls: 'icon icon--xs' }) %> Confirmed</span>
+          </div>
+          <p class="confirm__card-who"><%- include('partials/icon', { name: 'phone', cls: 'icon icon--sm accent-fg' }) %> <%= home.confirmation.card.manager %></p>
+          <ul class="confirm__card-list">
+            <% home.confirmation.card.items.forEach(function (it) { %>
+              <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span><%= it %></li>
+            <% }); %>
+          </ul>
+          <div class="confirm__card-foot"><%= home.confirmation.card.status %></div>
+        </aside>
+      </div>
+    </section>
+
     <!-- About the team: the authority behind the standard -->
     <section id="about" class="section">
       <div class="container founder">

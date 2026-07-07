@@ -71,6 +71,31 @@ export const steps = [
   },
 ];
 
+export const confirmation = {
+  eyebrow: "The confirmation call",
+  title: "We call every homeowner back before you ever do",
+  paragraphs: [
+    "This is the step the rest of the industry skips. Before a lead is ever sent to you, one of our lead managers picks up the phone and calls the homeowner directly, to confirm they are genuinely motivated to sell, that their details are accurate, and that their timeline is real.",
+    "Only the ones who clear that call get sent. So the person you dial isn't a cold form-fill, it's someone our team has already spoken with and confirmed wants to move.",
+  ],
+  checks: [
+    "Genuine interest and motivation to sell, confirmed by voice",
+    "Real urgency and timeline, not idle curiosity",
+    "Phone and contact details verified live on the call",
+    "Delivered to one agent only, never before it's confirmed",
+  ],
+  card: {
+    label: "Lead confirmation",
+    manager: "Confirmed by our lead manager",
+    items: [
+      "Spoke with the homeowner directly",
+      "Motivation and timeline confirmed",
+      "Contact details verified",
+    ],
+    status: "Ready to deliver, exclusive to you",
+  },
+};
+
 export const features = {
   eyebrow: "Why agents trust Nextus",
   title: "The standard every lead is held to before it reaches you",
