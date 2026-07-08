@@ -46,6 +46,10 @@ export const config = {
   gmailAppPassword: (process.env.GMAIL_APP_PASSWORD ?? "").replace(/\s+/g, ""),
   leadToEmail: process.env.LEAD_TO_EMAIL ?? "magdykishk314@gmail.com",
 
+  // Analytics + Search Console (optional; set in production to enable).
+  gaId: process.env.GA_MEASUREMENT_ID ?? "",
+  gscVerification: process.env.GSC_VERIFICATION ?? "",
+
   // Credentials for the CMS admin area.
   admin: {
     user: process.env.ADMIN_USER ?? "admin",

@@ -18,13 +18,15 @@ export function robots(_req: Request, res: Response) {
 }
 
 export function sitemap(_req: Request, res: Response) {
+  // Bump when the static pages get a meaningful content update.
+  const staticLastmod = "2026-07-08";
   const urls: { loc: string; lastmod?: string; priority: string }[] = [
-    { loc: absoluteUrl("/"), priority: "1.0" },
-    { loc: absoluteUrl("/services"), priority: "0.8" },
-    { loc: absoluteUrl("/faq"), priority: "0.7" },
-    { loc: absoluteUrl("/blog"), priority: "0.7" },
-    { loc: absoluteUrl("/privacy"), priority: "0.3" },
-    { loc: absoluteUrl("/terms"), priority: "0.3" },
+    { loc: absoluteUrl("/"), lastmod: staticLastmod, priority: "1.0" },
+    { loc: absoluteUrl("/services"), lastmod: staticLastmod, priority: "0.8" },
+    { loc: absoluteUrl("/faq"), lastmod: staticLastmod, priority: "0.7" },
+    { loc: absoluteUrl("/blog"), lastmod: staticLastmod, priority: "0.7" },
+    { loc: absoluteUrl("/privacy"), lastmod: staticLastmod, priority: "0.3" },
+    { loc: absoluteUrl("/terms"), lastmod: staticLastmod, priority: "0.3" },
   ];
 
   for (const post of listPublishedPosts()) {

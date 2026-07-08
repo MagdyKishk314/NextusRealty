@@ -14,6 +14,7 @@ export function showHome(req: Request, res: Response) {
       description: siteConfig.description,
       canonicalPath: "/",
       jsonLd: [serviceSchema(), faqSchema()],
+      preloadImage: "/img/hero.webp",
     }),
     home,
     faqs,

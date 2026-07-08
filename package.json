@@ -15,6 +15,7 @@
     "start": "node dist/server.js",
     "seed": "npm run build:server && node dist/db/seed-cli.js",
     "og": "node scripts/generate-og.mjs",
+    "optimize:img": "node scripts/optimize-images.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.client.json"
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "@types/node": "^22.13.0",
     "@types/nodemailer": "^8.0.1",
     "esbuild": "^0.24.2",
+    "sharp": "^0.35.3",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   }

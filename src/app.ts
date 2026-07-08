@@ -38,6 +38,8 @@ export function createApp() {
     res.locals.absoluteUrl = absoluteUrl;
     res.locals.baseJsonLd = BASE_JSONLD;
     res.locals.year = new Date().getFullYear();
+    res.locals.gaId = config.gaId;
+    res.locals.gscVerification = config.gscVerification;
     next();
   });
 

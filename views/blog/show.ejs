@@ -19,7 +19,7 @@
               <time class="post__date"><%= formatDate(post.published_at) %></time>
             </div>
             <h1 class="post__title"><%= post.title %></h1>
-            <% if (post.image) { %><img class="post__cover" src="<%= post.image %>" alt="" /><% } %>
+            <% if (post.image) { %><img class="post__cover" src="<%= post.image %>" alt="<%= post.title %>" /><% } %>
             <div class="prose"><%- bodyHtml %></div>
 
             <div class="post__cta">

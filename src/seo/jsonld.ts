@@ -71,6 +71,20 @@ export function servicesSchema() {
   };
 }
 
+/** Home > … breadcrumb trail for an inner page. */
+export function breadcrumbSchema(trail: Array<{ name: string; path: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: absoluteUrl(item.path),
+    })),
+  };
+}
+
 export function faqSchema() {
   return {
     "@context": "https://schema.org",

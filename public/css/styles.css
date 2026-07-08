@@ -436,7 +436,7 @@ section {
 .hero__photo {
   position: absolute;
   inset: 0;
-  background-image: url("/img/hero.jpg");
+  background-image: url("/img/hero.webp");
   background-size: cover;
   background-position: center 42%;
   filter: grayscale(0.4) contrast(1.05) brightness(0.68) saturate(0.85);
@@ -980,6 +980,9 @@ html.nx-lock {
   border-radius: var(--radius);
   background: var(--ink-800);
   box-shadow: var(--shadow-md);
+}
+.service__media picture {
+  display: contents;
 }
 .service__img {
   width: 100%;

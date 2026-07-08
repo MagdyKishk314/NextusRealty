@@ -7,6 +7,12 @@
 <meta name="robots" content="<%= meta.robots %>" />
 <meta name="author" content="<%= site.name %>" />
 <link rel="canonical" href="<%= absoluteUrl(meta.canonicalPath) %>" />
+<% if (typeof gscVerification !== 'undefined' && gscVerification) { %>
+<meta name="google-site-verification" content="<%= gscVerification %>" />
+<% } %>
+<% if (meta.preloadImage) { %>
+<link rel="preload" as="image" href="<%= meta.preloadImage %>" fetchpriority="high" />
+<% } %>
 
 <!-- Open Graph -->
 <meta property="og:type" content="<%= meta.ogType %>" />
@@ -60,3 +66,14 @@
 <% meta.jsonLd.forEach(function (obj) { %>
 <script type="application/ld+json"><%- JSON.stringify(obj) %></script>
 <% }); %>
+
+<% if (typeof gaId !== 'undefined' && gaId) { %>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%= gaId %>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', '<%= gaId %>');
+</script>
+<% } %>

@@ -6,7 +6,7 @@ import {
 } from "../models/postModel.js";
 import { meta } from "../seo/meta.js";
 import { pageTitle, siteConfig } from "../site.js";
-import { blogPostingSchema } from "../seo/jsonld.js";
+import { blogPostingSchema, breadcrumbSchema } from "../seo/jsonld.js";
 import { textToHtml, formatDate, excerptFrom } from "../utils.js";
 
 export function showBlogIndex(req: Request, res: Response) {
@@ -22,6 +22,12 @@ export function showBlogIndex(req: Request, res: Response) {
       description:
         "Notes on exclusive, human-confirmed real estate leads: how we source, verify, and deliver them.",
       canonicalPath: "/blog",
+      jsonLd: [
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+        ]),
+      ],
     }),
     posts,
     categories,
@@ -48,7 +54,14 @@ export function showBlogPost(req: Request, res: Response) {
       description: post.excerpt || excerptFrom(post.body),
       canonicalPath: `/blog/${post.slug}`,
       ogType: "article",
-      jsonLd: [blogPostingSchema(post)],
+      jsonLd: [
+        blogPostingSchema(post),
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Blog", path: "/blog" },
+          { name: post.title, path: `/blog/${post.slug}` },
+        ]),
+      ],
     }),
     post,
     categories: listCategories(),

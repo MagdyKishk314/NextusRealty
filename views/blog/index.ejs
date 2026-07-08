@@ -29,7 +29,7 @@
                 <% posts.forEach(function (post) { %>
                   <article class="post-card">
                     <% if (post.image) { %>
-                      <a class="post-card__image" href="/blog/<%= post.slug %>"><img src="<%= post.image %>" alt="" loading="lazy" /></a>
+                      <a class="post-card__image" href="/blog/<%= post.slug %>"><img src="<%= post.image %>" alt="<%= post.title %>" loading="lazy" /></a>
                     <% } %>
                     <div class="post-card__meta">
                       <% if (post.category) { %><span class="post-card__cat"><%= post.category %></span><% } %>

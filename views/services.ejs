@@ -25,7 +25,10 @@
           <% services.forEach(function (s, i) { %>
             <article class="service<%= i % 2 ? ' service--flip' : '' %>" id="<%= s.id %>">
               <figure class="service__media" data-reveal="<%= i % 2 ? 'right' : 'left' %>">
-                <img class="service__img" src="<%= s.image %>" alt="<%= s.imageAlt %>" loading="lazy" />
+                <picture>
+                  <source srcset="<%= s.image.replace('.jpg', '.webp') %>" type="image/webp" />
+                  <img class="service__img" src="<%= s.image %>" alt="<%= s.imageAlt %>" loading="lazy" />
+                </picture>
                 <div class="service__overlay">
                   <span class="service__overlay-label">Typical</span>
                   <ul class="service__tags">

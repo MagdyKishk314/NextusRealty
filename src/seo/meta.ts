@@ -8,6 +8,7 @@ export interface PageMeta {
   ogImage: string; // site-relative
   robots: string;
   jsonLd: object[]; // page-specific structured data
+  preloadImage?: string; // optional LCP image to <link rel="preload"> (e.g. hero)
 }
 
 /** Build page meta with sensible site-wide defaults. */
@@ -20,5 +21,6 @@ export function meta(partial: Partial<PageMeta> = {}): PageMeta {
     ogImage: partial.ogImage ?? siteConfig.ogImage,
     robots: partial.robots ?? "index, follow",
     jsonLd: partial.jsonLd ?? [],
+    preloadImage: partial.preloadImage,
   };
 }

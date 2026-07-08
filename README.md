@@ -107,6 +107,8 @@ defaults below.
 | `GMAIL_USER`                   | *(empty)*            | Gmail address that sends the lead emails |
 | `GMAIL_APP_PASSWORD`           | *(empty)*            | [App Password](https://myaccount.google.com/apppasswords) for that account (requires 2-Step Verification) |
 | `LEAD_TO_EMAIL`                | `magdykishk314@gmail.com` | Recipient for lead emails |
+| `GA_MEASUREMENT_ID`            | *(empty)*            | GA4 Measurement ID (`G-…`) — enables Google Analytics |
+| `GSC_VERIFICATION`             | *(empty)*            | Google Search Console meta-tag verification token (optional; DNS also works) |
 
 ## Deploy (Vercel)
 
