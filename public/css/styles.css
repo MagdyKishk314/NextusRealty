@@ -1423,6 +1423,13 @@ html.nx-lock {
   max-width: 1040px;
   align-items: center;
 }
+/* Calendly inline-widget wrapper — a clean rounded card on the dark section. */
+.lead__calendly {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+}
 .lead__points {
   list-style: none;
   margin: 28px 0 0;

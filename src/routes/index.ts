@@ -3,7 +3,6 @@ import { showHome } from "../controllers/homeController.js";
 import { showFaq } from "../controllers/faqController.js";
 import { showServices } from "../controllers/servicesController.js";
 import { showPrivacy, showTerms } from "../controllers/legalController.js";
-import { submitLead } from "../controllers/leadController.js";
 import { showBlogIndex, showBlogPost } from "../controllers/blogController.js";
 import { robots, sitemap } from "../controllers/seoController.js";
 import { adminRouter } from "./admin.js";
@@ -16,7 +15,6 @@ router.get("/services", showServices);
 router.get("/faq", showFaq);
 router.get("/privacy", showPrivacy);
 router.get("/terms", showTerms);
-router.post("/leads", submitLead);
 
 // Blog
 router.get("/blog", showBlogIndex);

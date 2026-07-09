@@ -38,14 +38,6 @@ export const config = {
       : path.join(this.publicDir, "uploads");
   },
 
-  // Lead-form delivery (nothing is stored): email each submission to
-  // leadToEmail over Gmail SMTP. Requires a Gmail account with 2-Step
-  // Verification and an App Password (https://myaccount.google.com/apppasswords).
-  // Unset = submissions are only logged server-side.
-  gmailUser: process.env.GMAIL_USER ?? "",
-  gmailAppPassword: (process.env.GMAIL_APP_PASSWORD ?? "").replace(/\s+/g, ""),
-  leadToEmail: process.env.LEAD_TO_EMAIL ?? "magdykishk314@gmail.com",
-
   // Analytics + Search Console (optional; set in production to enable).
   gaId: process.env.GA_MEASUREMENT_ID ?? "",
   gscVerification: process.env.GSC_VERIFICATION ?? "",

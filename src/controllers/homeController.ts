@@ -7,7 +7,7 @@ import { siteConfig } from "../site.js";
 import { serviceSchema, faqSchema } from "../seo/jsonld.js";
 import { formatDate } from "../utils.js";
 
-export function showHome(req: Request, res: Response) {
+export function showHome(_req: Request, res: Response) {
   res.render("home", {
     meta: meta({
       title: siteConfig.title,
@@ -20,8 +20,5 @@ export function showHome(req: Request, res: Response) {
     faqs,
     posts: listPublishedPosts().slice(0, 4), // 4 most recent for the home slider
     formatDate,
-    submitted: req.query.submitted === "1",
-    formError: null as string | null,
-    formValues: {} as Record<string, string>,
   });
 }

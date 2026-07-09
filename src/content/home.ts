@@ -242,16 +242,3 @@ export const comparison = {
     highlight: boolean;
   }>,
 };
-
-export const leadForm = {
-  markets: [
-    "Residential: buyer leads",
-    "Residential: seller leads",
-    "Luxury / high-net-worth",
-    "Commercial",
-    "Investment / multifamily",
-    "Wholesaling / motivated sellers",
-    "Contractor / home services (roofing, HVAC…)",
-  ],
-  volumes: ["10–25 / month", "25–50 / month", "50–100 / month", "100+ / month"],
-};

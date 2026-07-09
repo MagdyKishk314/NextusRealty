@@ -8,7 +8,6 @@ export function robots(_req: Request, res: Response) {
     "User-agent: *",
     "Allow: /",
     "Disallow: /admin",
-    "Disallow: /leads",
     "",
     `Sitemap: ${absoluteUrl("/sitemap.xml")}`,
     `Host: ${siteConfig.url}`,

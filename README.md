@@ -79,7 +79,6 @@ scripts/generate-og.mjs   Rasterizes the OG image from an SVG
 | Method | Path                         | Purpose                          |
 | ------ | ---------------------------- | -------------------------------- |
 | GET    | `/`                          | Home (all marketing sections)    |
-| POST   | `/leads`                     | Lead capture → SQLite (JSON + no-JS) |
 | GET    | `/blog`                      | Blog index (published posts)     |
 | GET    | `/blog/:slug`                | Single post                      |
 | GET    | `/robots.txt`, `/sitemap.xml`| SEO endpoints (sitemap is dynamic) |
@@ -104,9 +103,6 @@ defaults below.
 | `DB_PATH`                      | `data/nextus.db`     | SQLite file location           |
 | `ADMIN_USER` / `ADMIN_PASSWORD`| `admin` / `nextus`   | **Change before deploying**    |
 | `SESSION_SECRET`               | dev fallback         | Signs the admin session cookie; set a long random value in production (`openssl rand -hex 32`) |
-| `GMAIL_USER`                   | *(empty)*            | Gmail address that sends the lead emails |
-| `GMAIL_APP_PASSWORD`           | *(empty)*            | [App Password](https://myaccount.google.com/apppasswords) for that account (requires 2-Step Verification) |
-| `LEAD_TO_EMAIL`                | `magdykishk314@gmail.com` | Recipient for lead emails |
 | `GA_MEASUREMENT_ID`            | *(empty)*            | GA4 Measurement ID (`G-…`) — enables Google Analytics |
 | `GSC_VERIFICATION`             | *(empty)*            | Google Search Console meta-tag verification token (optional; DNS also works) |
 
@@ -123,16 +119,14 @@ still runs `src/server.ts` locally.)
 
 1. Import the repo in Vercel (or run `vercel --prod`) - no framework preset
    needed; `vercel.json` configures the build.
-2. Set project **Environment Variables**: `ADMIN_USER`, `ADMIN_PASSWORD`,
-   `SESSION_SECRET`, and `GMAIL_USER` + `GMAIL_APP_PASSWORD` (see the table
-   above).
+2. Set project **Environment Variables**: `ADMIN_USER`, `ADMIN_PASSWORD`, and
+   `SESSION_SECRET` (see the table above).
 
 > **⚠️ Storage is ephemeral on serverless.** Vercel's filesystem is read-only
 > except `/tmp`, so the SQLite database (blog posts) lives at `/tmp/nextus.db`
 > and uploads at `/tmp/uploads`. **Admin-authored blog posts and uploaded images
 > do not persist** across cold starts or between instances (the sample posts are
-> re-seeded on each cold start). Lead-form submissions are emailed over Gmail
-> SMTP, not stored, so they're unaffected - as are the static marketing pages.
+> re-seeded on each cold start). The static marketing pages are unaffected.
 > For a durable blog, point `DB_PATH` at a hosted SQLite/libSQL such as
 > [Turso](https://turso.tech).
 
@@ -151,11 +145,8 @@ Server-rendered, so all metadata is in the initial HTML:
 > **Before launch:** set your real domain in `src/site.ts` (`url`), change the
 > admin credentials, and put the app behind HTTPS.
 
-## Notes on the lead form
+## Booking
 
-The form works with **and** without JavaScript. With JS it submits via `fetch`
-and swaps in a success state; without JS it posts normally and redirects
-(Post/Redirect/Get). Submissions are **not** stored - each one is emailed to
-`LEAD_TO_EMAIL` over Gmail SMTP (set `GMAIL_USER` + `GMAIL_APP_PASSWORD`); if
-those aren't set the submission is just logged server-side. Customize delivery
-in `src/controllers/leadController.ts`.
+The home page's call-to-action embeds a [Calendly](https://calendly.com) inline
+widget (`views/home.ejs`, the `#get-leads` section) so visitors book a call
+directly. Point the widget's `data-url` at your own Calendly scheduling link.
