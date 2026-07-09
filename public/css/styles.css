@@ -876,6 +876,15 @@ html.nx-lock {
   font-size: 0.925rem;
   color: var(--slate-600);
 }
+.steps__cta {
+  margin-top: 44px;
+  text-align: center;
+}
+.steps__cta .link-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
 @media (min-width: 760px) {
   .steps {
     grid-template-columns: repeat(3, 1fr);

@@ -7,9 +7,9 @@ import { servicesSchema, breadcrumbSchema } from "../seo/jsonld.js";
 export function showServices(_req: Request, res: Response) {
   res.render("services", {
     meta: meta({
-      title: pageTitle("Services"),
+      title: pageTitle("Seller, Listing & Contractor Leads"),
       description:
-        "Exclusive, human-confirmed leads for wholesalers, listing agents, and home-service contractors - roofing, HVAC and more. Cold-called, verified, and never resold.",
+        "Exclusive, high-quality real estate leads for agents and investors: motivated seller leads, listing leads, and contractor leads, each cold-called and confirmed by our team before delivery.",
       canonicalPath: "/services",
       jsonLd: [
         servicesSchema(),

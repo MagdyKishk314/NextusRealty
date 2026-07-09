@@ -18,7 +18,7 @@ export function showBlogIndex(req: Request, res: Response) {
 
   res.render("blog/index", {
     meta: meta({
-      title: pageTitle(currentCategory ? `Blog: ${currentCategory}` : "Blog"),
+      title: pageTitle(currentCategory ? `${currentCategory} | Real Estate Lead Blog` : "Real Estate Lead Generation Blog"),
       description:
         "Notes on exclusive, human-confirmed real estate leads: how we source, verify, and deliver them.",
       canonicalPath: "/blog",

@@ -21,8 +21,8 @@ export type Service = {
 };
 
 export const servicesIntro = {
-  eyebrow: "What we do",
-  title: "Three markets. One standard.",
+  eyebrow: "Real estate lead generation",
+  title: "High-Quality Real Estate Leads, Built for How You Close",
   subhead:
     "Wholesalers, listing agents, and home-service contractors run different plays, but they all lose the same way: on prospects no one confirmed. Whatever you close, every opportunity we send is cold-called, confirmed by a real person, and handed to you alone.",
 };
@@ -32,7 +32,7 @@ export const services: Service[] = [
     id: "wholesaling",
     kicker: "For wholesalers & investors",
     icon: "target",
-    title: "Wholesale Deals",
+    title: "Motivated Seller Leads",
     tagline: "Motivated sellers with a real reason to move.",
     body:
       "We work the phones for distressed and off-market situations: owners who need to sell, not the ones idly testing the market. Every seller is spoken to and qualified for motivation, property condition, and timeline before it reaches you, so your acquisitions time goes to contracts, not dead numbers.",
@@ -45,13 +45,13 @@ export const services: Service[] = [
     examples: ["Probate", "Pre-foreclosure", "Tired landlords", "Vacant / inherited", "Relocation"],
     image: "/img/service-wholesale.jpg",
     imageAlt: "House keys and signed paperwork on a desk, a closed off-market deal",
-    ctaLabel: "Request wholesale deals",
+    ctaLabel: "Request seller leads",
   },
   {
     id: "listing",
     kicker: "For listing agents",
     icon: "home",
-    title: "Listing Properties",
+    title: "Listing Leads for Realtors",
     tagline: "Homeowners ready to list, matched to your market.",
     body:
       "Sellers for agents who would rather take listings than chase them. We target by area and property profile, then confirm the homeowner is genuinely planning to sell on a timeline worth your time, so you walk into listing appointments, not tire-kicking.",
@@ -64,13 +64,13 @@ export const services: Service[] = [
     examples: ["Relocation", "Downsizing", "Expired listings", "FSBO", "Equity-rich"],
     image: "/img/service-listing.jpg",
     imageAlt: "A For Sale sign in the front yard of a suburban home",
-    ctaLabel: "Request seller listings",
+    ctaLabel: "Request listing leads",
   },
   {
     id: "contractor",
     kicker: "For home-service contractors",
     icon: "wrench",
-    title: "Contractor Deals",
+    title: "Contractor Leads",
     tagline: "Homeowners with a project and the intent to book it.",
     body:
       "Roofing, HVAC, solar, and the trades that live or die by their pipeline. We reach homeowners who actually have the job (a leaking roof, a dead AC, a quote to get), confirm the need and the property, and route it to one contractor, so you are not racing three other trucks to the driveway.",
@@ -83,7 +83,7 @@ export const services: Service[] = [
     examples: ["Roofing", "HVAC", "Solar", "Storm damage", "Remodel"],
     image: "/img/service-contractor.jpg",
     imageAlt: "A contractor installing shingles on a residential roof",
-    ctaLabel: "Request contractor deals",
+    ctaLabel: "Request contractor leads",
   },
 ];
 

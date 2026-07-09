@@ -7,7 +7,7 @@ import { faqSchema, breadcrumbSchema } from "../seo/jsonld.js";
 export function showFaq(_req: Request, res: Response) {
   res.render("faq", {
     meta: meta({
-      title: pageTitle("FAQ"),
+      title: pageTitle("Real Estate Leads FAQ"),
       description:
         "Answers to common questions about Nextus Realty's exclusive, human-confirmed real estate leads.",
       canonicalPath: "/faq",
