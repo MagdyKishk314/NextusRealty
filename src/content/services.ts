@@ -18,6 +18,7 @@ export type Service = {
   image: string; // /img path to the describing photo
   imageAlt: string;
   ctaLabel: string;
+  learnMore?: { href: string; label: string }; // optional link to a dedicated landing page
 };
 
 export const servicesIntro = {
@@ -46,6 +47,7 @@ export const services: Service[] = [
     image: "/img/service-wholesale.jpg",
     imageAlt: "House keys and signed paperwork on a desk, a closed off-market deal",
     ctaLabel: "Request seller leads",
+    learnMore: { href: "/seller-leads", label: "More on motivated seller leads" },
   },
   {
     id: "listing",
@@ -65,6 +67,7 @@ export const services: Service[] = [
     image: "/img/service-listing.jpg",
     imageAlt: "A For Sale sign in the front yard of a suburban home",
     ctaLabel: "Request listing leads",
+    learnMore: { href: "/listing-leads", label: "More on listing leads" },
   },
   {
     id: "contractor",

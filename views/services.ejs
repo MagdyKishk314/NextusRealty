@@ -49,9 +49,14 @@
                     <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span><%= inc %></li>
                   <% }); %>
                 </ul>
-                <a class="link-gold service__cta" href="/#get-leads">
-                  <%= s.ctaLabel %> <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
-                </a>
+                <div class="service__actions">
+                  <a class="link-gold service__cta" href="/#get-leads">
+                    <%= s.ctaLabel %> <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
+                  </a>
+                  <% if (s.learnMore) { %>
+                    <a class="link-muted service__learn" href="<%= s.learnMore.href %>"><%= s.learnMore.label %></a>
+                  <% } %>
+                </div>
               </div>
             </article>
           <% }); %>

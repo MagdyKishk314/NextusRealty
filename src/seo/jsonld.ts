@@ -85,15 +85,42 @@ export function breadcrumbSchema(trail: Array<{ name: string; path: string }>) {
   };
 }
 
-export function faqSchema() {
+/** FAQPage schema from any list of question/answer pairs. */
+export function faqPageSchema(items: Array<{ q: string; a: string }>) {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
+    mainEntity: items.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
+  };
+}
+
+export function faqSchema() {
+  return faqPageSchema(faqs);
+}
+
+/** Service schema for a single-vertical landing page (SEO Phase 3). */
+export function landingServiceSchema(l: {
+  slug: string;
+  serviceName: string;
+  serviceType: string;
+  serviceDescription: string;
+  audienceType: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: l.serviceName,
+    serviceType: l.serviceType,
+    description: l.serviceDescription,
+    url: absoluteUrl(`/${l.slug}`),
+    provider: { "@id": ORG_ID },
+    areaServed: { "@type": "Country", name: "United States" },
+    audience: { "@type": "Audience", audienceType: l.audienceType },
+    offers: { "@type": "Offer", category: "Exclusive, verified real estate leads" },
   };
 }
 

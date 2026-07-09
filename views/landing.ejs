@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/header') %>
+
+  <main class="page landing">
+    <!-- Hero: the keyword claim -->
+    <section class="landing-hero section--decor">
+      <div class="section-decor" aria-hidden="true">
+        <span class="deco-orb deco--lg deco--tr"></span>
+        <span class="deco-dots deco--dot-bl"></span>
+      </div>
+      <div class="container landing-hero__grid">
+        <div class="landing-hero__copy" data-reveal="left">
+          <p class="eyebrow"><span class="dot"></span><%= landing.hero.eyebrow %></p>
+          <h1 class="landing-hero__title"><%= landing.hero.h1 %></h1>
+          <p class="landing-hero__lead"><%= landing.hero.lead %></p>
+          <div class="landing-hero__cta">
+            <a class="btn btn--gold btn--lg" href="/#get-leads">
+              <%= landing.hero.ctaLabel %> <%- include('partials/icon', { name: 'arrow', cls: 'icon' }) %>
+            </a>
+          </div>
+          <ul class="landing-hero__trust">
+            <% landing.hero.trustPoints.forEach(function (tp) { %>
+              <li><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs accent-fg' }) %><%= tp %></li>
+            <% }); %>
+          </ul>
+        </div>
+
+        <figure class="landing-hero__media" data-reveal="right">
+          <picture>
+            <source srcset="<%= landing.hero.image.replace('.jpg', '.webp') %>" type="image/webp" />
+            <img src="<%= landing.hero.image %>" alt="<%= landing.hero.imageAlt %>" loading="eager" />
+          </picture>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Intro + benefits -->
+    <section class="section section--muted section--decor">
+      <div class="section-decor" aria-hidden="true">
+        <span class="deco-orb deco--tl"></span>
+        <span class="deco-ring deco--br"></span>
+      </div>
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <h2 class="section-title"><%= landing.intro.title %></h2>
+          <% landing.intro.paragraphs.forEach(function (p) { %>
+            <p class="section-subhead"><%= p %></p>
+          <% }); %>
+        </div>
+        <div class="lcards">
+          <% landing.benefits.forEach(function (b) { %>
+            <div class="lcard" data-reveal>
+              <div class="lcard__icon"><%- include('partials/icon', { name: b.icon, cls: 'icon icon--sm' }) %></div>
+              <h3 class="lcard__title"><%= b.title %></h3>
+              <p class="lcard__body"><%= b.body %></p>
+            </div>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's included + how it works -->
+    <section class="section section--decor">
+      <div class="section-decor" aria-hidden="true">
+        <span class="deco-dots deco--dot-tr"></span>
+        <span class="deco-orb deco--sm deco--bl"></span>
+      </div>
+      <div class="container landing-split">
+        <div class="landing-includes" data-reveal="left">
+          <h2 class="section-title"><%= landing.includes.title %></h2>
+          <ul class="checklist landing-includes__list">
+            <% landing.includes.items.forEach(function (it) { %>
+              <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span><%= it %></li>
+            <% }); %>
+          </ul>
+          <div class="landing-audience">
+            <p class="landing-audience__lead"><strong><%= landing.audience.title %>.</strong> <%= landing.audience.blurb %></p>
+            <ul class="tag-row">
+              <% landing.audience.tags.forEach(function (t) { %>
+                <li class="tag"><%= t %></li>
+              <% }); %>
+            </ul>
+          </div>
+        </div>
+
+        <div class="landing-steps" data-reveal="right">
+          <p class="eyebrow">How it works</p>
+          <ol class="lsteps">
+            <% landing.steps.forEach(function (st) { %>
+              <li class="lstep">
+                <span class="lstep__num"><%= st.step %></span>
+                <div class="lstep__text">
+                  <h3 class="lstep__title"><%= st.title %></h3>
+                  <p class="lstep__body"><%= st.body %></p>
+                </div>
+              </li>
+            <% }); %>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--muted section--decor">
+      <div class="section-decor" aria-hidden="true">
+        <span class="deco-orb deco--tr"></span>
+        <span class="deco-ring deco--bl"></span>
+      </div>
+      <div class="container faq">
+        <div class="faq__intro" data-reveal>
+          <p class="eyebrow">Questions</p>
+          <h2 class="section-title">Common questions about <%= landing.breadcrumbName.toLowerCase() %></h2>
+        </div>
+        <div class="faq__list">
+          <% landing.faqs.forEach(function (faq, i) { %>
+            <div class="faq__item<%= i === 0 ? ' is-open' : '' %>" data-faq-item data-reveal>
+              <button type="button" class="faq__q" data-faq-toggle aria-expanded="<%= i === 0 ? 'true' : 'false' %>">
+                <span><%= faq.q %></span>
+                <span class="faq__toggle"><span class="faq__plus"><%- include('partials/icon', { name: 'plus', cls: 'icon icon--sm' }) %></span><span class="faq__minus"><%- include('partials/icon', { name: 'minus', cls: 'icon icon--sm' }) %></span></span>
+              </button>
+              <div class="faq__a"><p><%= faq.a %></p></div>
+            </div>
+          <% }); %>
+        </div>
+        <p class="landing-related" data-reveal>
+          <span class="landing-related__label">Explore more:</span>
+          <% landing.related.forEach(function (r, i) { %>
+            <a class="link-gold" href="<%= r.href %>"><%= r.label %></a><% if (i < landing.related.length - 1) { %><span class="landing-related__sep">·</span><% } %>
+          <% }); %>
+        </p>
+      </div>
+    </section>
+
+    <!-- Closing CTA -->
+    <section class="section section--dark">
+      <div class="container services-cta" data-reveal>
+        <p class="eyebrow eyebrow--center"><span class="dot"></span><%= landing.cta.eyebrow %></p>
+        <h2 class="section-title section-title--light"><%= landing.cta.title %></h2>
+        <p class="section-subhead section-subhead--light"><%= landing.cta.subhead %></p>
+        <a class="btn btn--gold btn--lg" href="/#get-leads">
+          <%= landing.cta.ctaLabel %> <%- include('partials/icon', { name: 'arrow', cls: 'icon' }) %>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+  <script src="/js/bundle.js" defer></script>
+</body>
+</html>
