@@ -333,10 +333,16 @@ section {
 }
 .nav__item {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .nav__top {
   display: inline-flex;
   align-items: center;
+  /* Explicit line-height so the <button> trigger and the <a> links share the
+     same box height and their text lines up (buttons default to a different
+     line-height than the inherited 1.6). */
+  line-height: 1;
   padding: 20px 12px;
   font-size: 0.9rem;
   font-weight: 500;
