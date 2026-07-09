@@ -85,7 +85,11 @@
     </section>
 
     <!-- How it works: the method -->
-    <section id="how-it-works" class="section">
+    <section id="how-it-works" class="section section--decor">
+      <div class="section-decor" aria-hidden="true">
+        <span class="deco-dots deco--dot-tr"></span>
+        <span class="deco-orb deco--bl"></span>
+      </div>
       <div class="container">
         <div class="section-head" data-reveal>
           <p class="eyebrow eyebrow--center">How it works</p>
@@ -108,7 +112,11 @@
     </section>
 
     <!-- The confirmation call: motivation + human verification -->
-    <section id="confirmation" class="section section--muted">
+    <section id="confirmation" class="section section--muted section--decor">
+      <div class="section-decor" aria-hidden="true">
+        <span class="deco-orb deco--lg deco--tr"></span>
+        <span class="deco-ring deco--bl"></span>
+      </div>
       <div class="container confirm__grid">
         <div class="confirm__pitch">
           <p class="eyebrow" data-reveal="left"><%= home.confirmation.eyebrow %></p>
@@ -140,7 +148,11 @@
     </section>
 
     <!-- About the team: the authority behind the standard -->
-    <section id="about" class="section">
+    <section id="about" class="section section--decor">
+      <div class="section-decor" aria-hidden="true">
+        <span class="deco-ring deco--lg deco--tl"></span>
+        <span class="deco-dots deco--dot-br"></span>
+      </div>
       <div class="container founder">
         <div class="founder__media" data-reveal="left">
           <figure class="founder__photo">
@@ -175,7 +187,11 @@
     </section>
 
     <!-- Comparison: the evidence -->
-    <section id="comparison" class="section section--muted">
+    <section id="comparison" class="section section--muted section--decor">
+      <div class="section-decor" aria-hidden="true">
+        <span class="deco-orb deco--tl"></span>
+        <span class="deco-ring deco--br"></span>
+      </div>
       <div class="container">
         <div class="section-head" data-reveal>
           <p class="eyebrow eyebrow--center"><%= home.comparison.eyebrow %></p>
@@ -212,7 +228,11 @@
     </section>
 
     <!-- FAQ: objection handling before the ask -->
-    <section id="faq" class="section">
+    <section id="faq" class="section section--decor">
+      <div class="section-decor" aria-hidden="true">
+        <span class="deco-dots deco--dot-tr"></span>
+        <span class="deco-orb deco--sm deco--bl"></span>
+      </div>
       <div class="container faq">
         <div class="faq__intro" data-reveal>
           <p class="eyebrow">Questions</p>
@@ -240,7 +260,11 @@
 
     <!-- Latest from the blog -->
     <% if (typeof posts !== 'undefined' && posts && posts.length) { %>
-    <section id="blog-latest" class="section section--muted">
+    <section id="blog-latest" class="section section--muted section--decor">
+      <div class="section-decor" aria-hidden="true">
+        <span class="deco-ring deco--tr"></span>
+        <span class="deco-orb deco--sm deco--bl"></span>
+      </div>
       <div class="container">
         <div class="blog-head" data-reveal>
           <div>

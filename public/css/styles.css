@@ -2497,3 +2497,142 @@ html.nx-lock {
   backdrop-filter: blur(6px);
   border-top: 1px solid var(--slate-200);
 }
+
+/* ============================================================
+   Decorative graphics - light sections
+   Pure CSS (no image assets): soft gold glows, thin rings, and
+   dot grids that warm the empty space on the white / champagne
+   sections. Kept low-opacity and behind the content, and tuned
+   to read well on both --white and the champagne --muted tint.
+   ============================================================ */
+.section--decor {
+  position: relative;
+}
+.section--decor > .container {
+  position: relative;
+  z-index: 1;
+}
+/* The clip layer: contains every shape so nothing bleeds past the
+   section (and never clips real content like tooltips - those live
+   outside this element). */
+.section-decor {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.section-decor > * {
+  position: absolute;
+}
+
+/* Soft gold glow */
+.deco-orb {
+  width: 30rem;
+  height: 30rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(233, 196, 106, 0.2),
+    rgba(233, 196, 106, 0) 68%
+  );
+  animation: deco-float 16s ease-in-out infinite;
+}
+/* Thin outlined ring */
+.deco-ring {
+  width: 24rem;
+  height: 24rem;
+  border-radius: 50%;
+  border: 1.5px solid rgba(201, 162, 39, 0.16);
+}
+.deco-ring::after {
+  content: "";
+  position: absolute;
+  inset: 2.4rem;
+  border-radius: 50%;
+  border: 1.5px solid rgba(201, 162, 39, 0.1);
+}
+/* Dot grid patch */
+.deco-dots {
+  width: 11rem;
+  height: 11rem;
+  background-image: radial-gradient(
+    rgba(201, 162, 39, 0.28) 1.4px,
+    transparent 1.6px
+  );
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(circle at center, #000 40%, transparent 78%);
+  mask-image: radial-gradient(circle at center, #000 40%, transparent 78%);
+}
+
+/* Size variants */
+.deco--lg {
+  width: 40rem;
+  height: 40rem;
+}
+.deco--sm {
+  width: 20rem;
+  height: 20rem;
+}
+
+/* Corner placement - shapes bleed off the edge. */
+.deco--tl {
+  top: -7rem;
+  left: -7rem;
+}
+.deco--tr {
+  top: -7rem;
+  right: -7rem;
+}
+.deco--bl {
+  bottom: -7rem;
+  left: -7rem;
+}
+.deco--br {
+  bottom: -7rem;
+  right: -7rem;
+}
+/* Inset placement - kept fully on-screen (used for dot grids). */
+.deco--dot-tr {
+  top: 3rem;
+  right: 3rem;
+}
+.deco--dot-tl {
+  top: 3rem;
+  left: 3rem;
+}
+.deco--dot-br {
+  bottom: 3rem;
+  right: 3rem;
+}
+.deco--dot-bl {
+  bottom: 3rem;
+  left: 3rem;
+}
+
+@keyframes deco-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -1.6rem, 0);
+  }
+}
+
+@media (max-width: 720px) {
+  /* Trim the pattern on small screens so it stays a whisper, not clutter. */
+  .deco-dots {
+    display: none;
+  }
+  .deco-orb,
+  .deco-ring {
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deco-orb {
+    animation: none;
+  }
+}
