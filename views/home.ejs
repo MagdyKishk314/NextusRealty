@@ -124,12 +124,9 @@
                     <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span><%= inc %></li>
                   <% }); %>
                 </ul>
-                <div class="service__actions">
-                  <a class="link-gold service__cta" href="<%= s.learnMore ? s.learnMore.href : '/#get-leads' %>">
-                    Explore <%= s.title %> <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
-                  </a>
-                  <a class="link-muted service__learn" href="/#get-leads">Request a sample</a>
-                </div>
+                <a class="link-gold service__cta" href="<%= s.learnMore ? s.learnMore.href : '/#get-leads' %>">
+                  Explore <%= s.title %> <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
+                </a>
               </div>
             </article>
           <% }); %>
