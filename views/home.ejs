@@ -84,6 +84,59 @@
       </div>
     </section>
 
+    <!-- Lead types: what you can get (moved from the old Services page) -->
+    <section id="lead-types" class="section section--muted section--decor">
+      <div class="section-decor" aria-hidden="true">
+        <span class="deco-orb deco--lg deco--tr"></span>
+        <span class="deco-dots deco--dot-bl"></span>
+      </div>
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow eyebrow--center"><span class="dot"></span><%= servicesIntro.eyebrow %></p>
+          <h2 class="section-title"><%= servicesIntro.title %></h2>
+          <p class="section-subhead"><%= servicesIntro.subhead %></p>
+        </div>
+        <div class="services">
+          <% services.forEach(function (s, i) { %>
+            <article class="service<%= i % 2 ? ' service--flip' : '' %>" id="<%= s.id %>">
+              <figure class="service__media" data-reveal="<%= i % 2 ? 'right' : 'left' %>">
+                <picture>
+                  <source srcset="<%= s.image.replace('.jpg', '.webp') %>" type="image/webp" />
+                  <img class="service__img" src="<%= s.image %>" alt="<%= s.imageAlt %>" loading="lazy" />
+                </picture>
+                <div class="service__overlay">
+                  <span class="service__overlay-label">Typical</span>
+                  <ul class="service__tags">
+                    <% s.examples.forEach(function (ex) { %>
+                      <li class="service__tag"><%= ex %></li>
+                    <% }); %>
+                  </ul>
+                </div>
+              </figure>
+
+              <div class="service__content" data-reveal="<%= i % 2 ? 'left' : 'right' %>">
+                <p class="eyebrow"><%= s.kicker %></p>
+                <h3 class="service__title"><%= s.title %></h3>
+                <p class="service__tagline"><%= s.tagline %></p>
+                <p class="service__body"><%= s.body %></p>
+                <ul class="checklist service__list">
+                  <% s.includes.forEach(function (inc) { %>
+                    <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span><%= inc %></li>
+                  <% }); %>
+                </ul>
+                <div class="service__actions">
+                  <a class="link-gold service__cta" href="<%= s.learnMore ? s.learnMore.href : '/#get-leads' %>">
+                    Explore <%= s.title %> <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
+                  </a>
+                  <a class="link-muted service__learn" href="/#get-leads">Request a sample</a>
+                </div>
+              </div>
+            </article>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+
     <!-- How it works: the method -->
     <section id="how-it-works" class="section section--decor">
       <div class="section-decor" aria-hidden="true">
@@ -106,7 +159,7 @@
           <% }); %>
         </div>
         <p class="steps__cta" data-reveal>
-          <a class="link-gold" href="/services">Explore our real estate lead types <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %></a>
+          <a class="link-gold" href="/#get-leads">Book a call and get your first leads <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %></a>
         </p>
       </div>
     </section>

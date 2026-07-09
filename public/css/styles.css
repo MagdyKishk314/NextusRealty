@@ -2887,3 +2887,12 @@ html.nx-lock {
 .link-muted:hover {
   color: var(--gold-600);
 }
+
+/* Dropdown trigger in the primary nav: a button styled as a nav link (the
+   "Industries" menu opens on hover/focus via the .nav__menu rules above). */
+.nav__trigger {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+}

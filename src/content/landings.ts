@@ -166,7 +166,7 @@ const sellerLeads: Landing = {
 
   related: [
     { label: "Listing leads for realtors", href: "/listing-leads" },
-    { label: "See all lead types", href: "/services" },
+    { label: "Contractor leads", href: "/contractor-leads" },
   ],
 
   cta: {
@@ -308,7 +308,7 @@ const listingLeads: Landing = {
 
   related: [
     { label: "Motivated seller leads", href: "/seller-leads" },
-    { label: "See all lead types", href: "/services" },
+    { label: "Contractor leads", href: "/contractor-leads" },
   ],
 
   cta: {
@@ -326,8 +326,150 @@ const listingLeads: Landing = {
   audienceType: "Real estate agents",
 };
 
+const contractorLeads: Landing = {
+  slug: "contractor-leads",
+  breadcrumbName: "Contractor Leads",
+  metaTitle: "Contractor Leads for Roofing, HVAC & Home Services",
+  metaDescription:
+    "Exclusive contractor leads for roofing, HVAC, solar, and the trades. Every homeowner is called and confirmed to have a real project, then routed to one contractor. Never shared.",
+
+  hero: {
+    eyebrow: "Contractor leads",
+    h1: "Contractor Leads With a Real Project, Confirmed",
+    lead:
+      "Stop racing three other trucks to the same driveway. Every contractor lead is a homeowner we've confirmed has an actual job to book, matched to your trade and service area, and delivered to you alone.",
+    ctaLabel: "Request contractor leads",
+    image: "/img/service-contractor.jpg",
+    imageAlt: "A contractor installing shingles on a residential roof",
+    trustPoints: ["Confirmed project", "One contractor per lead", "Verified homeowner"],
+  },
+
+  intro: {
+    title: "Contractor leads built for trades that live on their pipeline",
+    paragraphs: [
+      "Shared lead platforms sell the same homeowner to four contractors and let you fight it out on price. You burn hours quoting jobs that were never really yours, against trucks that were called at the same time.",
+      "We qualify first. Before a contractor lead reaches you, our team has confirmed the homeowner has a real project, captured the need and urgency, and checked it fits your trade and service area. The job is routed to one contractor: you.",
+    ],
+  },
+
+  benefits: [
+    {
+      icon: "target",
+      title: "Confirmed project",
+      body:
+        "Every homeowner has an actual job on the table, a leaking roof, a dead AC, a quote to get, not renters or browsers pricing a someday project.",
+    },
+    {
+      icon: "wrench",
+      title: "Matched to your trade",
+      body:
+        "Leads are routed by trade and service area, so roofing goes to roofers and HVAC to HVAC, in the zip codes you actually cover.",
+    },
+    {
+      icon: "phone",
+      title: "Verified homeowner",
+      body:
+        "The homeowner and their contact details are confirmed before delivery, so your first call reaches the decision-maker.",
+    },
+    {
+      icon: "shield",
+      title: "Exclusive to you",
+      body:
+        "Each job goes to one contractor. You are never underbidding three other trucks that got the same lead.",
+    },
+  ],
+
+  includes: {
+    title: "What every contractor lead includes",
+    items: [
+      "A confirmed project, not a renter or a browser",
+      "The service need and urgency captured on the call",
+      "Matched to your trade and service area",
+      "Homeowner name and property confirmed",
+      "Direct phone verified reachable before delivery",
+      "Exclusive to you, the job is yours alone",
+    ],
+  },
+
+  steps: [
+    {
+      step: "01",
+      title: "We source",
+      body:
+        "We build outreach around homeowners with real jobs in your trades and service area: roofing, HVAC, solar, storm damage, remodels.",
+    },
+    {
+      step: "02",
+      title: "We confirm",
+      body:
+        "Our team calls each homeowner, confirms the project, and captures the need and urgency. Anything that does not qualify never reaches you.",
+    },
+    {
+      step: "03",
+      title: "You book",
+      body:
+        "The confirmed job lands with you alone, ready to quote. You spend your time on estimates that convert, not price wars.",
+    },
+  ],
+
+  audience: {
+    title: "Who these contractor leads are for",
+    blurb:
+      "If your business runs on a steady flow of booked jobs, these leads are built for you.",
+    tags: [
+      "Roofing companies",
+      "HVAC contractors",
+      "Solar installers",
+      "Storm damage & restoration",
+      "Remodelers",
+    ],
+  },
+
+  faqs: [
+    {
+      q: "What is a contractor lead?",
+      a: "A homeowner our team has spoken to and confirmed has a real project in your trade, such as a roof replacement, an HVAC install, or a solar quote. We capture the need and urgency, and verify the homeowner before the lead reaches you.",
+    },
+    {
+      q: "Are the contractor leads exclusive?",
+      a: "Yes. Every contractor lead is routed to one contractor only. We never sell the same job to multiple trucks.",
+    },
+    {
+      q: "Can I choose my trade and service area?",
+      a: "Yes. We match leads to your trade and the zip codes you cover, so you only get jobs you can actually run.",
+    },
+    {
+      q: "How are the homeowners qualified?",
+      a: "A real person calls each homeowner, confirms the project and urgency, and checks the direct phone is reachable before delivery. Leads that do not qualify never reach you.",
+    },
+    {
+      q: "How do I start getting contractor leads?",
+      a: "Book a short call and tell us your trade and service area. We put together a confirmed sample for your exact market, with no contract and no obligation.",
+    },
+  ],
+
+  related: [
+    { label: "Motivated seller leads", href: "/seller-leads" },
+    { label: "Listing leads for realtors", href: "/listing-leads" },
+  ],
+
+  cta: {
+    eyebrow: "Get started",
+    title: "Ready for jobs that are yours alone?",
+    subhead:
+      "Tell us your trade and service area. We'll put together a confirmed sample of contractor leads, ready to quote. No contract, no obligation.",
+    ctaLabel: "Request contractor leads",
+  },
+
+  serviceName: "Contractor Lead Generation",
+  serviceType: "Home services lead generation",
+  serviceDescription:
+    "Exclusive contractor leads for roofing, HVAC, solar, and the trades: homeowners confirmed to have a real project, matched to the contractor's trade and routed to one contractor only.",
+  audienceType: "Home-service contractors",
+};
+
 /** All landing pages, in nav/sitemap order. */
-export const landings: Landing[] = [sellerLeads, listingLeads];
+export const landings: Landing[] = [sellerLeads, listingLeads, contractorLeads];
 
 /** Look up a landing page by its slug. */
 export function getLanding(slug: string): Landing | undefined {

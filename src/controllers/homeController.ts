@@ -1,10 +1,11 @@
 import type { Request, Response } from "express";
 import * as home from "../content/home.js";
 import { faqs } from "../content/faqs.js";
+import { servicesIntro, services } from "../content/services.js";
 import { listPublishedPosts } from "../models/postModel.js";
 import { meta } from "../seo/meta.js";
 import { siteConfig } from "../site.js";
-import { serviceSchema, faqSchema } from "../seo/jsonld.js";
+import { serviceSchema, servicesSchema, faqSchema } from "../seo/jsonld.js";
 import { formatDate } from "../utils.js";
 
 export function showHome(_req: Request, res: Response) {
@@ -13,11 +14,13 @@ export function showHome(_req: Request, res: Response) {
       title: siteConfig.title,
       description: siteConfig.description,
       canonicalPath: "/",
-      jsonLd: [serviceSchema(), faqSchema()],
+      jsonLd: [serviceSchema(), servicesSchema(), faqSchema()],
       preloadImage: "/img/hero.webp",
     }),
     home,
     faqs,
+    servicesIntro,
+    services,
     posts: listPublishedPosts().slice(0, 4), // 4 most recent for the home slider
     formatDate,
   });

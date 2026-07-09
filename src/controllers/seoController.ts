@@ -21,9 +21,9 @@ export function sitemap(_req: Request, res: Response) {
   const staticLastmod = "2026-07-09";
   const urls: { loc: string; lastmod?: string; priority: string }[] = [
     { loc: absoluteUrl("/"), lastmod: staticLastmod, priority: "1.0" },
-    { loc: absoluteUrl("/services"), lastmod: staticLastmod, priority: "0.8" },
-    { loc: absoluteUrl("/seller-leads"), lastmod: staticLastmod, priority: "0.8" },
-    { loc: absoluteUrl("/listing-leads"), lastmod: staticLastmod, priority: "0.8" },
+    { loc: absoluteUrl("/seller-leads"), lastmod: staticLastmod, priority: "0.9" },
+    { loc: absoluteUrl("/listing-leads"), lastmod: staticLastmod, priority: "0.9" },
+    { loc: absoluteUrl("/contractor-leads"), lastmod: staticLastmod, priority: "0.9" },
     { loc: absoluteUrl("/faq"), lastmod: staticLastmod, priority: "0.7" },
     { loc: absoluteUrl("/blog"), lastmod: staticLastmod, priority: "0.7" },
     { loc: absoluteUrl("/privacy"), lastmod: staticLastmod, priority: "0.3" },

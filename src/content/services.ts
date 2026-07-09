@@ -87,14 +87,7 @@ export const services: Service[] = [
     image: "/img/service-contractor.jpg",
     imageAlt: "A contractor installing shingles on a residential roof",
     ctaLabel: "Request contractor leads",
+    learnMore: { href: "/contractor-leads", label: "More on contractor leads" },
   },
 ];
 
-export const servicesOutro = {
-  eyebrow: "Get started",
-  title: "Not sure which fits your business?",
-  subhead:
-    "Tell us what you sell and where. We'll put together a sample for your exact vertical, confirmed and ready to work. No contract, no obligation.",
-  ctaLabel: "Request a sample",
-  ctaHref: "/#get-leads",
-};
