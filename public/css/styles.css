@@ -1290,8 +1290,8 @@ html.nx-lock {
 }
 @media (min-width: 940px) {
   .founder {
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 64px;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 56px;
     align-items: center;
   }
 }
@@ -3014,7 +3014,7 @@ html.nx-lock {
    Overrides the old framed-photo .founder__media.
    ============================================================ */
 .founder__media {
-  max-width: 440px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 0;
   background: none;
@@ -3024,7 +3024,7 @@ html.nx-lock {
 .founder__orbit {
   position: relative;
   width: 100%;
-  max-width: 440px;
+  max-width: 500px;
   margin: 0 auto;
   aspect-ratio: 1 / 1;
 }
@@ -3047,11 +3047,11 @@ html.nx-lock {
 /* Center: the founder, pinned to the middle of the orbit. */
 .founder__center-photo {
   position: absolute;
-  top: 44%;
+  top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
-  width: 44%;
+  width: 47%;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;
@@ -3112,17 +3112,21 @@ html.nx-lock {
   white-space: nowrap;
 }
 .orbit-node--1 {
-  top: 0;
+  top: -4%;
   left: 50%;
   transform: translateX(-50%);
 }
+/* Top peer: name above the photo so it doesn't tuck behind the center. */
+.orbit-node--1 .orbit-node__inner {
+  flex-direction: column-reverse;
+}
 .orbit-node--2 {
-  bottom: 2%;
-  left: 0;
+  bottom: 4%;
+  left: -3%;
 }
 .orbit-node--3 {
-  bottom: 2%;
-  right: 0;
+  bottom: 4%;
+  right: -3%;
 }
 
 @keyframes founder-float-1 {
