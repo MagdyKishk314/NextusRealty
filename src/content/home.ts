@@ -153,9 +153,9 @@ export const team = {
 
 export const founder = {
   eyebrow: "About the founder",
-  title: 'Built by a real <span class="accent">lead generation</span> specialist',
+  title: 'Built by a real <span class="accent">lead generation</span> expert',
   paragraphs: [
-    "Nextus was built by Vladimir Selantev, a lead generation specialist who has spent years generating deals for some of the biggest names in real estate, including Pace Morby, Jamil Damji, and Grant Cardone.",
+    "Nextus was built by Vladimir Selantev, a lead generation expert who has spent years generating deals for some of the biggest names in real estate, including Pace Morby, Jamil Damji, and Grant Cardone. For Grant Cardone alone, he managed a lead generation budget of more than $6.5 million a year.",
     "Before real estate, Vladimir spent nine years in ITAD (IT asset disposition) lead generation and wrote a book on winning Fortune 1000 contracts. Different industry, same discipline: pick up the phone, confirm real intent, and never hand a client a lead no one has spoken to. You can read more about his background at nextus.ai.",
   ],
   name: "Vladimir Selantev",
@@ -169,6 +169,7 @@ export const founder = {
   ],
   moreUrl: "https://nextus.ai",
   credentials: [
+    "Managed a $6.5M+ annual lead generation budget for Grant Cardone",
     "Generated deals with Pace Morby, Jamil Damji & Grant Cardone",
     "9 years in ITAD lead generation",
     "Author, How to Successfully Hunt Fortune 1000 Contracts",
