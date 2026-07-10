@@ -3014,6 +3014,7 @@ html.nx-lock {
    Overrides the old framed-photo .founder__media.
    ============================================================ */
 .founder__media {
+  width: 100%;
   max-width: 500px;
   margin: 0 auto;
   padding: 0;
@@ -3047,11 +3048,11 @@ html.nx-lock {
 /* Center: the founder, pinned to the middle of the orbit. */
 .founder__center-photo {
   position: absolute;
-  top: 45%;
+  top: 47%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
-  width: 47%;
+  width: 44%;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;
@@ -3080,28 +3081,34 @@ html.nx-lock {
   color: var(--gold-600);
 }
 
-/* Peers floating around the founder. */
+/* Peers floating around the founder. Everything is sized and placed as a
+   percentage of the orbit and each node is centered on its target point, so
+   the gaps to the center hold at any rendered size. The name label is
+   absolutely positioned so it never shifts the photo. */
 .orbit-node {
   position: absolute;
+  width: 20%;
+  transform: translate(-50%, -50%);
   z-index: 2;
 }
 .orbit-node__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  width: max-content;
+  position: relative;
   will-change: transform;
 }
 .orbit-node img {
-  width: clamp(64px, 19vw, 90px);
-  height: clamp(64px, 19vw, 90px);
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid var(--white);
   box-shadow: var(--shadow-md);
 }
 .orbit-node__name {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 0.72rem;
   font-weight: 600;
   color: var(--ink-800);
@@ -3111,22 +3118,14 @@ html.nx-lock {
   box-shadow: var(--shadow-sm);
   white-space: nowrap;
 }
-.orbit-node--1 {
-  top: -4%;
-  left: 50%;
-  transform: translateX(-50%);
-}
+/* Photo-center positions (percent of the orbit): a triangle around the founder. */
+.orbit-node--1 { top: 8%; left: 50%; }
+.orbit-node--2 { top: 77%; left: 16%; }
+.orbit-node--3 { top: 77%; left: 84%; }
 /* Top peer: name above the photo so it doesn't tuck behind the center. */
-.orbit-node--1 .orbit-node__inner {
-  flex-direction: column-reverse;
-}
-.orbit-node--2 {
-  bottom: 4%;
-  left: -3%;
-}
-.orbit-node--3 {
-  bottom: 4%;
-  right: -3%;
+.orbit-node--1 .orbit-node__name {
+  top: auto;
+  bottom: calc(100% + 8px);
 }
 
 @keyframes founder-float-1 {
