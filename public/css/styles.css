@@ -3007,3 +3007,140 @@ html.nx-lock {
 .founder__more {
   margin: 24px 0 0;
 }
+
+/* ============================================================
+   Founder "constellation": Vladimir centered, with the industry
+   names he has generated deals for floating slowly around him.
+   Overrides the old framed-photo .founder__media.
+   ============================================================ */
+.founder__media {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+.founder__orbit {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+}
+/* Faint orbit ring + a soft central glow. */
+.founder__orbit::before {
+  content: "";
+  position: absolute;
+  inset: 11%;
+  border-radius: 50%;
+  border: 1px dashed rgba(201, 162, 39, 0.3);
+}
+.founder__orbit::after {
+  content: "";
+  position: absolute;
+  inset: 24%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(233, 196, 106, 0.16), transparent 70%);
+}
+
+/* Center: the founder, pinned to the middle of the orbit. */
+.founder__center-photo {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 44%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--white);
+  box-shadow: 0 12px 30px rgba(13, 20, 36, 0.2), 0 0 0 1px rgba(201, 162, 39, 0.4);
+}
+/* Founder name/role sit below the whole orbit so they never crowd the peers. */
+.founder__media .founder__id {
+  margin-top: 18px;
+  text-align: center;
+}
+.founder__name {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.2rem;
+  color: var(--ink-900);
+}
+.founder__role {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--gold-600);
+}
+
+/* Peers floating around the founder. */
+.orbit-node {
+  position: absolute;
+  z-index: 2;
+}
+.orbit-node__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  width: max-content;
+  will-change: transform;
+}
+.orbit-node img {
+  width: clamp(64px, 19vw, 90px);
+  height: clamp(64px, 19vw, 90px);
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--white);
+  box-shadow: var(--shadow-md);
+}
+.orbit-node__name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-800);
+  background: var(--white);
+  padding: 3px 10px;
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+.orbit-node--1 {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.orbit-node--2 {
+  bottom: 2%;
+  left: 0;
+}
+.orbit-node--3 {
+  bottom: 2%;
+  right: 0;
+}
+
+@keyframes founder-float-1 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -15px, 0); }
+}
+@keyframes founder-float-2 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(9px, -11px, 0); }
+}
+@keyframes founder-float-3 {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-9px, -13px, 0); }
+}
+.orbit-node--1 .orbit-node__inner { animation: founder-float-1 6s ease-in-out infinite; }
+.orbit-node--2 .orbit-node__inner { animation: founder-float-2 7.6s ease-in-out infinite; }
+.orbit-node--3 .orbit-node__inner { animation: founder-float-3 6.8s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit-node__inner { animation: none !important; }
+}

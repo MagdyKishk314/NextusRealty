@@ -161,6 +161,12 @@ export const founder = {
   name: "Vladimir Selantev",
   role: "Founder, Nextus Realty",
   photo: "/img/vladimir.jpg",
+  // Industry names Vladimir has generated deals for, shown orbiting his photo.
+  peers: [
+    { name: "Grant Cardone", photo: "/img/grant-cardone.webp" },
+    { name: "Jamil Damji", photo: "/img/jamil-damji.jpg" },
+    { name: "Pace Morby", photo: "/img/pace-morby.jpg" },
+  ],
   moreUrl: "https://nextus.ai",
   credentials: [
     "Generated deals with Pace Morby, Jamil Damji & Grant Cardone",
