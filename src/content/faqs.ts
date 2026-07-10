@@ -8,11 +8,11 @@ export const faqs: Faq[] = [
   },
   {
     q: "Is each lead exclusive to me?",
-    a: "Yes. Each lead is delivered to a single agent (you) and no one else. We never resell, recycle, or syndicate a lead to other agents or brokerages. You're never competing to be the first to call.",
+    a: "Yes. Each lead is delivered to a single client (you) and no one else. We never resell, recycle, or syndicate a lead to anyone else. You're never competing to be the first to call.",
   },
   {
     q: "Do you verify every lead before delivery?",
-    a: "Yes. Every lead passes identity, contact, and intent checks before delivery. We confirm the phone and email are real and reachable, and we screen for genuine buying or selling intent and timeline. Anything that fails is filtered out before it ever reaches you.",
+    a: "Yes. Every lead passes identity, contact, and intent checks before delivery. We confirm the phone and email are real and reachable, and we screen for genuine intent, whether that's selling, listing, or a contractor project, along with a real timeline. Anything that fails is filtered out before it ever reaches you.",
   },
   {
     q: "Will you replace a lead if it turns out to be bad?",
@@ -20,10 +20,10 @@ export const faqs: Faq[] = [
   },
   {
     q: "Do I have to sign a long-term contract?",
-    a: "No. We start with a sample so you can judge the quality yourself. From there you choose your volume month to month, with no long lock-ins.",
+    a: "No. We start with a sample so you can judge the quality yourself. From there you set a target volume, say three leads a week, and pay per lead as they're delivered, with no long lock-ins.",
   },
   {
     q: "Does Nextus Realty cover my market and lead type?",
-    a: "Most likely, yes. We handle residential buyer and seller leads, luxury, commercial, and investment leads across most major markets. Tell us your city and property type and we'll confirm coverage before you commit.",
+    a: "Most likely, yes. We generate seller leads, listing leads, and contractor leads across most major markets in the US. Tell us your market and lead type and we'll confirm coverage before you commit.",
   },
 ];

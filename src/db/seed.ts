@@ -29,29 +29,29 @@ export function seedIfEmpty(): number {
 
 Exclusivity flips that dynamic. When a lead is yours alone, the first conversation is a conversation, not an interruption competing with four other calls. You can slow down, ask better questions, and actually build the relationship that leads to a signed contract.
 
-That's the whole reason we deliver every lead to a single agent and never resell it.`,
+That's the whole reason we deliver every lead to a single client and never resell it.`,
     },
     {
       title: "What our lead manager confirms before a lead ships",
       category: "Verification",
       excerpt:
-        "Every Nextus lead is called by a real person first. Here's exactly what we check before it reaches your inbox.",
+        "Every Nextus lead is called by a real person first. Here's exactly what we check before it reaches your pipeline.",
       body: `A form-fill is a guess. A confirmed lead is a fact.
 
-Before anything ships, our lead manager calls the lead directly and confirms the essentials: that the name and contact details are accurate, that the person is genuinely looking to buy or sell, and that their timeline is real.
+Before anything ships, our team calls the lead directly and confirms the essentials: that the name and contact details are accurate, that the homeowner is genuinely ready to sell, list, or book the work, and that their timeline is real. Then, a few hours later, we call again to re-confirm.
 
-We also note the little things that make your first call easier: their preferred contact time, the market they're focused on, and where they are in the process. By the time a lead reaches you, someone on our team has already spoken with them.`,
+We also note the little things that make your first call easier: their preferred contact time, the market they're focused on, and where they are in the process. By the time a lead reaches you, someone on our team has already spoken with them, twice.`,
     },
     {
       title: "Cold calling done right: how we source in your market",
       category: "Sourcing",
       excerpt:
-        "No scraped lists, no recycled databases. A look at how our team surfaces real buyers and sellers by picking up the phone.",
-      body: `Good leads don't come from buying the same tired database everyone else already has. They come from conversations.
+        "We buy the data, then put top callers on the phone. A look at how we turn a raw list into leads worth your time.",
+      body: `A raw list is just names and numbers. What turns it into a lead is the conversation, and who is having it.
 
-Our team works the phones in your market, reaching real people and listening for genuine intent. When we find someone actively looking to buy or sell, we confirm the details and match them to the agent best positioned to help.
+We buy the data, then put our best callers to work in your market, listening for genuine intent. When we find a homeowner ready to sell, list, or book the work, we confirm the details and route it to one client.
 
-It's slower than scraping a list, and that's exactly the point. Fewer, better leads mean bigger closings.`,
+It costs more than a scraped list resold ten times over, and that's exactly the point. Fewer, better leads mean bigger closings.`,
     },
   ];
 

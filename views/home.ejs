@@ -232,6 +232,53 @@
               <span><%= home.founder.book.blurb %></span>
             </p>
           </div>
+          <p class="founder__more" data-reveal>
+            <a class="link-gold" href="<%= home.founder.moreUrl %>" target="_blank" rel="noopener">Read more about Vladimir at nextus.ai <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %></a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The team: the people who source, develop, and confirm every lead -->
+    <section id="team" class="section section--dark">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow eyebrow--center"><span class="dot"></span><%= home.team.eyebrow %></p>
+          <h2 class="section-title section-title--light"><%= home.team.title %></h2>
+          <p class="section-subhead section-subhead--light"><%= home.team.subhead %></p>
+        </div>
+
+        <div class="team-grid">
+          <% home.team.groups.forEach(function (g) { %>
+            <div class="lcard team-card" data-reveal>
+              <div class="lcard__icon"><%- include('partials/icon', { name: g.icon, cls: 'icon icon--sm' }) %></div>
+              <h3 class="lcard__title"><%= g.name %></h3>
+              <p class="team-card__role"><%= g.role %></p>
+              <p class="lcard__body"><%= g.body %></p>
+            </div>
+          <% }); %>
+        </div>
+
+        <div class="callers" data-reveal>
+          <div class="callers__intro">
+            <p class="eyebrow eyebrow--center"><%= home.team.callers.eyebrow %></p>
+            <h3 class="callers__title"><%= home.team.callers.title %></h3>
+            <p class="section-subhead section-subhead--light"><%= home.team.callers.subhead %></p>
+          </div>
+          <div class="callers-compare">
+            <div class="callers-compare__row callers-compare__row--head">
+              <span class="callers-compare__label"></span>
+              <span class="callers-compare__cell callers-compare__cell--them"><%= home.team.callers.head.offshore %></span>
+              <span class="callers-compare__cell callers-compare__cell--us"><%= home.team.callers.head.nextus %></span>
+            </div>
+            <% home.team.callers.rows.forEach(function (r) { %>
+              <div class="callers-compare__row">
+                <span class="callers-compare__label"><%= r.label %></span>
+                <span class="callers-compare__cell callers-compare__cell--them"><%= r.offshore %></span>
+                <span class="callers-compare__cell callers-compare__cell--us"><%= r.nextus %></span>
+              </div>
+            <% }); %>
+          </div>
         </div>
       </div>
     </section>

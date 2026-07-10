@@ -26,7 +26,7 @@ export const privacy: LegalDoc = {
     {
       heading: "Information we collect",
       paragraphs: [
-        "<strong>Information you give us.</strong> When you submit our contact or lead-request form, we collect the details you provide, such as your name, work email, phone number, market or city, and the lead volume you're interested in.",
+        "<strong>Information you give us.</strong> When you book a call with us through our scheduling tool, or otherwise contact us, we collect the details you provide, such as your name, email, phone number, and anything you share about your market and the leads you're looking for.",
         "<strong>Information collected automatically.</strong> Like most websites, we may collect standard technical data such as your IP address, browser type, pages visited, and referring URLs, using cookies and similar technologies.",
       ],
     },
@@ -39,7 +39,7 @@ export const privacy: LegalDoc = {
     {
       heading: "How we share information",
       paragraphs: [
-        "We do not sell your personal information. We share it only with service providers who help us operate the site and communicate with you (for example, email delivery), and only as needed to provide our services.",
+        "We do not sell your personal information. We share it only with service providers who help us operate the site and communicate with you (for example, our scheduling and email tools), and only as needed to provide our services.",
         "We may disclose information if required by law, to enforce our terms, or to protect the rights, property, or safety of Nextus Realty, our clients, or others.",
       ],
     },
