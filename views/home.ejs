@@ -6,11 +6,13 @@
 <body>
   <%- include('partials/header') %>
 
-  <main id="top">
+  <main id="main">
     <!-- ============================================================
-         Authority journey: Claim (hero) → Proof (stats) → Pillars
-         (why Nextus) → Method (how it works) → Evidence (comparison)
-         → Objections (FAQ) → The ask (lead form).
+         Authority journey: Claim (hero) → Proof (stats) → Product
+         (lead types) → Method (how it works + confirmation) → Standard
+         (why Nextus) → Humans (founder, team) → Evidence (comparison,
+         testimonials) → Objections (FAQ) → The ask (booking) → Depth
+         (blog).
          ============================================================ -->
 
     <!-- Hero: the claim -->
@@ -29,12 +31,11 @@
         <h1 class="hero__title">
           <%= home.hero.titleLead %> <span class="accent"><%= home.hero.titleAccent %></span> <%= home.hero.titleTail %>
         </h1>
-        <p class="hero__tagline" data-hero-el><%= home.hero.tagline %></p>
         <p class="hero__subhead" data-hero-el><%= home.hero.subhead %></p>
 
         <div class="hero__cta" data-hero-el>
           <a class="btn btn--gold btn--lg" href="#get-leads">
-            Request your first leads <%- include('partials/icon', { name: 'arrow', cls: 'icon' }) %>
+            Book a call <%- include('partials/icon', { name: 'arrow', cls: 'icon' }) %>
           </a>
           <a class="btn btn--outline btn--lg" href="#comparison">See the difference</a>
         </div>
@@ -54,37 +55,20 @@
 
     <!-- Stats: immediate proof -->
     <section id="stats" class="stats-section">
-      <div class="container stats">
-        <% home.stats.forEach(function (s) { %>
-          <div class="stat" data-reveal>
-            <div class="stat__value" data-count><%= s.value %></div>
-            <div class="stat__label"><%= s.label %></div>
-          </div>
-        <% }); %>
-      </div>
-    </section>
-
-    <!-- Why Nextus: the authority pillars -->
-    <section id="why-nextus" class="section section--dark">
       <div class="container">
-        <div class="section-head" data-reveal>
-          <p class="eyebrow eyebrow--center"><%= home.features.eyebrow %></p>
-          <h2 class="section-title section-title--light"><%= home.features.title %></h2>
-          <p class="section-subhead section-subhead--light"><%= home.features.subhead %></p>
-        </div>
-        <div class="features">
-          <% home.features.items.forEach(function (f) { %>
-            <div class="feature" data-reveal>
-              <div class="feature__icon"><%- include('partials/icon', { name: f.icon, cls: 'icon icon--sm' }) %></div>
-              <h3 class="feature__title"><%= f.title %></h3>
-              <p class="feature__body"><%= f.body %></p>
+        <div class="stats">
+          <% home.stats.forEach(function (s) { %>
+            <div class="stat" data-reveal>
+              <div class="stat__value" data-count><%= s.value %></div>
+              <div class="stat__label"><%= s.label %></div>
             </div>
           <% }); %>
         </div>
+        <p class="stats__note" data-reveal>Across Nextus client campaigns. Close rate vs. industry-average shared leads.</p>
       </div>
     </section>
 
-    <!-- Lead types: what you can get (moved from the old Services page) -->
+    <!-- Lead types: the product, up front (compact cards; depth lives on the landing pages) -->
     <section id="lead-types" class="section section--muted section--decor">
       <div class="section-decor" aria-hidden="true">
         <span class="deco-orb deco--lg deco--tr"></span>
@@ -96,39 +80,29 @@
           <h2 class="section-title"><%= servicesIntro.title %></h2>
           <p class="section-subhead"><%= servicesIntro.subhead %></p>
         </div>
-        <div class="services">
+        <div class="ltypes">
           <% services.forEach(function (s, i) { %>
-            <article class="service<%= i % 2 ? ' service--flip' : '' %>" id="<%= s.id %>">
-              <figure class="service__media" data-reveal="<%= i % 2 ? 'right' : 'left' %>">
+            <a class="ltype-card" id="<%= s.id %>" href="<%= s.learnMore ? s.learnMore.href : '#get-leads' %>" data-reveal>
+              <figure class="ltype-card__media">
                 <picture>
                   <source srcset="<%= s.image.replace('.jpg', '.webp') %>" type="image/webp" />
-                  <img class="service__img" src="<%= s.image %>" alt="<%= s.imageAlt %>" loading="lazy" />
+                  <img src="<%= s.image %>" alt="<%= s.imageAlt %>" loading="lazy" />
                 </picture>
-                <div class="service__overlay">
-                  <span class="service__overlay-label">Typical</span>
-                  <ul class="service__tags">
-                    <% s.examples.forEach(function (ex) { %>
-                      <li class="service__tag"><%= ex %></li>
-                    <% }); %>
-                  </ul>
-                </div>
               </figure>
-
-              <div class="service__content" data-reveal="<%= i % 2 ? 'left' : 'right' %>">
-                <p class="eyebrow"><%= s.kicker %></p>
-                <h3 class="service__title"><%= s.title %></h3>
-                <p class="service__tagline"><%= s.tagline %></p>
-                <p class="service__body"><%= s.body %></p>
-                <ul class="checklist service__list">
-                  <% s.includes.forEach(function (inc) { %>
-                    <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span><%= inc %></li>
+              <div class="ltype-card__body">
+                <p class="ltype-card__kicker"><%= s.kicker %></p>
+                <h3 class="ltype-card__title"><%= s.title %></h3>
+                <p class="ltype-card__tagline"><%= s.tagline %></p>
+                <ul class="ltype-card__tags">
+                  <% s.examples.slice(0, 3).forEach(function (ex) { %>
+                    <li><%= ex %></li>
                   <% }); %>
                 </ul>
-                <a class="link-gold service__cta" href="<%= s.learnMore ? s.learnMore.href : '/#get-leads' %>">
+                <span class="link-gold ltype-card__cta">
                   Explore <%= s.title %> <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
-                </a>
+                </span>
               </div>
-            </article>
+            </a>
           <% }); %>
         </div>
       </div>
@@ -156,12 +130,12 @@
           <% }); %>
         </div>
         <p class="steps__cta" data-reveal>
-          <a class="link-gold" href="/#get-leads">Book a call and get your first leads <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %></a>
+          <a class="link-gold" href="#get-leads">Book a call and get your first leads <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %></a>
         </p>
       </div>
     </section>
 
-    <!-- The confirmation call: motivation + human verification -->
+    <!-- The confirmation calls: motivation + human verification -->
     <section id="confirmation" class="section section--muted section--decor">
       <div class="section-decor" aria-hidden="true">
         <span class="deco-orb deco--lg deco--tr"></span>
@@ -194,6 +168,26 @@
           </ul>
           <div class="confirm__card-foot"><%= home.confirmation.card.status %></div>
         </aside>
+      </div>
+    </section>
+
+    <!-- Why Nextus: what lands in your pipeline -->
+    <section id="why-nextus" class="section section--dark">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow eyebrow--center"><%= home.features.eyebrow %></p>
+          <h2 class="section-title section-title--light"><%= home.features.title %></h2>
+          <p class="section-subhead section-subhead--light"><%= home.features.subhead %></p>
+        </div>
+        <div class="features">
+          <% home.features.items.forEach(function (f) { %>
+            <div class="feature" data-reveal>
+              <div class="feature__icon"><%- include('partials/icon', { name: f.icon, cls: 'icon icon--sm' }) %></div>
+              <h3 class="feature__title"><%= f.title %></h3>
+              <p class="feature__body"><%= f.body %></p>
+            </div>
+          <% }); %>
+        </div>
       </div>
     </section>
 
@@ -237,7 +231,7 @@
             </p>
           </div>
           <p class="founder__more" data-reveal>
-            <a class="link-gold" href="<%= home.founder.moreUrl %>" target="_blank" rel="noopener">Read more about Vladimir at nextus.ai <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %></a>
+            <a class="link-gold" href="<%= home.founder.moreUrl %>" target="_blank" rel="noopener">More about Vladimir at&nbsp;<span class="nowrap">nextus.ai <%- include('partials/icon', { name: 'arrow', cls: 'icon icon--sm' }) %></span></a>
           </p>
         </div>
       </div>
@@ -328,6 +322,29 @@
       </div>
     </section>
 
+    <!-- Testimonials: outside voices (renders only when real quotes are in) -->
+    <% if (typeof testimonials !== 'undefined' && testimonials.enabled && testimonials.items.length) { %>
+    <section id="testimonials" class="section">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow eyebrow--center"><%= testimonials.eyebrow %></p>
+          <h2 class="section-title"><%= testimonials.title %></h2>
+        </div>
+        <div class="quotes">
+          <% testimonials.items.forEach(function (t) { %>
+            <figure class="quote" data-reveal>
+              <blockquote class="quote__text"><%= t.quote %></blockquote>
+              <figcaption class="quote__who">
+                <strong><%= t.name %></strong>
+                <span><%= t.detail %></span>
+              </figcaption>
+            </figure>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+    <% } %>
+
     <!-- FAQ: objection handling before the ask -->
     <section id="faq" class="section section--decor">
       <div class="section-decor" aria-hidden="true">
@@ -359,7 +376,14 @@
       </div>
     </section>
 
-    <!-- Latest from the blog -->
+    <!-- The ask: book a call (shared partial with the guarantee band) -->
+    <%- include('partials/booking', { bk: {
+      eyebrow: 'Get started',
+      heading: 'Book a call and get your first leads',
+      subhead: "Grab a 30-minute slot and we'll walk you through exactly what a confirmed lead looks like in your market. No contracts, just leads that close."
+    } }) %>
+
+    <!-- Latest from the blog: depth for the unconvinced, after the ask -->
     <% if (typeof posts !== 'undefined' && posts && posts.length) { %>
     <section id="blog-latest" class="section section--muted section--decor">
       <div class="section-decor" aria-hidden="true">
@@ -402,34 +426,6 @@
       </div>
     </section>
     <% } %>
-
-    <!-- Lead form: the ask -->
-    <section id="get-leads" class="section section--dark lead">
-      <div class="container lead__grid">
-        <div class="lead__pitch" data-reveal="left">
-          <p class="eyebrow">Get started</p>
-          <h2 class="section-title section-title--light">Book a call and get your first leads</h2>
-          <p class="section-subhead section-subhead--light">
-            Grab a 30-minute slot and we'll walk you through exactly what a
-            confirmed lead looks like in your market. No contracts, just leads
-            that close.
-          </p>
-          <ul class="lead__points">
-            <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>A dedicated specialist for your market</li>
-            <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>First sample delivered within days</li>
-            <li><span class="mark mark--check"><%- include('partials/icon', { name: 'check', cls: 'icon icon--xs' }) %></span>Replace any lead that doesn't measure up</li>
-          </ul>
-          <p class="lead__privacy"><%- include('partials/icon', { name: 'shield', cls: 'icon icon--sm accent-fg' }) %> No pressure and no contracts, just a quick conversation about your market.</p>
-        </div>
-
-        <div class="lead__calendly" data-reveal="right">
-          <!-- Calendly inline widget begin -->
-          <div class="calendly-inline-widget" data-url="https://calendly.com/magdy-nextus/30min" style="min-width:320px;height:700px;"></div>
-          <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-          <!-- Calendly inline widget end -->
-        </div>
-      </div>
-    </section>
   </main>
 
   <%- include('partials/footer') %>

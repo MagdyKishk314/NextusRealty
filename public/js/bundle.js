@@ -4309,14 +4309,6 @@
         img.addEventListener("error", done2, { once: true });
       });
     }
-    for (const el of Array.from(document.querySelectorAll("video, audio"))) {
-      if (el.preload === "none") continue;
-      track(el.readyState >= 3 || el.error != null, (done2) => {
-        el.addEventListener("canplaythrough", done2, { once: true });
-        el.addEventListener("loadeddata", done2, { once: true });
-        el.addEventListener("error", done2, { once: true });
-      });
-    }
     if ("fonts" in document) {
       track(document.fonts.status === "loaded", (done2) => {
         document.fonts.ready.then(done2, done2);
@@ -4366,7 +4358,7 @@
       gsapWithCSS.to(fill, { scaleX: progress, duration: 0.35, ease: "power1.out", overwrite: true });
     });
     const minShow = new Promise((r) => setTimeout(r, 900));
-    const safety = new Promise((r) => setTimeout(r, 2e4));
+    const safety = new Promise((r) => setTimeout(r, 2500));
     Promise.race([Promise.all([assets, minShow]), safety]).then(() => {
       pulse.kill();
       gsapWithCSS.timeline({ defaults: { ease: "power3.inOut" } }).to(fill, { scaleX: 1, duration: 0.3, ease: "power2.inOut" }).to(inner, { autoAlpha: 0, scale: 0.92, duration: 0.28, ease: "power2.in" }, ">-0.05").to(
@@ -6973,7 +6965,7 @@
       document.documentElement.classList.remove("is-veiled");
       const pulse = gsapWithCSS.to(mark, { scale: 1.07, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: -1 });
       const minShow = new Promise((r) => setTimeout(r, 350));
-      const safety = new Promise((r) => setTimeout(r, 15e3));
+      const safety = new Promise((r) => setTimeout(r, 1800));
       Promise.race([Promise.all([assetsReady(), minShow]), safety]).then(() => {
         pulse.kill();
         gsapWithCSS.set(mark, { scale: 1 });
@@ -7016,7 +7008,7 @@
     });
   }
 
-  // src/client/main.ts
+  // src/client/nav.ts
   function initHeader() {
     const header = document.querySelector(".site-header");
     if (!header || !document.querySelector(".hero")) return;
@@ -7039,6 +7031,53 @@
       });
     });
   }
+  function initNavDropdown() {
+    const item = document.querySelector(".nav__item--menu");
+    const trigger = item == null ? void 0 : item.querySelector(".nav__trigger");
+    if (!item || !trigger) return;
+    const set = (open) => {
+      item.classList.toggle("is-open", open);
+      trigger.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    trigger.addEventListener("click", () => set(!item.classList.contains("is-open")));
+    item.addEventListener("mouseenter", () => set(true));
+    item.addEventListener("mouseleave", () => set(false));
+    item.addEventListener("focusin", () => set(true));
+    item.addEventListener("focusout", (e) => {
+      if (!item.contains(e.relatedTarget)) set(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && item.classList.contains("is-open")) {
+        set(false);
+        if (item.contains(document.activeElement)) trigger.focus();
+      }
+    });
+  }
+  function initMobileMenu() {
+    const btn = document.querySelector("[data-menu-toggle]");
+    const panel = document.querySelector("[data-mobile-menu]");
+    const header = document.querySelector(".site-header");
+    if (!btn || !panel) return;
+    const set = (open) => {
+      panel.classList.toggle("is-open", open);
+      btn.classList.toggle("is-open", open);
+      header == null ? void 0 : header.classList.toggle("is-menu-open", open);
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
+    btn.addEventListener("click", () => set(!panel.classList.contains("is-open")));
+    panel.addEventListener("click", (e) => {
+      if (e.target.closest("a")) set(false);
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && panel.classList.contains("is-open")) {
+        set(false);
+        btn.focus();
+      }
+    });
+  }
+
+  // src/client/main.ts
   function initPostForm() {
     const form = document.querySelector("[data-post-form]");
     if (!form) return;
@@ -7144,6 +7183,8 @@
   document.addEventListener("DOMContentLoaded", () => {
     initHeader();
     initFaq();
+    initNavDropdown();
+    initMobileMenu();
     initBlogSlider();
     initPostForm();
     initLoader();

@@ -40,7 +40,8 @@ Open <http://localhost:3000>. The CMS is at <http://localhost:3000/admin>
 | Command                | What it does                                        |
 | ---------------------- | --------------------------------------------------- |
 | `npm run dev`          | Watch + rebuild client & server, restart on change  |
-| `npm run build`        | Build client bundle + compile server to `dist/`     |
+| `npm run build`        | Build client bundles + minified CSS + compile server to `dist/` |
+| `npm run build:css`    | Minify `public/css/styles.css` → `styles.min.css` (served in production) |
 | `npm start`            | Run the compiled server (`node dist/server.js`)     |
 | `npm run seed`         | Seed sample content (idempotent)                    |
 | `npm run typecheck`    | Type-check server and client                        |
@@ -56,7 +57,7 @@ src/
   config.ts               Env-driven config (port, paths, admin creds)
   site.ts                 SEO/brand source of truth (title, description, keywords)
   utils.ts                slugify, escapeHtml, textToHtml, formatDate, isEmail
-  content/                Static home-page copy (home.ts) + FAQs (faqs.ts)
+  content/                Copy as data: home, services, landings, faqs, legal, testimonials
   seo/
     meta.ts               Per-page <meta> builder with defaults
     jsonld.ts             Organization/WebSite/Service/FAQPage/BlogPosting schema
@@ -64,12 +65,12 @@ src/
     database.ts           node:sqlite connection + schema (runs on boot)
     seed.ts               Sample content seeder
   models/                 postModel (raw SQL)
-  controllers/            home, lead, blog, admin, seo
+  controllers/            home, landing, blog, admin, seo, legal, faq
   routes/                 index (public) + admin (basic-auth guarded)
   middleware/auth.ts      HTTP Basic Auth for /admin
-  client/main.ts          Vanilla TS: FAQ accordion + AJAX lead form
-views/                    EJS templates (partials, home, blog/, admin/, error)
-public/                   Static assets (css/, js/bundle.js, img/og.png, icon.svg)
+  client/                 main.ts (full bundle), main-lite.ts (legal/error), nav, motion, loader
+views/                    EJS templates (partials incl. booking.ejs, home, landing, blog/, admin/)
+public/                   Static assets (css/ incl. styles.min.css, js/ both bundles, img/)
 data/nextus.db            SQLite database (gitignored, created at runtime)
 scripts/generate-og.mjs   Rasterizes the OG image from an SVG
 ```
@@ -79,6 +80,8 @@ scripts/generate-og.mjs   Rasterizes the OG image from an SVG
 | Method | Path                         | Purpose                          |
 | ------ | ---------------------------- | -------------------------------- |
 | GET    | `/`                          | Home (all marketing sections)    |
+| GET    | `/seller-leads`, `/listing-leads`, `/contractor-leads` | Keyword landing pages (each with on-page booking) |
+| GET    | `/services`                  | 301 → `/#lead-types` (legacy URL) |
 | GET    | `/blog`                      | Blog index (published posts)     |
 | GET    | `/blog/:slug`                | Single post                      |
 | GET    | `/robots.txt`, `/sitemap.xml`| SEO endpoints (sitemap is dynamic) |

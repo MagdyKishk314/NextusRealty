@@ -30,6 +30,8 @@ export function showLanding(slug: string) {
         title: pageTitle(landing.metaTitle),
         description: landing.metaDescription,
         canonicalPath: `/${landing.slug}`,
+        ogImage: landing.hero.image, // page-specific social card
+        preloadImage: landing.hero.image.replace(".jpg", ".webp"), // LCP hero
         jsonLd: [
           landingServiceSchema(landing),
           faqPageSchema(landing.faqs),

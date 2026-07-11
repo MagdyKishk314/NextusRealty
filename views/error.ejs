@@ -6,7 +6,7 @@
 <body>
   <%- include('partials/header') %>
 
-  <main class="page">
+  <main id="main" class="page">
     <section class="section error-page">
       <div class="container container--narrow">
         <p class="eyebrow"><%= status %></p>
@@ -18,5 +18,6 @@
   </main>
 
   <%- include('partials/footer') %>
+  <script src="/js/bundle-lite.js" defer></script>
 </body>
 </html>

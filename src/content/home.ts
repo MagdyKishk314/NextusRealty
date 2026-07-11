@@ -9,9 +9,8 @@ export const hero = {
   titleLead: "We set the standard for",
   titleAccent: "verified real estate leads",
   titleTail: "that close",
-  tagline: "This is what a real lead looks like.",
   subhead:
-    "Nextus Realty defines what a qualified lead should be. Every one is cold-called and confirmed by our team, then handed to one client: you. We don't resell lists. We set the bar the rest of the industry falls short of.",
+    "Every lead is cold-called and confirmed by our team, then handed to one client: you. We don't resell lists.",
   trustPoints: [
     { icon: "lock", label: "Exclusive, never resold" },
     { icon: "shield", label: "Pre-qualified intent" },
@@ -73,25 +72,10 @@ export const confirmation = {
 
 export const features = {
   eyebrow: "Why clients trust Nextus",
-  title: "The standard every lead is held to before it reaches you",
+  title: "What lands in your pipeline",
   subhead:
-    "We don't resell raw lists. We deliver conversations our team has already confirmed are worth your time. This is the bar we hold, on every single lead.",
+    "We deliver conversations our team has already confirmed are worth your time, matched to the business you actually want to write.",
   items: [
-    {
-      icon: "lock",
-      title: "Exclusivity, guaranteed",
-      body: "Every lead is delivered once, and only to you. You'll never dial a prospect who's already fielding calls from four other people.",
-    },
-    {
-      icon: "phone",
-      title: "Confirmed by a real person",
-      body: "Our team calls every lead, confirms their details are accurate, and asks the questions that matter, before it ever reaches you.",
-    },
-    {
-      icon: "badge",
-      title: "Verified, not just captured",
-      body: "Real name, working number, valid email, confirmed intent. If it doesn't pass our checks, it doesn't reach you. No exceptions.",
-    },
     {
       icon: "target",
       title: "Matched to your market",
@@ -119,8 +103,8 @@ export const team = {
     {
       icon: "phone",
       name: "Our callers",
-      role: "C1+ top agents",
-      body: "The voices on the phone are our highest-paid people: C1+ fluent callers who hold a real conversation and can tell genuine interest from a polite brush-off. Not a scripted rep racing a quota.",
+      role: "Top-of-market callers",
+      body: "The voices on the phone are our highest-paid people: near-native English speakers (CEFR C1+) who hold a real conversation and can tell genuine interest from a polite brush-off. Not a scripted rep racing a quota.",
     },
     {
       icon: "target",
@@ -142,7 +126,7 @@ export const team = {
       "Most lead vendors run on the cheapest offshore labor they can find. We run on the most expensive, because the person on the phone is what decides whether a lead is real.",
     head: { offshore: "Industry standard", nextus: "Nextus callers" },
     rows: [
-      { label: "English", offshore: "Heavy accent, scripted", nextus: "C1+ fluent, natural" },
+      { label: "English", offshore: "Heavy accent, scripted", nextus: "Near-native (C1+), natural" },
       { label: "Caliber", offshore: "Bottom-of-market pay", nextus: "Highest-paid callers in the market" },
       { label: "Approach", offshore: "Read a script, hit a quota", nextus: "Listen, qualify, build rapport" },
       { label: "Experience", offshore: "High churn, green reps", nextus: "Seasoned top performers" },
@@ -156,7 +140,7 @@ export const founder = {
   title: 'Built by a real <span class="accent">lead generation</span> expert',
   paragraphs: [
     "Nextus was built by Vladimir Selantev, a lead generation expert who has spent years generating deals for some of the biggest names in real estate, including Pace Morby, Jamil Damji, and Grant Cardone. For Grant Cardone alone, he managed a lead generation budget of more than $6.5 million a year.",
-    "Before real estate, Vladimir spent nine years in ITAD (IT asset disposition) lead generation and wrote a book on winning Fortune 1000 contracts. Different industry, same discipline: pick up the phone, confirm real intent, and never hand a client a lead no one has spoken to. You can read more about his background at nextus.ai.",
+    "Before real estate, Vladimir spent nine years in ITAD (IT asset disposition) lead generation and wrote a book on winning Fortune 1000 contracts. Different industry, same discipline: pick up the phone, confirm real intent, and never hand a client a lead no one has spoken to. You can read more about his background at nextus.ai, his lead generation consultancy.",
   ],
   name: "Vladimir Selantev",
   role: "Founder, Nextus Realty",
@@ -176,7 +160,7 @@ export const founder = {
     "15+ years generating leads",
   ],
   book: {
-    cover: "/img/hunt-fortune-1000.jpg",
+    cover: "/img/hunt-fortune-1000-cover.jpg",
     title: "How to Successfully Hunt Fortune 1000 Contracts",
     blurb:
       "Vladimir's playbook from nine years in ITAD lead generation, the same discipline behind every Nextus lead.",
@@ -185,7 +169,7 @@ export const founder = {
 
 export type ComparisonValue = string | boolean;
 export const comparison = {
-  eyebrow: "The measure of a lead",
+  eyebrow: "Side by side",
   title: 'Lead generation, reimagined by <span class="accent">Nextus Realty</span>.',
   subhead:
     "This is the benchmark we set, line by line. Here's how a Nextus lead measures against what the rest of the industry hands you.",
@@ -231,7 +215,7 @@ export const comparison = {
       label: "Intent screened?",
       typical: "Unscreened",
       nextus: "Pre-qualified",
-      nextusTip: "Our LDS team qualifies intent by listening to each lead before it ships.",
+      nextusTip: "Our LDS team (Lead Development Specialists) qualifies intent by listening to each lead before it ships.",
       highlight: false,
     },
     {
@@ -248,7 +232,13 @@ export const comparison = {
       nextusTip: "Tell us your target volume, say three leads a week. We generate them and charge per lead as each one is delivered, one at a time.",
       highlight: false,
     },
-    { label: "Close rate?", typical: "~1%", nextus: "~3.4%", highlight: false },
+    {
+      label: "Close rate?",
+      typical: "~1%",
+      nextus: "~3.4%",
+      nextusTip: "Averages across Nextus client campaigns; individual results vary.",
+      highlight: false,
+    },
     {
       label: "If a lead misses?",
       typical: "Counts anyway",

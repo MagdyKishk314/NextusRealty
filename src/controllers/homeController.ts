@@ -1,6 +1,7 @@
 import type { Request, Response } from "express";
 import * as home from "../content/home.js";
 import { faqs } from "../content/faqs.js";
+import { testimonials } from "../content/testimonials.js";
 import { servicesIntro, services } from "../content/services.js";
 import { listPublishedPosts } from "../models/postModel.js";
 import { meta } from "../seo/meta.js";
@@ -19,6 +20,7 @@ export function showHome(_req: Request, res: Response) {
     }),
     home,
     faqs,
+    testimonials,
     servicesIntro,
     services,
     posts: listPublishedPosts().slice(0, 4), // 4 most recent for the home slider

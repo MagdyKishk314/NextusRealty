@@ -64,7 +64,9 @@ export function initLoader(): void {
   });
 
   const minShow = new Promise<void>((r) => setTimeout(r, 900)); // never just blink
-  const safety = new Promise<void>((r) => setTimeout(r, 20000)); // reveal even if an asset stalls
+  // Hard cap: first impressions are worth more than complete assets. Anything
+  // still loading (below-fold images etc.) finishes behind the content.
+  const safety = new Promise<void>((r) => setTimeout(r, 2500));
 
   Promise.race([Promise.all([assets, minShow]), safety]).then(() => {
     pulse.kill();

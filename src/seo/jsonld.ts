@@ -44,7 +44,10 @@ export function serviceSchema() {
     description: siteConfig.description,
     provider: { "@id": ORG_ID },
     areaServed: { "@type": "Country", name: "United States" },
-    audience: { "@type": "Audience", audienceType: "Real estate agents" },
+    audience: {
+      "@type": "Audience",
+      audienceType: "Real estate investors, listing agents, and home-service contractors",
+    },
     offers: { "@type": "Offer", category: "Exclusive, verified real estate leads" },
   };
 }
@@ -124,14 +127,22 @@ export function landingServiceSchema(l: {
   };
 }
 
+/** Normalize SQLite's "YYYY-MM-DD HH:MM:SS" datetimes to ISO 8601 (schema.org DateTime). */
+function toIso(value: string | null | undefined): string | undefined {
+  if (!value) return undefined;
+  const d = new Date(value.includes("T") ? value : `${value.replace(" ", "T")}Z`);
+  return Number.isNaN(d.getTime()) ? undefined : d.toISOString();
+}
+
 export function blogPostingSchema(post: Post) {
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: post.title,
     description: post.excerpt,
-    datePublished: post.published_at ?? undefined,
-    dateModified: post.updated_at ?? post.published_at ?? undefined,
+    datePublished: toIso(post.published_at),
+    dateModified: toIso(post.updated_at) ?? toIso(post.published_at),
+    ...(post.image ? { image: absoluteUrl(post.image) } : {}),
     author: { "@type": "Organization", name: siteConfig.name },
     publisher: { "@id": ORG_ID },
     mainEntityOfPage: absoluteUrl(`/blog/${post.slug}`),

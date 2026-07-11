@@ -71,7 +71,9 @@ export function initPageTransitions(): void {
     // mark so it never looks frozen; then wipe it away.
     const pulse = gsap.to(mark, { scale: 1.07, duration: 0.7, ease: "sine.inOut", yoyo: true, repeat: -1 });
     const minShow = new Promise<void>((r) => setTimeout(r, 350));
-    const safety = new Promise<void>((r) => setTimeout(r, 15000));
+    // Between-page curtain gets an even tighter cap than the boot loader:
+    // repeat navigations should feel snappy, not theatrical.
+    const safety = new Promise<void>((r) => setTimeout(r, 1800));
     Promise.race([Promise.all([assetsReady(), minShow]), safety]).then(() => {
       pulse.kill();
       gsap.set(mark, { scale: 1 });

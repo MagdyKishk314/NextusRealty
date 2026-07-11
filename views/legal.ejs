@@ -6,7 +6,7 @@
 <body>
   <%- include('partials/header') %>
 
-  <main class="page">
+  <main id="main" class="page">
     <section class="section">
       <div class="container legal">
         <div class="legal__head" data-reveal>
@@ -30,6 +30,7 @@
   </main>
 
   <%- include('partials/footer') %>
-  <script src="/js/bundle.js" defer></script>
+  <!-- Lite bundle: header/menus only - no GSAP payload on content pages -->
+  <script src="/js/bundle-lite.js" defer></script>
 </body>
 </html>

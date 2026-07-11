@@ -24,6 +24,14 @@ const CLIENT_ARGS = [
   "--target=es2018",
   "--outfile=public/js/bundle.js",
 ];
+// Lite bundle (header/menus only) used by legal + error pages.
+const CLIENT_LITE_ARGS = [
+  "src/client/main-lite.ts",
+  "--bundle",
+  "--sourcemap",
+  "--target=es2018",
+  "--outfile=public/js/bundle-lite.js",
+];
 
 const children = [];
 
@@ -64,6 +72,7 @@ process.on("SIGTERM", () => {
 console.log("[dev] building…");
 await once([TSC, "-p", "tsconfig.json"]);
 await once([ESBUILD, ...CLIENT_ARGS]);
+await once([ESBUILD, ...CLIENT_LITE_ARGS]);
 
 // Watch: recompile the server, rebundle the client, and restart the server.
 console.log("[dev] watching for changes (Ctrl+C to stop)…");
@@ -71,4 +80,5 @@ console.log("[dev] watching for changes (Ctrl+C to stop)…");
 // dev is launched non-interactively); in a normal terminal it behaves the same.
 watch([TSC, "-p", "tsconfig.json", "--watch", "--preserveWatchOutput"]);
 watch([ESBUILD, ...CLIENT_ARGS, "--watch=forever"]);
+watch([ESBUILD, ...CLIENT_LITE_ARGS, "--watch=forever"]);
 watch(["--watch", "dist/server.js"]);

@@ -1,0 +1,59 @@
+<%
+/* Shared booking section (Calendly) used by the home page and every landing
+   page, so the ask never requires leaving the page the visitor is on.
+   Pass a `bk` object: { eyebrow, heading, subhead, points? } - `points`
+   falls back to the standard three reassurances. */
+var pts = (typeof bk.points !== "undefined" && bk.points && bk.points.length)
+  ? bk.points
+  : [
+      "A dedicated specialist for your market",
+      "First sample delivered within days",
+      "Replace any lead that doesn't measure up",
+    ];
+%>
+<section id="get-leads" class="section section--dark lead">
+  <div class="container">
+    <!-- The Nextus guarantee: the buried tooltip promises, in daylight -->
+    <ul class="guarantee" data-reveal>
+      <li class="guarantee__item">
+        <span class="guarantee__icon"><%- include('icon', { name: 'lock', cls: 'icon icon--sm' }) %></span>
+        <span class="guarantee__text"><strong>Exclusive to you</strong><span>One client per lead, never resold</span></span>
+      </li>
+      <li class="guarantee__item">
+        <span class="guarantee__icon"><%- include('icon', { name: 'badge', cls: 'icon icon--sm' }) %></span>
+        <span class="guarantee__text"><strong>Replaced if it misses</strong><span>Unqualified or wrong details? Replaced</span></span>
+      </li>
+      <li class="guarantee__item">
+        <span class="guarantee__icon"><%- include('icon', { name: 'clock', cls: 'icon icon--sm' }) %></span>
+        <span class="guarantee__text"><strong>Free reactivation</strong><span>Quiet leads re-worked free for 2 months</span></span>
+      </li>
+    </ul>
+
+    <div class="lead__grid">
+      <div class="lead__pitch" data-reveal="left">
+        <p class="eyebrow"><%= bk.eyebrow %></p>
+        <h2 class="section-title section-title--light"><%= bk.heading %></h2>
+        <p class="section-subhead section-subhead--light"><%= bk.subhead %></p>
+        <p class="lead__pricing">Pay per lead. You set the target volume; we charge as each confirmed lead is delivered.</p>
+        <ul class="lead__points">
+          <% pts.forEach(function (pt) { %>
+            <li><span class="mark mark--check"><%- include('icon', { name: 'check', cls: 'icon icon--xs' }) %></span><%= pt %></li>
+          <% }); %>
+        </ul>
+        <p class="lead__privacy"><%- include('icon', { name: 'shield', cls: 'icon icon--sm accent-fg' }) %> No pressure and no contracts, just a quick conversation about your market.</p>
+        <p class="lead__alt">Prefer email? <a href="mailto:<%= site.contactEmail %>"><%= site.contactEmail %></a></p>
+      </div>
+
+      <div class="lead__calendly" data-reveal="right">
+        <!-- Calendly inline widget begin -->
+        <div class="calendly-inline-widget cal-skeleton" data-url="https://calendly.com/magdy-nextus/30min" style="min-width:320px;height:780px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <!-- Calendly inline widget end -->
+        <p class="lead__fallback">
+          Trouble loading the calendar?
+          <a href="https://calendly.com/magdy-nextus/30min" target="_blank" rel="noopener">Book directly on Calendly</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

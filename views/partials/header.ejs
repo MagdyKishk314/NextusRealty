@@ -1,3 +1,4 @@
+<a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="container site-header__inner">
     <a class="brand" href="/#top">
@@ -10,7 +11,7 @@
         <a class="nav__top" href="/#top">Home</a>
       </div>
       <div class="nav__item nav__item--menu">
-        <button type="button" class="nav__top nav__trigger" aria-haspopup="true">
+        <button type="button" class="nav__top nav__trigger" aria-haspopup="true" aria-expanded="false">
           Leads <span class="nav__caret" aria-hidden="true"></span>
         </button>
         <div class="nav__menu">
@@ -28,9 +29,30 @@
     </nav>
 
     <div class="site-header__actions">
-      <a class="btn btn--gold btn--sm" href="/#get-leads">
-        Contact Us <%- include('icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
+      <a class="btn btn--gold btn--sm" href="<%= bookHref %>">
+        Book a call <%- include('icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
       </a>
+      <button type="button" class="nav-burger" data-menu-toggle aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <span class="nav-burger__line"></span>
+        <span class="nav-burger__line"></span>
+        <span class="nav-burger__line"></span>
+      </button>
     </div>
+  </div>
+
+  <!-- Mobile navigation panel (hidden >=860px; toggled by the burger) -->
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu>
+    <nav class="mobile-menu__nav" aria-label="Mobile">
+      <a class="mobile-menu__link" href="/#top">Home</a>
+      <p class="mobile-menu__group">Leads</p>
+      <a class="mobile-menu__link mobile-menu__link--sub" href="/seller-leads">Seller Leads</a>
+      <a class="mobile-menu__link mobile-menu__link--sub" href="/listing-leads">Listing Leads</a>
+      <a class="mobile-menu__link mobile-menu__link--sub" href="/contractor-leads">Contractor Leads</a>
+      <a class="mobile-menu__link" href="/blog">Blog</a>
+      <a class="mobile-menu__link" href="/faq">FAQ</a>
+      <a class="btn btn--gold mobile-menu__cta" href="<%= bookHref %>">
+        Book a call <%- include('icon', { name: 'arrow', cls: 'icon icon--sm' }) %>
+      </a>
+    </nav>
   </div>
 </header>

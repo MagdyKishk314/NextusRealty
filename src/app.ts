@@ -40,6 +40,13 @@ export function createApp() {
     res.locals.year = new Date().getFullYear();
     res.locals.gaId = config.gaId;
     res.locals.gscVerification = config.gscVerification;
+    // Minified stylesheet in production/Vercel; the editable source in dev.
+    res.locals.assetCss =
+      config.env === "development" ? "/css/styles.css" : "/css/styles.min.css";
+    // Booking CTA target: same-page anchor on pages that embed the booking
+    // section, home anchor everywhere else.
+    const hasBooking = ["/", "/seller-leads", "/listing-leads", "/contractor-leads"].includes(req.path);
+    res.locals.bookHref = hasBooking ? "#get-leads" : "/#get-leads";
     next();
   });
 

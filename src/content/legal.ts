@@ -19,15 +19,15 @@ const CONTACT = '<a href="mailto:hello@nextusrealty.com">hello@nextusrealty.com<
 
 export const privacy: LegalDoc = {
   title: "Privacy Policy",
-  updated: "July 7, 2026",
+  updated: "July 10, 2026",
   intro:
     'Nextus Realty ("we," "us," or "our") respects your privacy. This policy explains what information we collect through nextusrealty.com, how we use it, and the choices you have.',
   sections: [
     {
       heading: "Information we collect",
       paragraphs: [
-        "<strong>Information you give us.</strong> When you book a call with us through our scheduling tool, or otherwise contact us, we collect the details you provide, such as your name, email, phone number, and anything you share about your market and the leads you're looking for.",
-        "<strong>Information collected automatically.</strong> Like most websites, we may collect standard technical data such as your IP address, browser type, pages visited, and referring URLs, using cookies and similar technologies.",
+        "<strong>Information you give us.</strong> When you book a call with us through our scheduling tool (Calendly), or otherwise contact us, we collect the details you provide, such as your name, email, phone number, and anything you share about your market and the leads you're looking for. Calendly processes your booking under its own privacy policy.",
+        "<strong>Information collected automatically.</strong> Like most websites, we may collect standard technical data such as your IP address, browser type, pages visited, and referring URLs, using cookies and similar technologies, including Google Analytics when enabled.",
       ],
     },
     {
@@ -39,7 +39,7 @@ export const privacy: LegalDoc = {
     {
       heading: "How we share information",
       paragraphs: [
-        "We do not sell your personal information. We share it only with service providers who help us operate the site and communicate with you (for example, our scheduling and email tools), and only as needed to provide our services.",
+        "We do not sell your personal information. We share it only with service providers who help us operate the site and communicate with you (for example, Calendly for scheduling, Google Analytics for site usage, and our email tools), and only as needed to provide our services.",
         "We may disclose information if required by law, to enforce our terms, or to protect the rights, property, or safety of Nextus Realty, our clients, or others.",
       ],
     },
@@ -88,7 +88,7 @@ export const privacy: LegalDoc = {
 
 export const terms: LegalDoc = {
   title: "Terms of Service",
-  updated: "July 7, 2026",
+  updated: "July 10, 2026",
   intro:
     "These Terms of Service (\"Terms\") govern your access to and use of the Nextus Realty website at nextusrealty.com. By using the site, you agree to these Terms. If you do not agree, please do not use the site.",
   sections: [

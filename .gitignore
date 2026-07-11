@@ -37,3 +37,6 @@ npm-debug.log*
 /.agents
 /.claude
 skills-lock.json
+
+# Local review artifacts (not part of the site)
+design-analysis.pdf

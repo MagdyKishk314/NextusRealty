@@ -6,8 +6,9 @@
         <span class="brand__name">Nextus<span class="accent"> Realty</span></span>
       </a>
       <p class="footer__blurb">
-        Exclusive, verified, pre-qualified real estate leads for agents who
-        measure success in closings, not call volume.
+        Exclusive, verified, pre-qualified leads for investors, listing agents,
+        and home-service contractors who measure success in closings, not call
+        volume.
       </p>
     </div>
 
@@ -24,7 +25,7 @@
         <h3>Company</h3>
         <a href="/blog">Blog</a>
         <a href="/#faq">FAQ</a>
-        <a href="/#get-leads">Get leads</a>
+        <a href="<%= bookHref %>">Book a call</a>
         <a href="mailto:<%= site.contactEmail %>">Contact</a>
       </div>
       <div class="footer__col">
@@ -38,7 +39,7 @@
   <div class="container footer__meta">
     <p>© <%= year %> <%= site.name %>. All rights reserved.</p>
     <div class="footer__meta-right">
-      <span>Quality leads. No compromises.</span>
+      <span><%= site.tagline %></span>
       <a class="footer__admin" href="/admin/login">Admin</a>
     </div>
   </div>

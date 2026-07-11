@@ -54,6 +54,7 @@ export function showBlogPost(req: Request, res: Response) {
       description: post.excerpt || excerptFrom(post.body),
       canonicalPath: `/blog/${post.slug}`,
       ogType: "article",
+      ...(post.image ? { ogImage: post.image } : {}),
       jsonLd: [
         blogPostingSchema(post),
         breadcrumbSchema([

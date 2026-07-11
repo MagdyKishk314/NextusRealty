@@ -48,16 +48,10 @@ export function assetsReady(
     });
   }
 
-  // Media elements (video/audio) - skip ones that won't fetch until played.
-  for (const el of Array.from(document.querySelectorAll<HTMLMediaElement>("video, audio"))) {
-    if (el.preload === "none") continue;
-    // readyState >= HAVE_FUTURE_DATA means it can play through the current data.
-    track(el.readyState >= 3 || el.error != null, (done) => {
-      el.addEventListener("canplaythrough", done, { once: true });
-      el.addEventListener("loadeddata", done, { once: true });
-      el.addEventListener("error", done, { once: true });
-    });
-  }
+  // Media elements (video/audio) are intentionally NOT tracked: the hero video
+  // has a poster + static-photo fallback by design, so a loading screen must
+  // never hold the page hostage while a large mp4 buffers. It fades in on its
+  // own whenever it's ready.
 
   // Web fonts (Fraunces / Inter).
   if ("fonts" in document) {

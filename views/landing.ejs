@@ -6,7 +6,7 @@
 <body>
   <%- include('partials/header') %>
 
-  <main class="page landing">
+  <main id="main" class="page landing">
     <!-- Hero: the keyword claim -->
     <section class="landing-hero section--decor">
       <div class="section-decor" aria-hidden="true">
@@ -15,11 +15,14 @@
       </div>
       <div class="container landing-hero__grid">
         <div class="landing-hero__copy" data-reveal="left">
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <a href="/">Home</a><span class="crumbs__sep" aria-hidden="true">/</span><span aria-current="page"><%= landing.breadcrumbName %></span>
+          </nav>
           <p class="eyebrow"><span class="dot"></span><%= landing.hero.eyebrow %></p>
           <h1 class="landing-hero__title"><%= landing.hero.h1 %></h1>
           <p class="landing-hero__lead"><%= landing.hero.lead %></p>
           <div class="landing-hero__cta">
-            <a class="btn btn--gold btn--lg" href="/#get-leads">
+            <a class="btn btn--gold btn--lg" href="#get-leads">
               <%= landing.hero.ctaLabel %> <%- include('partials/icon', { name: 'arrow', cls: 'icon' }) %>
             </a>
           </div>
@@ -136,17 +139,12 @@
       </div>
     </section>
 
-    <!-- Closing CTA -->
-    <section class="section section--dark">
-      <div class="container services-cta" data-reveal>
-        <p class="eyebrow eyebrow--center"><span class="dot"></span><%= landing.cta.eyebrow %></p>
-        <h2 class="section-title section-title--light"><%= landing.cta.title %></h2>
-        <p class="section-subhead section-subhead--light"><%= landing.cta.subhead %></p>
-        <a class="btn btn--gold btn--lg" href="/#get-leads">
-          <%= landing.cta.ctaLabel %> <%- include('partials/icon', { name: 'arrow', cls: 'icon' }) %>
-        </a>
-      </div>
-    </section>
+    <!-- The ask: book right here, without leaving the page -->
+    <%- include('partials/booking', { bk: {
+      eyebrow: landing.cta.eyebrow,
+      heading: landing.cta.title,
+      subhead: landing.cta.subhead
+    } }) %>
   </main>
 
   <%- include('partials/footer') %>

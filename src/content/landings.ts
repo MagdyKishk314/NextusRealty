@@ -54,8 +54,8 @@ const sellerLeads: Landing = {
     h1: "Motivated Seller Leads, Cold-Called and Confirmed",
     lead:
       "Stop paying for scraped lists and shared seller data. Every seller lead we deliver is spoken to by a real person, qualified for genuine motivation, and handed to you alone.",
-    ctaLabel: "Request seller leads",
-    image: "/img/service-wholesale.jpg",
+    ctaLabel: "Book a call",
+    image: "/img/landing-seller.jpg",
     imageAlt: "House keys and signed paperwork on a desk, a closed off-market deal",
     trustPoints: ["Confirmed by a human", "Exclusive to you", "Never resold"],
   },
@@ -174,7 +174,7 @@ const sellerLeads: Landing = {
     title: "Ready for seller leads that actually pick up?",
     subhead:
       "Tell us your market and buy box. We'll put together a confirmed sample of motivated seller leads, ready to work. No contract, no obligation.",
-    ctaLabel: "Request seller leads",
+    ctaLabel: "Book a call",
   },
 
   serviceName: "Motivated Seller Lead Generation",
@@ -196,8 +196,8 @@ const listingLeads: Landing = {
     h1: "Listing Leads for Realtors, Ready to List",
     lead:
       "Spend your time in listing appointments, not chasing tire-kickers. Every listing lead is a homeowner we've confirmed is planning to sell, matched to your market and delivered to you alone.",
-    ctaLabel: "Request listing leads",
-    image: "/img/service-listing.jpg",
+    ctaLabel: "Book a call",
+    image: "/img/landing-listing.jpg",
     imageAlt: "A For Sale sign in the front yard of a suburban home",
     trustPoints: ["Confirmed intent", "One agent per lead", "Verified contact"],
   },
@@ -316,7 +316,7 @@ const listingLeads: Landing = {
     title: "Ready to fill your calendar with listing appointments?",
     subhead:
       "Tell us your market and the listings you want. We'll put together a confirmed sample of listing leads, ready to work. No contract, no obligation.",
-    ctaLabel: "Request listing leads",
+    ctaLabel: "Book a call",
   },
 
   serviceName: "Listing Lead Generation for Realtors",
@@ -338,8 +338,8 @@ const contractorLeads: Landing = {
     h1: "Contractor Leads With a Real Project, Confirmed",
     lead:
       "Stop racing three other trucks to the same driveway. Every contractor lead is a homeowner we've confirmed has an actual job to book, matched to your trade and service area, and delivered to you alone.",
-    ctaLabel: "Request contractor leads",
-    image: "/img/service-contractor.jpg",
+    ctaLabel: "Book a call",
+    image: "/img/landing-contractor.jpg",
     imageAlt: "A contractor installing shingles on a residential roof",
     trustPoints: ["Confirmed project", "One contractor per lead", "Verified homeowner"],
   },
@@ -458,7 +458,7 @@ const contractorLeads: Landing = {
     title: "Ready for jobs that are yours alone?",
     subhead:
       "Tell us your trade and service area. We'll put together a confirmed sample of contractor leads, ready to quote. No contract, no obligation.",
-    ctaLabel: "Request contractor leads",
+    ctaLabel: "Book a call",
   },
 
   serviceName: "Contractor Lead Generation",

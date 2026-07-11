@@ -6,33 +6,7 @@
 import { initLoader } from "./loader";
 import { initMotion } from "./motion";
 import { initPageTransitions } from "./transitions";
-
-function initHeader(): void {
-  const header = document.querySelector<HTMLElement>(".site-header");
-  // Only pages with a hero get the transparent-over-hero treatment; elsewhere
-  // the header stays solid (its CSS default).
-  if (!header || !document.querySelector(".hero")) return;
-
-  const THRESHOLD = 40;
-  const update = () => {
-    header.classList.toggle("is-transparent", window.scrollY < THRESHOLD);
-  };
-  update(); // set the initial state before enabling transitions (no flash)
-  requestAnimationFrame(() => header.classList.add("is-ready"));
-  window.addEventListener("scroll", update, { passive: true });
-}
-
-function initFaq(): void {
-  const toggles = document.querySelectorAll<HTMLButtonElement>("[data-faq-toggle]");
-  toggles.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const item = btn.closest<HTMLElement>("[data-faq-item]");
-      if (!item) return;
-      const isOpen = item.classList.toggle("is-open");
-      btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    });
-  });
-}
+import { initHeader, initFaq, initNavDropdown, initMobileMenu } from "./nav";
 
 function initPostForm(): void {
   const form = document.querySelector<HTMLFormElement>("[data-post-form]");
@@ -154,6 +128,8 @@ function initBlogSlider(): void {
 document.addEventListener("DOMContentLoaded", () => {
   initHeader();
   initFaq();
+  initNavDropdown();
+  initMobileMenu();
   initBlogSlider();
   initPostForm();
   initLoader();
